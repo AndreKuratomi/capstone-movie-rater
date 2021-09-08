@@ -18,13 +18,13 @@ export const theme = extendTheme({
       transparent500: "rgba(0, 0, 0, 0.5)",
       transparent800: "rgba(0, 0, 0, 0.51)",
     },
-    bronw: {
+    brown: {
       dark: "rgba(29, 22, 22, 0.8)",
     },
     fonts: {
       rounded1C: "font-family: 'M PLUS Rounded 1c', sans-serif;",
       ptMono: "font-family: 'PT Mono', monospace;",
-      inder: "font-family: 'Inder', sans-serif;",
+      inder: "Inder, sans-serif",
     },
   },
 });

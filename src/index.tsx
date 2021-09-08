@@ -8,13 +8,13 @@ import { theme } from "./Global/styles";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Providers>
-      <BrowserRouter>
-        <ChakraProvider>
-          <App />
-        </ChakraProvider>
-      </BrowserRouter>
-    </Providers>
+    {/* <Providers> */}
+    <BrowserRouter>
+      <ChakraProvider theme={theme}>
+        <App />
+      </ChakraProvider>
+    </BrowserRouter>
+    {/* </Providers> */}
   </React.StrictMode>,
   document.getElementById("root")
 );
