@@ -1,4 +1,4 @@
-export const Landpage = () => {
+export const AboutUs = () => {
     return(
         <>
         </>

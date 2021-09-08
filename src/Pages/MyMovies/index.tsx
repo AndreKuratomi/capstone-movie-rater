@@ -1,1 +1,6 @@
-export const MyMovies = () => {};
+export const MyMovies = () => {
+    return(
+        <>
+        </>
+    )
+};

@@ -1,1 +1,6 @@
-export const Groups = () => {};
+export const Groups = () => {
+    return(
+        <>
+        </>
+    )
+};
