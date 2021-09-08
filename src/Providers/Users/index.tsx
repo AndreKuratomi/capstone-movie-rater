@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import apifake from "../../Services/apifake";
+import api from "../../Services/api";
 import jwtDecode from "jwt-decode";
 
 import { ReactNode } from "react";
@@ -33,7 +33,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   const [favorites, setFavorites] = useState({});
 
   const signIn = (data: IUser) => {
-    apifake
+    api
       .post("/login/", data)
       .then((response) => {
         const { access } = response.data;
@@ -49,7 +49,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   const register = (data: IUser) => {
     const user = email;
 
-    apifake
+    api
       .post("/register/", user)
       .then((_) => {})
       .catch((err) => {
