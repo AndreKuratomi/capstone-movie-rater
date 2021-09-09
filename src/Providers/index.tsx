@@ -2,7 +2,8 @@ import { ReactNode } from "react";
 import { AuthProvider } from "./Auth";
 import { GroupsProvider } from "./Groups";
 import { MoviesProvider } from "./Movies";
-import { UserProvider } from "./Users";
+import { RegisterProvider } from "./Register";
+import { LoginProvider } from "./Login";
 
 interface ProvidersProps {
   children: ReactNode;
@@ -12,7 +13,9 @@ const Providers = ({ children }: ProvidersProps) => {
     <MoviesProvider>
       <GroupsProvider>
         <AuthProvider>
-          <UserProvider>{children}</UserProvider>
+          <RegisterProvider>
+            <LoginProvider>{children}</LoginProvider>
+          </RegisterProvider>
         </AuthProvider>
       </GroupsProvider>
     </MoviesProvider>
