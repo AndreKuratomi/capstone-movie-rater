@@ -11,9 +11,10 @@ const MenuAside = () => {
   return (
     <VStack
       w="250px"
-      minH="100%"
+      minH="100vh"
       bgColor="red.800"
       borderRadius="0px 15px 15px 0px"
+      mr="10px"
     >
       <Grid
         color="fontColor.white100"
