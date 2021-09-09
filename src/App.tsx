@@ -1,13 +1,12 @@
 import React from "react";
 import Routes from "./Routes";
-import GlobalStyle from "./Global/styles";
+import ContainerDashboard from "./Components/Container";
 
 function App() {
   return (
-    <div>
+    <ContainerDashboard>
       <Routes />
-      <GlobalStyle />
-    </div>
+    </ContainerDashboard>
   );
 }
 
