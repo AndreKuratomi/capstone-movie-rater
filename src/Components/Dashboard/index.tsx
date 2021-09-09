@@ -16,7 +16,10 @@ const Dashboard = () => {
         Up coming Movies
       </Heading>
       <MovieContainer type="column">
-        <BoxContainer bgImg="https://image.tmdb.org/t/p/original/tFBVXnqmsmoSFR3rbltTfdGIMgV.jpg">
+        <BoxContainer
+          type="Upcomming"
+          bgImg="https://image.tmdb.org/t/p/original/tFBVXnqmsmoSFR3rbltTfdGIMgV.jpg"
+        >
           <MovieCard
             release_date="20-05-2013"
             title="titulo"
@@ -25,6 +28,14 @@ const Dashboard = () => {
             imgUrl="https://image.tmdb.org/t/p/original/pUK9duiCK1PKqWA5rRQ4XBMHITH.jpg"
           />
         </BoxContainer>
+        <Heading
+          w="76%"
+          fontSize="20px"
+          fontWeight="400"
+          color="fontColor.white100"
+        >
+          Browse Movies
+        </Heading>
         <BoxContainer bgImg="https://image.tmdb.org/t/p/original/tFBVXnqmsmoSFR3rbltTfdGIMgV.jpg">
           {[1, 2, 3, 4, 5, 3, 1, 4, 5, 3, 45].map((element) => (
             <MovieCard
@@ -35,6 +46,14 @@ const Dashboard = () => {
             />
           ))}
         </BoxContainer>
+        <Heading
+          w="76%"
+          fontSize="20px"
+          fontWeight="400"
+          color="fontColor.white100"
+        >
+          My movies
+        </Heading>
         <BoxContainer bgImg="https://image.tmdb.org/t/p/original/tFBVXnqmsmoSFR3rbltTfdGIMgV.jpg">
           <MovieCard
             release_date="20-05-2013"

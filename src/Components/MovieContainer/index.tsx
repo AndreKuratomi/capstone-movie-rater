@@ -10,7 +10,7 @@ const MovieContainer = ({ children, type }: IMovieContainer) => {
   return type === "column" ? (
     <Flex
       w="65vw"
-      h="85vh"
+      h="88vh"
       mb="20px"
       justifyContent="space-evenly"
       flexDirection="column"

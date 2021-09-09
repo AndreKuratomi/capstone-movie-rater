@@ -43,7 +43,7 @@ const BrowseMovies = () => {
         >
           Browse Movies
         </Heading>
-        <BoxContainer>
+        <BoxContainer type="Browse">
           {[1, 2, 3, 3, 4].map((elemtn) => (
             <MovieCard
               release_date="25202"
