@@ -14,7 +14,7 @@ const Routes = () => {
   return (
     <Switch>
       <Route exact path="/" component={Landpage} />
-      <Route exact path="/aboutus" component={AboutUs} />
+      <Route path="/aboutus" component={AboutUs} />
       <Route path="/signup" component={Register} />
       <Route path="/login" component={Login} />
       <Route isPrivate path="/dashboard" component={Dashboard} />
