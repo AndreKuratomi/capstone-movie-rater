@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import apifake from "../../Services/apifake";
+import api from "../../Services/api";
 import { ReactNode } from "react";
 
 interface IGroups {
@@ -27,7 +27,7 @@ export const GroupsProvider = ({ children }: IGroups) => {
     JSON.parse(localStorage.getItem("@movies:token") || "null") || false;
 
   const getGroups = (token: IGroupsContext) => {
-    apifake
+    api
       .get("groups/subscriptions/", {
         headers: { Authorization: `Bearer ${token}` },
       })
@@ -37,7 +37,7 @@ export const GroupsProvider = ({ children }: IGroups) => {
       .catch((err) => console.log("Grupos não podem ser carregados"));
   };
   const getSpecificGroup = (token: IGroupsContext) => {
-    apifake
+    api
       .get("groups/{groups.id}/", {
         headers: { Authorization: `Bearer ${token}` },
       })
@@ -49,7 +49,7 @@ export const GroupsProvider = ({ children }: IGroups) => {
 
   const handleGroupCreation = (data: IGroupsContext) => {
     const { name, description, category } = data;
-    apifake
+    api
       .post(
         "groups/",
         {
