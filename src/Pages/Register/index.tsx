@@ -3,12 +3,10 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
+import { useRegister } from "../../Providers/Register";
+
 export const Register = () => {
   interface IRegister {
-    data: string;
-  }
-
-  interface IRegisterValues {
     username: string;
     email: string;
     password: string;
@@ -32,12 +30,15 @@ export const Register = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IRegisterValues>({
+  } = useForm({
     resolver: yupResolver(formSchema),
   });
+
   const history = useHistory();
-  const submitFunction = ({ data }: IRegister) => {
-    console.log(data);
+  const { signUp } = useRegister();
+
+  const submitFunction = (data: IRegister) => {
+    signUp(data);
     history.push("/login");
   };
 
@@ -55,6 +56,7 @@ export const Register = () => {
           <Link to="/signup">Junte-se</Link>
         </nav>
       </header>
+
       <form onSubmit={handleSubmit(submitFunction)}>
         <input placeholder="Usuário" {...register("username")} />
         {errors.username?.message}
