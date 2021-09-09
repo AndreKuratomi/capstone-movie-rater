@@ -2,7 +2,6 @@ import { useHistory, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-// import { FiUser, FiMail, FiLock } from "react-icons/fi";
 
 export const Register = () => {
   interface IRegister {
@@ -44,7 +43,6 @@ export const Register = () => {
 
   return (
     <>
-      {/* <Header /> */}
       <header>
         <figure>
           <img src="../assets/img/logo" alt="Logo" />
@@ -58,26 +56,13 @@ export const Register = () => {
         </nav>
       </header>
       <form onSubmit={handleSubmit(submitFunction)}>
-        <input
-          // FiUser
-          placeholder="Usuário"
-          {...register("username")}
-        />
+        <input placeholder="Usuário" {...register("username")} />
         {errors.username?.message}
-        <input
-          // FiMail
-          placeholder="Email"
-          {...register("email")}
-        />
+        <input placeholder="Email" {...register("email")} />
         {errors.email?.message}
-        <input
-          // FiLock
-          placeholder="Senha"
-          {...register("password")}
-        />
+        <input placeholder="Senha" {...register("password")} />
         {errors.password?.message}
         <input
-          //   FiLock
           placeholder="Confirmação de senha"
           {...register("confirmPassword")}
         />

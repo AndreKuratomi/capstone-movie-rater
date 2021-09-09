@@ -1,27 +1,25 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import api from "../../Services/api";
 import { ReactNode } from "react";
-
+import { useAuth } from "../Auth";
 interface IMovies {
   children: ReactNode;
 }
 
 interface IMoviesContext {
-  token: string;
   getMovies: (token: IMoviesContext) => void;
   searchMovies: (token: IMoviesContext) => void;
 }
 
 const MoviesContext = createContext({} as IMoviesContext);
 export const MoviesProvider = ({ children }: IMovies) => {
-  const [token] =
-    JSON.parse(localStorage.getItem("@movies:token") || "null") || false;
+  const { auth } = useAuth();
   const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState({});
 
   const getMovies = (token: IMoviesContext) => {
     api
-      .get("discover/movie?page=2&api_key=4b5de5fed14a8cc95ec876f973db1f9c", {
+      .get("movies", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -30,10 +28,10 @@ export const MoviesProvider = ({ children }: IMovies) => {
       .catch((err) => console.log("Grupos não podem ser carregados"));
   };
 
-  const searchMovies = (token: IMoviesContext) => {
+  const searchMovies = (auth: IMoviesContext) => {
     api
       .get("search/", {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${auth}` },
       })
 
       .then((response) => {
@@ -43,7 +41,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
   };
 
   return (
-    <MoviesContext.Provider value={{ searchMovies, getMovies, token }}>
+    <MoviesContext.Provider value={{ searchMovies, getMovies }}>
       {children}
     </MoviesContext.Provider>
   );

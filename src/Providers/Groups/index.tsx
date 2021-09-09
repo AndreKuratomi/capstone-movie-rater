@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import api from "../../Services/api";
 import { ReactNode } from "react";
+import { useAuth } from "../Auth"
 
 interface IGroups {
   children: ReactNode;
@@ -12,7 +13,6 @@ interface IGroupsProps {
   getGroups: (data: IGroupsContext) => void;
 }
 interface IGroupsContext {
-  token: string;
   data: Object;
   name: string;
   description: string;
@@ -23,23 +23,22 @@ const GroupsContext = createContext({} as IGroupsProps);
 export const GroupsProvider = ({ children }: IGroups) => {
   const [groups, setGroups] = useState([]);
   const [group, setGroup] = useState([]);
-  const [token] =
-    JSON.parse(localStorage.getItem("@movies:token") || "null") || false;
+  const { auth } = useAuth();
 
-  const getGroups = (token: IGroupsContext) => {
+  const getGroups = (auth: IGroupsContext) => {
     api
       .get("groups/subscriptions/", {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${auth}` },
       })
       .then((response) => {
         setGroups(response.data);
       })
       .catch((err) => console.log("Grupos não podem ser carregados"));
   };
-  const getSpecificGroup = (token: IGroupsContext) => {
+  const getSpecificGroup = (auth: IGroupsContext) => {
     api
       .get("groups/{groups.id}/", {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${auth}` },
       })
       .then((response) => {
         setGroups(response.data);
@@ -59,7 +58,7 @@ export const GroupsProvider = ({ children }: IGroups) => {
         },
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${auth}`,
           },
         }
       )

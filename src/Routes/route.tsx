@@ -20,7 +20,7 @@ const Route = ({
     <ReactDOMRoute
       {...rest}
       render={() => {
-        return isPrivate === !!token ? (
+        return isPrivate === !token ? (
           <Component />
         ) : (
           <Redirect
