@@ -1,6 +1,95 @@
+import { useHistory, Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+// import { FiUser, FiMail, FiLock } from "react-icons/fi";
+
 export const Register = () => {
-    return(
-        <>
-        </>
-    )
+  interface IRegister {
+    data: string;
+  }
+
+  interface IRegisterValues {
+    username: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+  }
+  const formSchema = yup.object().shape({
+    username: yup
+      .string()
+      .required("Required input!")
+      .min(4, "Minimum 4 characters!"),
+    email: yup.string().required("Required input!").email("Not valid email!"),
+    password: yup
+      .string()
+      .required("Required input!")
+      .min(8, "Minimum 8 characters!"),
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref("password")], "Unequal emails!"),
+  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IRegisterValues>({
+    resolver: yupResolver(formSchema),
+  });
+  const history = useHistory();
+  const submitFunction = ({ data }: IRegister) => {
+    console.log(data);
+    history.push("/login");
+  };
+
+  return (
+    <>
+      {/* <Header /> */}
+      <header>
+        <figure>
+          <img src="../assets/img/logo" alt="Logo" />
+          <figcaption>Logo</figcaption>
+        </figure>
+        <h3>MovieRater</h3>
+        <nav>
+          <Link to="/aboutus">Sobre Nós</Link>
+          <Link to="/login">Entrar</Link>
+          <Link to="/signup">Junte-se</Link>
+        </nav>
+      </header>
+      <form onSubmit={handleSubmit(submitFunction)}>
+        <input
+          // FiUser
+          placeholder="Usuário"
+          {...register("username")}
+        />
+        {errors.username?.message}
+        <input
+          // FiMail
+          placeholder="Email"
+          {...register("email")}
+        />
+        {errors.email?.message}
+        <input
+          // FiLock
+          placeholder="Senha"
+          {...register("password")}
+        />
+        {errors.password?.message}
+        <input
+          //   FiLock
+          placeholder="Confirmação de senha"
+          {...register("confirmPassword")}
+        />
+        {errors.confirmPassword?.message}
+        <button type="submit">Registrar</button>
+      </form>
+      <p>
+        <Link to="/login">Entrar</Link>
+      </p>
+      <p>
+        <Link to="/">Voltar para a página principal</Link>
+      </p>
+    </>
+  );
 };

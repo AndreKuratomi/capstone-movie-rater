@@ -1,10 +1,11 @@
 import Routes from "./Routes";
+import ContainerDashboard from "./Components/Container";
 
 function App() {
   return (
-    <div>
+    <ContainerDashboard>
       <Routes />
-    </div>
+    </ContainerDashboard>
   );
 }
 
