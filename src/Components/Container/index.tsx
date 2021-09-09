@@ -21,7 +21,7 @@ const ContainerDashboard = ({ children }: ContainerDashboardProps) => {
       <Box minW="100vh" minH="100vh" bgColor="black.transparent500">
         <Flex minH="100vh" justifyContent="space-between" alignItems="center">
           <MenuAside />
-          <SpecificMovie />
+          <BrowseMovies />
           {children}
         </Flex>
       </Box>
