@@ -2,7 +2,6 @@ import { useHistory, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-// import { FiUser, FiLock } from "react-icons/fi";
 
 export const Login = () => {
   interface ILogin {
@@ -39,7 +38,6 @@ export const Login = () => {
 
   return (
     <>
-      {/* <Header /> */}
       <header>
         <figure>
           <img src="../assets/img/logo" alt="Logo" />
@@ -53,17 +51,9 @@ export const Login = () => {
         </nav>
       </header>
       <form onSubmit={handleSubmit(submitFunction)}>
-        <input
-          //   FiUser
-          placeholder="Usuário"
-          {...register("username")}
-        />
+        <input placeholder="Usuário" {...register("username")} />
         {errors.username?.message}
-        <input
-          // FiLock
-          placeholder="Senha"
-          {...register("password")}
-        />
+        <input placeholder="Senha" {...register("password")} />
         {errors.password?.message}
         <button type="submit">Entrar</button>
       </form>
