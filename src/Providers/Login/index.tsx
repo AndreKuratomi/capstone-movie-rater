@@ -1,6 +1,6 @@
 import { createContext, useContext, ReactNode } from "react";
 import { useAuth } from "../Auth";
-import jwtDecode from "jwt-decode";
+import jwtDecode, { JwtPayload } from "jwt-decode";
 import api from "../../Services/api";
 import { useHistory } from "react-router-dom";
 
@@ -10,7 +10,6 @@ interface LoginProviderProps {
 interface ILogin {
   username: string;
   password: string;
-  sub: string;
 }
 interface LoginContextProps {
   signIn: (data: ILogin) => void;
@@ -26,7 +25,7 @@ export const LoginProvider = ({ children }: LoginProviderProps) => {
       .post("login/", data)
       .then((response) => {
         const { access } = response.data;
-        const decoded = jwtDecode(access);
+        const decoded = jwtDecode<JwtPayload>(access);
         setAuth(access);
         // "Login feito com sucesso!";
         history.push("/dashboard", { user: decoded.sub });
