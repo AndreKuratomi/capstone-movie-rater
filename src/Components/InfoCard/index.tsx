@@ -17,8 +17,15 @@ const InfoCard = ({
   email,
 }: InfoCardProps) => {
   return (
-    <Box w="100%" bg="#3C0101" color="white" padding="20px" textAlign="center">
-      <Image src={image} />
+    <Box
+      w="100%"
+      bg="#3C0101"
+      color="white"
+      padding="20px"
+      textAlign="center"
+      border="1px solid black"
+    >
+      <Image src={image} border="1px solid black" />
       <Heading>{name}</Heading>
       <Text>{description}</Text>
       <Box fontSize="14px">

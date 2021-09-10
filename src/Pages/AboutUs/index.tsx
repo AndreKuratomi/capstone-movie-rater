@@ -12,6 +12,7 @@ import "react-multi-carousel/lib/styles.css";
 import Carousel from "react-multi-carousel";
 import "./styles.css";
 import { BiRightArrow, BiLeftArrow } from "react-icons/bi";
+import About from "../../Assets/img/about.png";
 
 export const AboutUs = () => {
   const responsive = {
@@ -105,12 +106,16 @@ export const AboutUs = () => {
             margin="auto"
             mt="2rem"
             padding="2rem"
+            backgroundImage={About}
+            backgroundRepeat="no-repeat"
+            backgroundSize="100%"
+            backgroundColor="rgba(31, 3, 3, 0.096)"
           >
             <Text textAlign="center" fontSize="2xl">
               texto sobre a equipe bem aquuuui texto texto texto texto texto
               texto
             </Text>
-            <Box margin="auto" bg="black">
+            <Box margin="auto">
               <Carousel
                 responsive={responsive}
                 infinite={true}

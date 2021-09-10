@@ -7,6 +7,7 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import Logo from "../../Assets/img/logo.png";
 
 const NavBar = () => {
   return (
@@ -15,12 +16,7 @@ const NavBar = () => {
         <Flex w="100%" bg="#000000" justify="space-between" alignItems="center">
           <Box padding="1rem">
             <BreadcrumbItem>
-              <Image
-                src="https://i.ibb.co/PxQQ71q/image.png"
-                alt="logo"
-                width="20%"
-              />
-              <p>MovieRater</p>
+              <Image src={Logo} alt="logo" width="50%" />
             </BreadcrumbItem>
           </Box>
           <Box padding="1rem">
