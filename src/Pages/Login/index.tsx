@@ -34,9 +34,8 @@ export const Login = () => {
   const history = useHistory();
   const { signIn } = useLogin();
 
-  const submitFunction = (data: ILogin) => {
+  const submitFunction = (data:ILogin) => {
     signIn(data);
-    history.push("/dashboard");
   };
 
   return (
