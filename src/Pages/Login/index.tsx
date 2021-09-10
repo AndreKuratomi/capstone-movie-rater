@@ -3,12 +3,10 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
+import { useLogin } from "../../Providers/Login";
+
 export const Login = () => {
   interface ILogin {
-    data: string;
-  }
-
-  interface ILoginValues {
     username: string;
     password: string;
   }
@@ -23,16 +21,20 @@ export const Login = () => {
       .required("Required input!")
       .min(8, "Minimum 8 characters!"),
   });
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ILoginValues>({
+  } = useForm({
     resolver: yupResolver(formSchema),
   });
+
   const history = useHistory();
-  const submitFunction = ({ data }: ILogin) => {
-    console.log(data);
+  const { signIn } = useLogin();
+
+  const submitFunction = (data: ILogin) => {
+    signIn(data);
     history.push("/dashboard");
   };
 
