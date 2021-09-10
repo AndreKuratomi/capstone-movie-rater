@@ -9,7 +9,7 @@ interface IGroups {
 
 interface IGroupsProps {
   handleGroupCreation: (data: IGroupsContext) => void;
-  getSpecificGroup: (data: IGroupsContext) => void;
+  getSpecificGroup: (id:IGroupsProps) => void;
   getGroups: (data: IGroupsContext) => void;
 }
 interface IGroupsContext {
@@ -18,16 +18,18 @@ interface IGroupsContext {
   description: string;
   category: string;
   groups: Object;
+  id:number
 }
+
 const GroupsContext = createContext({} as IGroupsProps);
+
 export const GroupsProvider = ({ children }: IGroups) => {
   const [groups, setGroups] = useState([]);
-  const [group, setGroup] = useState([]);
   const { auth } = useAuth();
 
-  const getGroups = (auth: IGroupsContext) => {
+  const getGroups = () => {
     api
-      .get("groups/subscriptions/", {
+      .get("groups/", {
         headers: { Authorization: `Bearer ${auth}` },
       })
       .then((response) => {
@@ -35,9 +37,10 @@ export const GroupsProvider = ({ children }: IGroups) => {
       })
       .catch((err) => console.log("Grupos não podem ser carregados"));
   };
-  const getSpecificGroup = (auth: IGroupsContext) => {
+
+  const getSpecificGroup = (id:IGroupsProps) => {
     api
-      .get("groups/{groups.id}/", {
+      .get(`groups/${id}/`, {
         headers: { Authorization: `Bearer ${auth}` },
       })
       .then((response) => {

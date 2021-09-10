@@ -1,12 +1,7 @@
 import Routes from "./Routes";
-import ContainerDashboard from "./Components/Container";
 
 function App() {
-  return (
-    // <ContainerDashboard>
-    <Routes />
-    /* </ContainerDashboard> */
-  );
+  return <Routes />;
 }
 
 export default App;

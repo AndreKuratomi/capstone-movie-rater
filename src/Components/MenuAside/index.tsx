@@ -64,7 +64,7 @@ const MenuAside = () => {
               Menu
             </Heading>
             <Box display="flex" w="150px">
-              <Text fontSize="35px">
+              <Text fontSize="35px" cursor="pointer">
                 <ImHome3 />
               </Text>
               <Heading
@@ -78,7 +78,7 @@ const MenuAside = () => {
               </Heading>
             </Box>
             <Box display="flex" w="150px">
-              <Heading fontSize="35px" as="span">
+              <Heading fontSize="35px" as="span" cursor="pointer">
                 <RiSearchEyeLine />
               </Heading>
               <Heading
@@ -92,7 +92,7 @@ const MenuAside = () => {
               </Heading>
             </Box>
             <Box display="flex" w="150px">
-              <Heading fontSize="35px" as="span">
+              <Heading fontSize="35px" as="span" cursor="pointer">
                 <TiGroup />
               </Heading>
               <Heading
@@ -106,7 +106,7 @@ const MenuAside = () => {
               </Heading>
             </Box>
             <Box display="flex" w="150px">
-              <Heading fontSize="35px" as="span">
+              <Heading fontSize="35px" as="span" cursor="pointer">
                 <MdMovieCreation />
               </Heading>
               <Heading
@@ -127,7 +127,7 @@ const MenuAside = () => {
               General
             </Heading>
             <Box display="flex" w="150px">
-              <Text fontSize="35px">
+              <Text fontSize="35px" cursor="pointer">
                 <CgProfile />
               </Text>
               <Heading
@@ -141,7 +141,7 @@ const MenuAside = () => {
               </Heading>
             </Box>
             <Box display="flex" w="150px">
-              <Heading fontSize="35px" as="span">
+              <Heading fontSize="35px" as="span" cursor="pointer">
                 <RiLogoutBoxFill />
               </Heading>
               <Heading

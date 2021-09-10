@@ -2,8 +2,25 @@ import { Heading, Flex } from "@chakra-ui/layout";
 import MovieCard from "../MovieCard";
 import BoxContainer from "../BoxContainer";
 import MovieContainer from "../MovieContainer";
+import { useMovies } from "../../Providers/Movies/index";
+import { useEffect, useState } from "react";
 
-const Dashboard = () => {
+const DashboardComponent = () => {
+  const { getMovies, movies } = useMovies();
+  const [count, setCount] = useState<number>(0);
+  const imgurl = "https://image.tmdb.org/t/p/original";
+
+  const UpMovies = movies.filter((movie) => {
+    const date = movie.release_date?.replaceAll("-", "");
+    return Number(date) > 202109;
+  });
+
+  useEffect(() => {
+    if (movies.length < 1) {
+      getMovies();
+    }
+  }, [movies, getMovies]);
+  console.log(movies);
   return (
     <Flex
       w="85%"
@@ -16,18 +33,23 @@ const Dashboard = () => {
         Up coming Movies
       </Heading>
       <MovieContainer type="column">
-        <BoxContainer
-          type="Upcomming"
-          bgImg="https://image.tmdb.org/t/p/original/tFBVXnqmsmoSFR3rbltTfdGIMgV.jpg"
-        >
-          <MovieCard
-            release_date="20-05-2013"
-            title="titulo"
-            type="upComing"
-            popularity={10}
-            imgUrl="https://image.tmdb.org/t/p/original/pUK9duiCK1PKqWA5rRQ4XBMHITH.jpg"
-          />
-        </BoxContainer>
+        {UpMovies.length > 1 ? (
+          <BoxContainer
+            increase={() => setCount(count + 1)}
+            decrease={() => (count > 1 ? setCount(count - 1) : null)}
+            type="Upcomming"
+            bgImg={imgurl + UpMovies[count].backdrop_path}
+          >
+            <MovieCard
+              type="upComing"
+              release_date={UpMovies[count].release_date}
+              title={UpMovies[count].title}
+              popularity={UpMovies[count].popularity}
+              poster_path={imgurl + UpMovies[count].poster_path}
+            />
+          </BoxContainer>
+        ) : null}
+
         <Heading
           w="76%"
           fontSize="20px"
@@ -36,13 +58,11 @@ const Dashboard = () => {
         >
           Browse Movies
         </Heading>
-        <BoxContainer bgImg="https://image.tmdb.org/t/p/original/tFBVXnqmsmoSFR3rbltTfdGIMgV.jpg">
-          {[1, 2, 3, 4, 5, 3, 1, 4, 5, 3, 45].map((element) => (
+        <BoxContainer>
+          {movies?.map((movie) => (
             <MovieCard
-              release_date="20-05-2013"
-              title="titulo"
-              popularity={10}
-              imgUrl="https://image.tmdb.org/t/p/original/pUK9duiCK1PKqWA5rRQ4XBMHITH.jpg"
+              title={movie.title}
+              poster_path={imgurl + movie.poster_path}
             />
           ))}
         </BoxContainer>
@@ -54,16 +74,16 @@ const Dashboard = () => {
         >
           My movies
         </Heading>
-        <BoxContainer bgImg="https://image.tmdb.org/t/p/original/tFBVXnqmsmoSFR3rbltTfdGIMgV.jpg">
-          <MovieCard
-            release_date="20-05-2013"
-            title="titulo"
-            popularity={10}
-            imgUrl="https://image.tmdb.org/t/p/original/pUK9duiCK1PKqWA5rRQ4XBMHITH.jpg"
-          />
+        <BoxContainer>
+          {movies?.map((movie) => (
+            <MovieCard
+              title={movie.title}
+              poster_path={imgurl + movie.poster_path}
+            />
+          ))}
         </BoxContainer>
       </MovieContainer>
     </Flex>
   );
 };
-export default Dashboard;
+export default DashboardComponent;
