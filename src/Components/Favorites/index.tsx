@@ -6,7 +6,7 @@ import { Input } from "@chakra-ui/react";
 
 import { BsSearch } from "react-icons/bs";
 
-const AllGroups = () =>{
+const Favorites = () =>{
     return(
         <Flex
       w="85%"
@@ -40,7 +40,7 @@ const AllGroups = () =>{
           mb="3px"
           color="fontColor.pinkLight"
         >
-          Groups
+          Favorites
         </Heading>
         <BoxContainer type="Browse">
           {}
@@ -50,4 +50,4 @@ const AllGroups = () =>{
     )
 }
 
-export default AllGroups
+export default Favorites
