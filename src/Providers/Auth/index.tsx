@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import { ReactNode } from "react";
 import { createContext, useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
@@ -8,6 +9,7 @@ interface AuthProviderProps {
 
 interface AuthContextProps {
   auth: string;
+  setAuth: Dispatch<SetStateAction<string>>;
 }
 
 const AuthContext = createContext<AuthContextProps>({} as AuthContextProps);
@@ -22,7 +24,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   }, []);
   return (
-    <AuthContext.Provider value={{ auth }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ auth, setAuth }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 export const useAuth = () => useContext(AuthContext);
