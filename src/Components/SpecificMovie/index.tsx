@@ -13,7 +13,7 @@ const SpecificMovie = () => {
       flexDirection="column"
     >
       <MovieContainer>
-        <BoxContainer>
+        <BoxContainer type="specificMovie">
           <SpecificMovieContainer></SpecificMovieContainer>
         </BoxContainer>
       </MovieContainer>

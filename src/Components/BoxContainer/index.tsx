@@ -51,6 +51,34 @@ const BoxContainer = ({ bgImg, children, type }: IBoxContainer) => {
     >
       {children}
     </Box>
+  ) : type === "specificMovie" ? (
+    <Box
+      w="85%"
+      overflowY="auto"
+      css={{
+        "&::-webkit-scrollbar": {
+          width: "0",
+        },
+        "&::-webkit-scrollbar-track": {
+          width: "6px",
+        },
+        "&::-webkit-scrollbar-thumb": {
+          background: "rgba(91, 91, 91, 0.67)",
+          borderRadius: "24px",
+        },
+      }}
+      bgColor="black.transparent800"
+      h="95%"
+      mb="8px"
+      display="flex"
+      flexDirection="row"
+      justifyContent="space-between"
+      borderRadius="15px"
+      bgSize="fill"
+      bgPosition="center"
+    >
+      {children}
+    </Box>
   ) : (
     <Box
       w="85%"

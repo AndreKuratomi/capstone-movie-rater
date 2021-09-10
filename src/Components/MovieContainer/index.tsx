@@ -24,8 +24,8 @@ const MovieContainer = ({ children, type }: IMovieContainer) => {
     </Flex>
   ) : (
     <Flex
-      w="65vw"
-      h="85vh"
+      w="75vw"
+      h="95vh"
       mb="20px"
       justifyContent="center"
       flexDirection="column"
