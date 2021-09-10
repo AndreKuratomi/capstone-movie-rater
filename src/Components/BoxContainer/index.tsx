@@ -1,17 +1,28 @@
 import { Box } from "@chakra-ui/layout";
 import { ReactNode } from "hoist-non-react-statics/node_modules/@types/react";
+import { AiOutlineArrowRight } from "react-icons/ai";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 
 interface IBoxContainer {
   bgImg?: string;
   children: ReactNode;
   type?: string | undefined;
+  decrease?: () => void;
+  increase?: () => void;
 }
 
-const BoxContainer = ({ bgImg, children, type }: IBoxContainer) => {
+const BoxContainer = ({
+  bgImg,
+  children,
+  type,
+  increase,
+  decrease,
+}: IBoxContainer) => {
   return type === "Upcomming" ? (
     <Box
       minW="85%"
       h="30%"
+      position="relative"
       display="flex"
       flexDirection="row"
       borderRadius="15px"
@@ -20,6 +31,28 @@ const BoxContainer = ({ bgImg, children, type }: IBoxContainer) => {
       mt="8px"
       bgPosition="center"
     >
+      <Box
+        cursor="pointer"
+        position="absolute"
+        right="5"
+        top="50%"
+        color="fontColor.white100"
+        fontSize="25px"
+        onClick={increase}
+      >
+        <AiOutlineArrowRight />
+      </Box>
+      <Box
+        cursor="pointer"
+        position="absolute"
+        color="fontColor.white100"
+        fontSize="25px"
+        left="5"
+        top="50%"
+        onClick={decrease}
+      >
+        <AiOutlineArrowLeft />
+      </Box>
       {children}
     </Box>
   ) : type === "Browse" ? (

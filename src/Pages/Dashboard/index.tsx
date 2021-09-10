@@ -1,6 +1,10 @@
+import ContainerDashboard from "../../Components/Container";
+import DashboardComponent from "../../Components/Dashboard";
+
 export const Dashboard = () => {
-    return(
-        <>
-        </>
-    )
+  return (
+    <ContainerDashboard>
+      <DashboardComponent />
+    </ContainerDashboard>
+  );
 };
