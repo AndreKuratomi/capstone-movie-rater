@@ -109,7 +109,6 @@ export const Login = () =>
           <Image
             src={LogoLogin}
             alt="logoImage"
-            // boxSize="250px"
             objectFit="cover"
             bg="#000"
             w="50%"
@@ -123,7 +122,6 @@ export const Login = () =>
             <FormControl
               align="center"
               borderBottom="4px solid white"
-              // margin=""
               padding="3.5rem 10rem"
               // w="50%"
               // isInvalid={!!problem}
@@ -165,13 +163,7 @@ export const Login = () =>
                   )}
                 </InputGroup>
               </Stack>
-              <Button
-                // onClick={handleSubmit(submitFunction)}
-                bg="#F00"
-                color="white"
-                margin-top="10"
-                type="submit"
-              >
+              <Button bg="#F00" color="white" margin-top="10" type="submit">
                 Registrar
               </Button>
             </FormControl>

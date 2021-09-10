@@ -108,7 +108,6 @@ export const Register = () => {
         <Image
           src={LogoRegister}
           alt="registerImage"
-          // boxSize="250px"
           objectFit="cover"
           bg="#000"
           w="50%"
@@ -122,7 +121,6 @@ export const Register = () => {
           <FormControl
             align="center"
             borderBottom="4px solid white"
-            // margin=""
             padding="3.5rem 10rem"
             // w="50%"
             // isInvalid={!!problem}
