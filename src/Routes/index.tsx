@@ -4,7 +4,7 @@ import { Landpage } from "../Pages/Landpage";
 import { Register } from "../Pages/Register";
 import { Login } from "../Pages/Login";
 import { Dashboard } from "../Pages/Dashboard";
-import { Groups } from "../Pages/Groups";
+import  Groups  from "../Pages/Groups";
 import { AboutUs } from "../Pages/AboutUs";
 import { MyMovies } from "../Pages/MyMovies";
 import { Aboutmovie } from "../Pages/Aboutmovie";

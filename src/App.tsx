@@ -3,9 +3,7 @@ import ContainerDashboard from "./Components/Container";
 
 function App() {
   return (
-    <ContainerDashboard>
       <Routes />
-    </ContainerDashboard>
   );
 }
 

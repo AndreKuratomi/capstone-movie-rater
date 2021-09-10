@@ -42,7 +42,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
       .catch((err) =>
         console.log(
           "Não foi possível fazer o login. Verifique dados informados"
-        )
+          )
       );
   };
 
