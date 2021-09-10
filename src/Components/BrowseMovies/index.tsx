@@ -49,7 +49,7 @@ const BrowseMovies = () => {
               release_date="25202"
               popularity={5}
               title="movie name"
-              imgUrl="https://image.tmdb.org/t/p/original/pUK9duiCK1PKqWA5rRQ4XBMHITH.jpg"
+              poster_path="https://image.tmdb.org/t/p/original/pUK9duiCK1PKqWA5rRQ4XBMHITH.jpg"
             />
           ))}
         </BoxContainer>

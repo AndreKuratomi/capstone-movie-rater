@@ -9,6 +9,7 @@ export const Login = () => {
   interface ILogin {
     username: string;
     password: string;
+    sub: string;
   }
 
   const formSchema = yup.object().shape({

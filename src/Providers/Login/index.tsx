@@ -18,7 +18,7 @@ interface LoginContextProps {
 const LoginContext = createContext<LoginContextProps>({} as LoginContextProps);
 
 export const LoginProvider = ({ children }: LoginProviderProps) => {
-  const { auth, setAuth } = useAuth();
+  const { setAuth } = useAuth();
   const history = useHistory();
   const signIn = (data: ILogin) => {
     api
