@@ -22,7 +22,7 @@ import { Flex, Stack } from "@chakra-ui/layout";
 import { FaUserAlt, FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
-import LogoRegister from "../../Assets/img/imgRegister.png";
+import LogoRegister from "../../Assets/img/img register.png";
 
 import { useRegister } from "../../Providers/Register";
 
@@ -76,6 +76,7 @@ export const Register = () => {
       .min(8, "Minimum 8 characters!"),
     confirmPassword: yup
       .string()
+      .required("Required input!")
       .oneOf([yup.ref("password")], "Unequal emails!"),
   });
 
@@ -95,11 +96,12 @@ export const Register = () => {
     // signUp(data);
 
     api
-      .post("register/", data)
-      .then((_) => console.log("Cadastro realizado com sucesso!"))
+      .post("/register/", data)
+      .then((_) => {
+        console.log("Cadastro realizado com sucesso!");
+        history.push("/login");
+      })
       .catch((_) => console.log("Falha no cadastro!"));
-
-    history.push("/login");
   };
   return (
     <>
@@ -140,7 +142,9 @@ export const Register = () => {
                 />
                 <FormErrorMessage>{errors.username?.message}</FormErrorMessage>
                 {!!errors && (
-                  <FormErrorMessage>{errors.message}</FormErrorMessage>
+                  <FormErrorMessage>
+                    {errors.username?.message}
+                  </FormErrorMessage>
                 )}
               </InputGroup>
               <InputGroup>
