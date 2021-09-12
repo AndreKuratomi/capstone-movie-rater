@@ -2,6 +2,10 @@ import { Heading, Flex } from "@chakra-ui/layout";
 import MovieCard from "../MovieCard";
 import BoxContainer from "../BoxContainer";
 import MovieContainer from "../MovieContainer";
+<<<<<<< HEAD
+
+const Dashboard = () => {
+=======
 import { useMovies } from "../../Providers/Movies/index";
 import { useEffect, useState } from "react";
 
@@ -21,6 +25,7 @@ const DashboardComponent = () => {
     }
   }, [movies, getMovies]);
   console.log(movies);
+>>>>>>> 6e6104d0346d58b64491eee011f7f5c682d4890b
   return (
     <Flex
       w="85%"
@@ -33,23 +38,18 @@ const DashboardComponent = () => {
         Up coming Movies
       </Heading>
       <MovieContainer type="column">
-        {UpMovies.length > 1 ? (
-          <BoxContainer
-            increase={() => setCount(count + 1)}
-            decrease={() => (count > 1 ? setCount(count - 1) : null)}
-            type="Upcomming"
-            bgImg={imgurl + UpMovies[count].backdrop_path}
-          >
-            <MovieCard
-              type="upComing"
-              release_date={UpMovies[count].release_date}
-              title={UpMovies[count].title}
-              popularity={UpMovies[count].popularity}
-              poster_path={imgurl + UpMovies[count].poster_path}
-            />
-          </BoxContainer>
-        ) : null}
-
+        <BoxContainer
+          type="Upcomming"
+          bgImg="https://image.tmdb.org/t/p/original/tFBVXnqmsmoSFR3rbltTfdGIMgV.jpg"
+        >
+          <MovieCard
+            release_date="20-05-2013"
+            title="titulo"
+            type="upComing"
+            popularity={10}
+            imgUrl="https://image.tmdb.org/t/p/original/pUK9duiCK1PKqWA5rRQ4XBMHITH.jpg"
+          />
+        </BoxContainer>
         <Heading
           w="76%"
           fontSize="20px"
@@ -58,11 +58,13 @@ const DashboardComponent = () => {
         >
           Browse Movies
         </Heading>
-        <BoxContainer>
-          {movies?.map((movie) => (
+        <BoxContainer bgImg="https://image.tmdb.org/t/p/original/tFBVXnqmsmoSFR3rbltTfdGIMgV.jpg">
+          {[1, 2, 3, 4, 5, 3, 1, 4, 5, 3, 45].map((element) => (
             <MovieCard
-              title={movie.title}
-              poster_path={imgurl + movie.poster_path}
+              release_date="20-05-2013"
+              title="titulo"
+              popularity={10}
+              imgUrl="https://image.tmdb.org/t/p/original/pUK9duiCK1PKqWA5rRQ4XBMHITH.jpg"
             />
           ))}
         </BoxContainer>
@@ -74,16 +76,16 @@ const DashboardComponent = () => {
         >
           My movies
         </Heading>
-        <BoxContainer>
-          {movies?.map((movie) => (
-            <MovieCard
-              title={movie.title}
-              poster_path={imgurl + movie.poster_path}
-            />
-          ))}
+        <BoxContainer bgImg="https://image.tmdb.org/t/p/original/tFBVXnqmsmoSFR3rbltTfdGIMgV.jpg">
+          <MovieCard
+            release_date="20-05-2013"
+            title="titulo"
+            popularity={10}
+            imgUrl="https://image.tmdb.org/t/p/original/pUK9duiCK1PKqWA5rRQ4XBMHITH.jpg"
+          />
         </BoxContainer>
       </MovieContainer>
     </Flex>
   );
 };
-export default DashboardComponent;
+export default Dashboard;

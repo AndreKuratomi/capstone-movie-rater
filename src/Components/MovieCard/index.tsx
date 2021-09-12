@@ -3,33 +3,23 @@ import { VStack, Box, Text, Heading } from "@chakra-ui/layout";
 import { Menu, MenuButton, MenuList } from "@chakra-ui/menu";
 import { HiPlus } from "react-icons/hi";
 
-interface IMoviesList {
+interface ImovieCard {
+  imgUrl: string;
+  title: string;
+  release_date: string;
+  popularity: number;
+  type?: string | undefined;
   onClick?: () => void;
-  type?: string;
-  adult?: boolean;
-  backdrop_path?: string;
-  genre_ids?: number[];
-  id?: number;
-  original_language?: string;
-  original_title?: string;
-  overview?: string;
-  popularity?: number;
-  poster_path?: string;
-  release_date?: string;
-  title?: string;
-  video?: boolean;
-  vote_average?: number;
-  vote_count?: number;
 }
+
 const MovieCard = ({
-  backdrop_path,
+  imgUrl,
   title,
   release_date,
   popularity,
   type,
-  poster_path,
   onClick,
-}: IMoviesList) => {
+}: ImovieCard) => {
   return type === "upComing" ? (
     <VStack
       justifyContent="center"
@@ -41,7 +31,7 @@ const MovieCard = ({
       <Img
         cursor="pointer"
         onClick={onClick}
-        src={backdrop_path || poster_path}
+        src={imgUrl}
         borderRadius="8px"
         w="130px"
         h="70%"
@@ -92,7 +82,7 @@ const MovieCard = ({
       <Img
         onClick={onClick}
         cursor="pointer"
-        src={backdrop_path || poster_path}
+        src={imgUrl}
         borderRadius="8px"
         w="130px"
         h="80%"

@@ -2,7 +2,6 @@ import { createContext, useContext, useEffect, useState } from "react";
 import api from "../../Services/api";
 import { ReactNode } from "react";
 import { useAuth } from "../Auth";
-import { Dispatch, SetStateAction } from "react";
 interface IMovies {
   children: ReactNode;
 }
@@ -24,8 +23,7 @@ interface IMoviesList {
 }
 
 interface IMoviesContext {
-  getMovies: () => void;
-  setMovies: any;
+  getMovies: (token: IMoviesContext) => void;
   searchMovies: (token: IMoviesContext) => void;
   movies: IMoviesList[];
 }
@@ -38,7 +36,9 @@ export const MoviesProvider = ({ children }: IMovies) => {
 
   const getMovies = () => {
     api
-      .get("movies?page=2")
+      .get("movies", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
         console.log(response.data[0].results);
         setMovies(response.data[0].results);
@@ -60,9 +60,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
   };
 
   return (
-    <MoviesContext.Provider
-      value={{ searchMovies, getMovies, movies, setMovies }}
-    >
+    <MoviesContext.Provider value={{ searchMovies, getMovies }}>
       {children}
     </MoviesContext.Provider>
   );
