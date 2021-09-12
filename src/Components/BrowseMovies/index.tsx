@@ -4,10 +4,44 @@ import { Flex, Heading } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/button";
 import BoxContainer from "../BoxContainer";
 import { Input } from "@chakra-ui/react";
+import { useMovies } from "../../Providers/Movies";
+import { FormControl } from "@chakra-ui/form-control";
 
 import { BsSearch } from "react-icons/bs";
+import { useEffect, useState } from "react";
 
 const BrowseMovies = () => {
+  const { getMovies, movies, searchMovies, searchedMovies } = useMovies();
+  const [page, setPage] = useState<number>(1);
+  const [text, setText] = useState<string>("");
+  const [isSearch, setIsSearch] = useState<boolean>(false);
+  const imgurl = "https://image.tmdb.org/t/p/original";
+  const handleSearch = () => {
+    searchMovies(text);
+    setIsSearch(true);
+  };
+
+  useEffect(() => {
+    if (movies.length < 1) {
+      getMovies(page);
+    }
+    if (text === "") {
+      setIsSearch(false);
+    }
+
+    console.log(searchedMovies);
+  }, [
+    movies,
+    getMovies,
+    page,
+    searchedMovies,
+    text,
+    isSearch,
+    setText,
+    setIsSearch,
+    searchMovies.length,
+  ]);
+  console.log(movies);
   return (
     <Flex
       w="85%"
@@ -19,10 +53,11 @@ const BrowseMovies = () => {
       <MovieContainer>
         <Flex w="100%" mb="25px" justifyContent="flex-end">
           <Input
+            onChange={(e) => setText(e.target.value)}
             w="60%"
             color="fontColor.pinkLight"
             borderColor="fontColor.black800"
-            placeholder="Search Move"
+            placeholder="Search Movie"
             bgColor="brown.dark"
           />
           <hr />
@@ -30,6 +65,7 @@ const BrowseMovies = () => {
             hover="fontColor.black800"
             bgColor="brown.dark"
             color="fontColor.pinkLight"
+            onClick={handleSearch}
           >
             <BsSearch />
           </Button>
@@ -44,14 +80,23 @@ const BrowseMovies = () => {
           Browse Movies
         </Heading>
         <BoxContainer type="Browse">
-          {[1, 2, 3, 3, 4].map((elemtn) => (
-            <MovieCard
-              release_date="25202"
-              popularity={5}
-              title="movie name"
-              poster_path="https://image.tmdb.org/t/p/original/pUK9duiCK1PKqWA5rRQ4XBMHITH.jpg"
-            />
-          ))}
+          {isSearch
+            ? searchedMovies.map((movie) => (
+                <MovieCard
+                  release_date={movie.release_date}
+                  popularity={movie.popularity}
+                  title={movie.original_title}
+                  poster_path={imgurl + movie.poster_path}
+                />
+              ))
+            : movies.map((movie) => (
+                <MovieCard
+                  release_date={movie.release_date}
+                  popularity={movie.popularity}
+                  title={movie.original_title}
+                  poster_path={imgurl + movie.poster_path}
+                />
+              ))}
         </BoxContainer>
       </MovieContainer>
     </Flex>
