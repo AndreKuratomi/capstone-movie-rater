@@ -21,18 +21,18 @@ const NavBar = () => {
           </Box>
           <Box padding="1rem">
             <BreadcrumbItem padding="0px 5px" color="white">
-              <BreadcrumbLink as={Link} to="/about">
-                Sobre Nós
+              <BreadcrumbLink as={Link} to="/aboutus">
+                About us
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbItem padding="0px 5px" color="white">
-              <BreadcrumbLink as={Link} to="/about">
-                Entrar
+              <BreadcrumbLink as={Link} to="/login">
+                Login
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbItem padding="0px 5px" bg="#C11B1B" color="white">
-              <BreadcrumbLink as={Link} to="/about">
-                Junte-se
+              <BreadcrumbLink as={Link} to="/signup">
+                Sign Up
               </BreadcrumbLink>
             </BreadcrumbItem>
           </Box>
@@ -43,3 +43,4 @@ const NavBar = () => {
 };
 
 export default NavBar;
+

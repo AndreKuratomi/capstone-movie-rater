@@ -8,6 +8,8 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { Link as ReachLink } from "react-router-dom"
+import { Link } from "@chakra-ui/react"
 
 const NavMobile = () => {
   return (
@@ -20,14 +22,14 @@ const NavMobile = () => {
           color="black"
         />
         <MenuList bg="white" border="none" color="black" padding="0px">
-          <MenuItem>Sobre Nós</MenuItem>
-          <MenuItem>Entrar</MenuItem>
+          <MenuItem><Link as={ReachLink} to="/aboutus">About Us</Link></MenuItem>
+          <MenuItem><Link as={ReachLink} to="/login">Login</Link></MenuItem>
           <MenuItem
             backgroundColor="red"
             borderBottomRightRadius="6px"
             borderBottomLeftRadius="6px"
           >
-            Junte-se
+            <Link as={ReachLink} to="/signup">Join Us</Link>
           </MenuItem>
         </MenuList>
       </Menu>
