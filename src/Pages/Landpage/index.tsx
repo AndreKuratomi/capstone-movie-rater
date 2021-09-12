@@ -103,7 +103,7 @@ export const Landpage = () => {
           mt="1rem"
         >
           <Heading fontFamily="PT Mono" mt="3rem" textAlign="center">
-            bem vindo ao movierater!
+            Welcome to Movie Rater!
           </Heading>
           <Heading
             maxWidth="50rem"
