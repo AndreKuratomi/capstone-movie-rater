@@ -1,0 +1,29 @@
+.image-gallery-slide .image-gallery-description {
+  background: rgb(0, 0, 0);
+  bottom: 140px;
+  color: rgb(255, 255, 255);
+  line-height: 1;
+  padding: 10px 20px;
+  position: absolute;
+  white-space: normal;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-gallery {
+  width: 70%;
+  height: auto;
+  text-align: center;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media only screen and (max-width: 500px) {
+  .image-gallery {
+    width: 100%;
+    height: auto;
+    text-align: center;
+  }
+}
