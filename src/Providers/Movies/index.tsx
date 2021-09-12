@@ -1,56 +1,39 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import api from "../../Services/api";
 import { ReactNode } from "react";
-import { useAuth } from "../Auth";
+
 interface IMovies {
   children: ReactNode;
 }
-interface IMoviesList {
-  adult?: boolean;
-  backdrop_path?: string;
-  genre_ids?: number[];
-  id?: number;
-  original_language?: string;
-  original_title?: string;
-  overview?: string;
-  popularity?: number;
-  poster_path?: string;
-  release_date?: string;
-  title?: string;
-  video?: boolean;
-  vote_average?: number;
-  vote_count?: number;
-}
 
 interface IMoviesContext {
+  token: string;
   getMovies: (token: IMoviesContext) => void;
   searchMovies: (token: IMoviesContext) => void;
-  movies: IMoviesList[];
 }
 
 const MoviesContext = createContext({} as IMoviesContext);
 export const MoviesProvider = ({ children }: IMovies) => {
-  const { auth } = useAuth();
+  const [token] =
+    JSON.parse(localStorage.getItem("@movies:token") || "null") || false;
   const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState({});
 
-  const getMovies = () => {
+  const getMovies = (token: IMoviesContext) => {
     api
-      .get("movies", {
+      .get("discover/movie?page=2&api_key=4b5de5fed14a8cc95ec876f973db1f9c", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        console.log(response.data[0].results);
-        setMovies(response.data[0].results);
-        console.log(movies);
+        setMovies(response.data);
       })
       .catch((err) => console.log("Grupos não podem ser carregados"));
   };
 
-  const searchMovies = (auth: IMoviesContext) => {
+  const searchMovies = (token: IMoviesContext) => {
     api
       .get("search/", {
-        headers: { Authorization: `Bearer ${auth}` },
+        headers: { Authorization: `Bearer ${token}` },
       })
 
       .then((response) => {
@@ -60,7 +43,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
   };
 
   return (
-    <MoviesContext.Provider value={{ searchMovies, getMovies }}>
+    <MoviesContext.Provider value={{ searchMovies, getMovies, token }}>
       {children}
     </MoviesContext.Provider>
   );

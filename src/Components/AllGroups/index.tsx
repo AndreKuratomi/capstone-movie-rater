@@ -3,12 +3,12 @@ import { Flex, Heading } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/button";
 import BoxContainer from "../BoxContainer";
 import { Input } from "@chakra-ui/react";
-
+import Chat from "../Chat";
 import { BsSearch } from "react-icons/bs";
 
-const AllGroups = () =>{
-    return(
-        <Flex
+const AllGroups = () => {
+  return (
+    <Flex
       w="85%"
       h="100vh"
       justifyContent="flex-start"
@@ -43,11 +43,11 @@ const AllGroups = () =>{
           Groups
         </Heading>
         <BoxContainer type="Browse">
-          {}
+          <Chat />
         </BoxContainer>
       </MovieContainer>
     </Flex>
-    )
-}
+  );
+};
 
-export default AllGroups
+export default AllGroups;

@@ -9,7 +9,7 @@ interface IGroups {
 
 interface IGroupsProps {
   handleGroupCreation: (data: IGroupsContext) => void;
-  getSpecificGroup: (id: IGroupsProps) => void;
+
   getGroups: (data: IGroupsContext) => void;
 }
 interface IGroupsContext {
@@ -69,9 +69,7 @@ export const GroupsProvider = ({ children }: IGroups) => {
   };
 
   return (
-    <GroupsContext.Provider
-      value={{ handleGroupCreation, getSpecificGroup, getGroups }}
-    >
+    <GroupsContext.Provider value={{ handleGroupCreation, getGroups }}>
       {children}
     </GroupsContext.Provider>
   );

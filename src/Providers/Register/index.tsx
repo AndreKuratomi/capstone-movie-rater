@@ -23,11 +23,7 @@ const RegisterContext = createContext<RegisterContextProps>(
 export const RegisterProvider = ({ children }: RegisterProviderProps) => {
   const signUp = (data: IRegister) => {
     api
-<<<<<<< HEAD
       .post("/register/", data)
-=======
-      .post("register/", data)
->>>>>>> 6e6104d0346d58b64491eee011f7f5c682d4890b
       .then((_) => "Cadastro realizado com sucesso!")
       .catch((_) => "Falha no cadastro!");
   };
