@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import api from "../../Services/api";
 import { ReactNode } from "react";
-import { useAuth } from "../Auth"
+import { useAuth } from "../Auth";
 
 interface IGroups {
   children: ReactNode;
@@ -9,7 +9,7 @@ interface IGroups {
 
 interface IGroupsProps {
   handleGroupCreation: (data: IGroupsContext) => void;
-  getSpecificGroup: (data: IGroupsContext) => void;
+  getSpecificGroup: (id: IGroupsProps) => void;
   getGroups: (data: IGroupsContext) => void;
 }
 interface IGroupsContext {
@@ -18,8 +18,11 @@ interface IGroupsContext {
   description: string;
   category: string;
   groups: Object;
+  id: number;
 }
+
 const GroupsContext = createContext({} as IGroupsProps);
+
 export const GroupsProvider = ({ children }: IGroups) => {
   const [groups, setGroups] = useState([]);
   const [group, setGroup] = useState([]);
