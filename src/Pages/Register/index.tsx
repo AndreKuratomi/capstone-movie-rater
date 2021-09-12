@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import api from "../../Services/api";
 
 import {
+  useMediaQuery,
   Box,
   Button,
   FormControl,
@@ -27,10 +28,9 @@ import LogoRegister from "../../Assets/img/img register.png";
 import { useRegister } from "../../Providers/Register";
 
 import NavBar from "../../Components/NavBar";
-// import { Input } from "../../Components/Form/Input";
+import NavMobile from "../../Components/NavMobile";
 
 import { FieldError } from "react-hook-form";
-// import { IconType } from "react-icons/lib";
 import { useState, useEffect } from "react";
 
 // interface IInput {
@@ -103,108 +103,213 @@ export const Register = () => {
       })
       .catch((_) => console.log("Falha no cadastro!"));
   };
+
+  const [mobileVersion] = useMediaQuery("(max-width: 768px)");
+  const [desktopVersion] = useMediaQuery("(min-width:768px)");
+
   return (
     <>
-      <NavBar />
+      {mobileVersion ? <NavMobile /> : <NavBar />}
+
       <Box bg="#000">
-        <Image
-          src={LogoRegister}
-          alt="registerImage"
-          objectFit="cover"
-          bg="#000"
-          w="50%"
-          align="center"
-          z-index="1"
-          margin="0 20rem"
-        />
+        {mobileVersion ? (
+          <Image
+            src={LogoRegister}
+            alt="logoImage"
+            objectFit="cover"
+            bg="#000"
+            w="50%"
+            align="center"
+            z-index="1"
+            margin="0 5.5rem"
+          />
+        ) : (
+          <Image
+            src={LogoRegister}
+            alt="logoImage"
+            objectFit="cover"
+            bg="#000"
+            w="50%"
+            align="center"
+            z-index="1"
+            margin="0 20rem"
+          />
+        )}
       </Box>
       <Flex align="center" bg="#000" direction="column" height="100vh">
         <form onSubmit={handleSubmit(submitFunction)}>
-          <FormControl
-            align="center"
-            borderBottom="4px solid white"
-            padding="3.5rem 10rem"
-            // w="50%"
-            // isInvalid={!!problem}
-          >
-            <Stack spacing="3.5">
-              <InputGroup>
-                <InputLeftElement children={<FaUserAlt />} />
-                <Input
-                  bg="#FFF"
-                  // borderColor={statusColor[colors]}
-                  // color={statusColor[colors]}
-                  icon={<FaUserAlt />}
-                  size="md"
-                  variant="outlined"
-                  placeholder="Usuário"
-                  {...register("username")}
-                />
-                <FormErrorMessage>{errors.username?.message}</FormErrorMessage>
-                {!!errors && (
+          {mobileVersion ? (
+            <FormControl
+              align="center"
+              borderBottom="4px solid white"
+              padding="1.5rem 4rem"
+              // w="50%"
+              // isInvalid={!!problem}
+            >
+              <Stack spacing="3.5">
+                <InputGroup>
+                  <InputLeftElement children={<FaUserAlt />} />
+                  <Input
+                    bg="#FFF"
+                    // borderColor={statusColor[colors]}
+                    // color={statusColor[colors]}
+                    icon={<FaUserAlt />}
+                    size="md"
+                    variant="outlined"
+                    placeholder="Usuário"
+                    {...register("username")}
+                  />
                   <FormErrorMessage>
                     {errors.username?.message}
                   </FormErrorMessage>
-                )}
-              </InputGroup>
-              <InputGroup>
-                <InputLeftElement children={<MdEmail />} />
-                <Input
-                  bg="#FFF"
-                  // borderColor={statusColor[colors]}
-                  // color={statusColor[colors]}
-                  placeholder="Email"
-                  size="md"
-                  type="email"
-                  variant="outlined"
-                  {...register("email")}
-                />
-                {!!errors && (
-                  <FormErrorMessage>{errors.message}</FormErrorMessage>
-                )}
-              </InputGroup>
-              <InputGroup>
-                <InputLeftElement children={<FaLock />} />
-                <Input
-                  bg="#FFF"
-                  // borderColor={statusColor[colors]}
-                  // color={statusColor[colors]}
-                  placeholder="Senha"
-                  size="md"
-                  type="password"
-                  variant="outlined"
-                  {...register("password")}
-                />
-                {!!errors && (
-                  <FormErrorMessage>{errors.message}</FormErrorMessage>
-                )}
-              </InputGroup>
-              <InputGroup>
-                <InputLeftElement children={<FaLock />} />
-                <Input
-                  bg="#FFF"
-                  // borderColor={statusColor[colors]}
-                  // color={statusColor[colors]}
-                  placeholder="Confirmação de senha"
-                  size="md"
-                  type="password"
-                  variant="outlined"
-                  {...register("confirmPassword")}
-                />
-                {!!errors && (
-                  <FormErrorMessage>{errors.message}</FormErrorMessage>
-                )}
-              </InputGroup>
-            </Stack>
-            <Button bg="#F00" color="white" margin-top="10" type="submit">
-              Registrar
-            </Button>
-          </FormControl>
+                  {!!errors && (
+                    <FormErrorMessage>
+                      {errors.username?.message}
+                    </FormErrorMessage>
+                  )}
+                </InputGroup>
+                <InputGroup>
+                  <InputLeftElement children={<MdEmail />} />
+                  <Input
+                    bg="#FFF"
+                    // borderColor={statusColor[colors]}
+                    // color={statusColor[colors]}
+                    placeholder="Email"
+                    size="md"
+                    type="email"
+                    variant="outlined"
+                    {...register("email")}
+                  />
+                  {!!errors && (
+                    <FormErrorMessage>{errors.message}</FormErrorMessage>
+                  )}
+                </InputGroup>
+                <InputGroup>
+                  <InputLeftElement children={<FaLock />} />
+                  <Input
+                    bg="#FFF"
+                    // borderColor={statusColor[colors]}
+                    // color={statusColor[colors]}
+                    placeholder="Senha"
+                    size="md"
+                    type="password"
+                    variant="outlined"
+                    {...register("password")}
+                  />
+                  {!!errors && (
+                    <FormErrorMessage>{errors.message}</FormErrorMessage>
+                  )}
+                </InputGroup>
+                <InputGroup>
+                  <InputLeftElement children={<FaLock />} />
+                  <Input
+                    bg="#FFF"
+                    // borderColor={statusColor[colors]}
+                    // color={statusColor[colors]}
+                    placeholder="Confirmação de senha"
+                    size="md"
+                    type="password"
+                    variant="outlined"
+                    {...register("confirmPassword")}
+                  />
+                  {!!errors && (
+                    <FormErrorMessage>{errors.message}</FormErrorMessage>
+                  )}
+                </InputGroup>
+              </Stack>
+              <Button bg="#F00" color="white" margin-top="10" type="submit">
+                Registrar
+              </Button>
+            </FormControl>
+          ) : (
+            <FormControl
+              align="center"
+              borderBottom="4px solid white"
+              padding="3.5rem 10rem"
+              // w="50%"
+              // isInvalid={!!problem}
+            >
+              <Stack spacing="3.5">
+                <InputGroup>
+                  <InputLeftElement children={<FaUserAlt />} />
+                  <Input
+                    bg="#FFF"
+                    // borderColor={statusColor[colors]}
+                    // color={statusColor[colors]}
+                    icon={<FaUserAlt />}
+                    size="md"
+                    variant="outlined"
+                    placeholder="Usuário"
+                    {...register("username")}
+                  />
+                  <FormErrorMessage>
+                    {errors.username?.message}
+                  </FormErrorMessage>
+                  {!!errors && (
+                    <FormErrorMessage>
+                      {errors.username?.message}
+                    </FormErrorMessage>
+                  )}
+                </InputGroup>
+                <InputGroup>
+                  <InputLeftElement children={<MdEmail />} />
+                  <Input
+                    bg="#FFF"
+                    // borderColor={statusColor[colors]}
+                    // color={statusColor[colors]}
+                    placeholder="Email"
+                    size="md"
+                    type="email"
+                    variant="outlined"
+                    {...register("email")}
+                  />
+                  {!!errors && (
+                    <FormErrorMessage>{errors.message}</FormErrorMessage>
+                  )}
+                </InputGroup>
+                <InputGroup>
+                  <InputLeftElement children={<FaLock />} />
+                  <Input
+                    bg="#FFF"
+                    // borderColor={statusColor[colors]}
+                    // color={statusColor[colors]}
+                    placeholder="Senha"
+                    size="md"
+                    type="password"
+                    variant="outlined"
+                    {...register("password")}
+                  />
+                  {!!errors && (
+                    <FormErrorMessage>{errors.message}</FormErrorMessage>
+                  )}
+                </InputGroup>
+                <InputGroup>
+                  <InputLeftElement children={<FaLock />} />
+                  <Input
+                    bg="#FFF"
+                    // borderColor={statusColor[colors]}
+                    // color={statusColor[colors]}
+                    placeholder="Confirmação de senha"
+                    size="md"
+                    type="password"
+                    variant="outlined"
+                    {...register("confirmPassword")}
+                  />
+                  {!!errors && (
+                    <FormErrorMessage>{errors.message}</FormErrorMessage>
+                  )}
+                </InputGroup>
+              </Stack>
+              <Button bg="#F00" color="white" margin-top="10" type="submit">
+                Registrar
+              </Button>
+            </FormControl>
+          )}
         </form>
         <Box marginTop="3.5">
           <Stack spacing="3.5">
             <Flex align="center" color="white" direction="column">
-              <Text>
+              <Text as="span" align="center">
                 Já tem cadastro? Então vamos ao{" "}
                 <Link as={ReachLink} to="/login">
                   Login
