@@ -12,9 +12,12 @@ import {
   FormControl,
   Link,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 
 import { Input } from "../../Components/Form/Input";
+import { ModalSuccess } from "../../Components/ModalResults/ModalSuccess";
+import { ModalFail } from "../../Components/ModalResults/ModalFail";
 
 import { Flex, Stack } from "@chakra-ui/layout";
 import { FaUserAlt, FaLock } from "react-icons/fa";
@@ -33,20 +36,7 @@ interface IRegister {
   password: string;
 }
 
-<<<<<<< HEAD
 export const Register = () => {
-=======
-const Register = () => {
-  // { problem = null }: IInput
-  // const [colors, setColors] = useState<string>("default");
-
-  // useEffect(() => {
-  //   if (!problem) {
-  //     return setColors("error");
-  //   }
-  // }, [problem]);
-
->>>>>>> b018c87c2dcaeed326d265ccb17560f23e04a7c1
   const formSchema = yup.object().shape({
     username: yup
       .string()
@@ -73,7 +63,19 @@ const Register = () => {
   } = useForm({
     resolver: yupResolver(formSchema),
   });
-  console.log(errors.username?.message);
+
+  const {
+    isOpen: isModalSuccessOpen,
+    onOpen: onModalSuccessOpen,
+    onClose: onModalSuccessClose,
+  } = useDisclosure();
+
+  const {
+    isOpen: isModalFailOpen,
+    onOpen: onModalFailOpen,
+    onClose: onModalFailClose,
+  } = useDisclosure();
+
   const history = useHistory();
 
   const submitFunction = (data: IRegister) => {
@@ -82,10 +84,14 @@ const Register = () => {
     api
       .post("register", data)
       .then((_) => {
-        console.log("Cadastro realizado com sucesso!");
+        onModalSuccessOpen();
         history.push("/login");
+        // console.log("Cadastro realizado com sucesso! Prosseguir");
       })
-      .catch((_) => console.log("Falha no cadastro!"));
+      .catch((_) => {
+        onModalFailOpen();
+        // console.log("Falha no cadastro!"))
+      });
   };
 
   const [mobileVersion] = useMediaQuery("(max-width: 768px)");
@@ -93,6 +99,9 @@ const Register = () => {
 
   return (
     <>
+      <ModalSuccess isOpen={isModalSuccessOpen} onClose={onModalSuccessClose} />
+      <ModalFail isOpen={isModalFailOpen} onClose={onModalFailClose} />
+
       {mobileVersion ? <NavMobile /> : <NavBar />}
 
       <Flex align="center" bg="#000" direction="column" height="100vh">
@@ -106,19 +115,9 @@ const Register = () => {
               >
                 <Stack spacing="5">
                   <Input
-<<<<<<< HEAD
                     error={errors.username}
                     icon={FaUserAlt}
                     placeholder="Usuário"
-=======
-                    bg="#FFF"
-                    // borderColor={statusColor[colors]}
-                    // color={statusColor[colors]}
-                    icon={<FaUserAlt />}
-                    size="md"
-                    variant="outlined"
-                    placeholder="Username"
->>>>>>> b018c87c2dcaeed326d265ccb17560f23e04a7c1
                     {...register("username")}
                   />
                   <Input
@@ -129,53 +128,25 @@ const Register = () => {
                     {...register("email")}
                   />
                   <Input
-<<<<<<< HEAD
                     error={errors.password}
                     icon={FaLock}
                     placeholder="Senha"
-=======
-                    bg="#FFF"
-                    // borderColor={statusColor[colors]}
-                    // color={statusColor[colors]}
-                    placeholder="Password"
-                    size="md"
->>>>>>> b018c87c2dcaeed326d265ccb17560f23e04a7c1
                     type="password"
                     {...register("password")}
                   />
                   <Input
-<<<<<<< HEAD
                     error={errors.confirmPassword}
                     icon={FaLock}
                     placeholder="Confirmar senha"
-=======
-                    bg="#FFF"
-                    // borderColor={statusColor[colors]}
-                    // color={statusColor[colors]}
-                    placeholder="Password confirmation"
-                    size="md"
->>>>>>> b018c87c2dcaeed326d265ccb17560f23e04a7c1
                     type="password"
                     {...register("confirmPassword")}
                   />
-<<<<<<< HEAD
                 </Stack>
                 <Button bg="#F00" color="white" margin-top="10" type="submit">
                   Registrar
                 </Button>
               </FormControl>
             </Box>
-=======
-                  {!!errors && (
-                    <FormErrorMessage>{errors.message}</FormErrorMessage>
-                  )}
-                </InputGroup>
-              </Stack>
-              <Button bg="#F00" color="white" margin-top="10" type="submit">
-                Register
-              </Button>
-            </FormControl>
->>>>>>> b018c87c2dcaeed326d265ccb17560f23e04a7c1
           ) : (
             <Box bgImage={LogoRegister}>
               <FormControl
@@ -185,19 +156,9 @@ const Register = () => {
               >
                 <Stack spacing="7">
                   <Input
-<<<<<<< HEAD
                     error={errors.username}
                     icon={FaUserAlt}
                     placeholder="Usuário"
-=======
-                    bg="#FFF"
-                    // borderColor={statusColor[colors]}
-                    // color={statusColor[colors]}
-                    icon={<FaUserAlt />}
-                    size="md"
-                    variant="outlined"
-                    placeholder="Username"
->>>>>>> b018c87c2dcaeed326d265ccb17560f23e04a7c1
                     {...register("username")}
                   />
                   <Input
@@ -207,23 +168,12 @@ const Register = () => {
                     {...register("email")}
                   />
                   <Input
-<<<<<<< HEAD
                     error={errors.password}
                     icon={FaLock}
                     placeholder="Senha"
-=======
-                    bg="#FFF"
-                    // borderColor={statusColor[colors]}
-                    // color={statusColor[colors]}
-                    placeholder="Password"
-                    size="md"
-                    type="password"
-                    variant="outlined"
->>>>>>> b018c87c2dcaeed326d265ccb17560f23e04a7c1
                     {...register("password")}
                   />
                   <Input
-<<<<<<< HEAD
                     error={errors.confirmPassword}
                     icon={FaLock}
                     placeholder="Confirmar senha"
@@ -235,39 +185,19 @@ const Register = () => {
                 </Button>
               </FormControl>
             </Box>
-=======
-                    bg="#FFF"
-                    // borderColor={statusColor[colors]}
-                    // color={statusColor[colors]}
-                    placeholder="Password confirmation"
-                    size="md"
-                    type="password"
-                    variant="outlined"
-                    {...register("confirmPassword")}
-                  />
-                  {!!errors && (
-                    <FormErrorMessage>{errors.message}</FormErrorMessage>
-                  )}
-                </InputGroup>
-              </Stack>
-              <Button bg="#F00" color="white" margin-top="10" type="submit">
-                Register
-              </Button>
-            </FormControl>
->>>>>>> b018c87c2dcaeed326d265ccb17560f23e04a7c1
           )}
         </form>
         <Box marginTop="3.5">
           <Stack spacing="3.5">
             <Flex align="center" color="white" direction="column">
               <Text as="span" align="center">
-                Already a member? Go to {" "}
+                Já tem cadastro? Então vamos ao{" "}
                 <Link as={ReachLink} to="/login">
                   Login
                 </Link>
               </Text>
               <Link as={ReachLink} to="/">
-                Back to homepage
+                Voltar para a página principal
               </Link>
             </Flex>
           </Stack>
@@ -277,4 +207,4 @@ const Register = () => {
   );
 };
 
-export default Register
+export default Register;
