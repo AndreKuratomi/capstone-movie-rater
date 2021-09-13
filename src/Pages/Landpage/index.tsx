@@ -10,6 +10,7 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   useMediaQuery,
+  Link
 } from "@chakra-ui/react";
 import "react-image-gallery/styles/css/image-gallery.css";
 import "./styles.css";
@@ -48,7 +49,7 @@ export const Landpage = () => {
   const [tabletVersion] = useMediaQuery("(max-width: 768px)");
 
   return (
-    <div>
+    <Box>
       {mobileVersion ? <NavMobile /> : <NavBar />}
       <Box
         bg="black"
@@ -76,7 +77,7 @@ export const Landpage = () => {
             outline="none"
             href="#video"
           >
-            <a href="#video">Conheça o site</a>
+            <Link href="#video">Site overview</Link>
           </Button>
         ) : (
           <Button
@@ -93,7 +94,7 @@ export const Landpage = () => {
             outline="none"
             href="#video"
           >
-            <a href="#video">Conheça o site</a>
+            <Link href="#video">Site overview</Link>
           </Button>
         )}
 
@@ -106,7 +107,7 @@ export const Landpage = () => {
           mt="1rem"
         >
           <Heading fontFamily="PT Mono" mt="3rem" textAlign="center">
-            bem vindo ao movierater!
+            Welcome to MovieRater!
           </Heading>
           <Heading
             maxWidth="50rem"
@@ -116,9 +117,7 @@ export const Landpage = () => {
             textAlign="justify"
             fontSize="2xl"
           >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-            nisl turpis, vehicula ac turpis dignissim, finibus interdum nulla.
-            Nunc posuere mi tellus, sed interdum purus placerat vitae.
+            All thrending movies in the same place!
           </Heading>
         </Box>
         <Box w="60%">
@@ -172,7 +171,7 @@ export const Landpage = () => {
         </Box>
         <Box backgroundImage={Faixa} backgroundRepeat="no-repeat" width="100%">
           <Heading textAlign="center" mt="9rem" fontFamily="PT Mono">
-            O que se pode fazer no site?
+            What can you do on MovieRater?
           </Heading>
           <Flex
             flexWrap="wrap"
@@ -193,7 +192,7 @@ export const Landpage = () => {
             >
               <Image src={Film} alt="film" width="70%" />
               <Text maxWidth="10rem" mt="1rem" fontFamily="PT Mono">
-                publique e veja review dos seus filmes favoritos.
+                post and share reviews of your favorite movies.
               </Text>
             </Box>
             <Box
@@ -209,7 +208,7 @@ export const Landpage = () => {
             >
               <Image src={Group} alt="group" width="70%" />
               <Text maxWidth="10rem" mt="1rem" fontFamily="PT Mono">
-                entre em grupos com pessoas com o mesmo gosto que você.
+                join group chats with same interests.
               </Text>
             </Box>
             <Box
@@ -225,16 +224,16 @@ export const Landpage = () => {
             >
               <Image src={Best} alt="fav" width="70%" />
               <Text maxWidth="10rem" mt="0.75rem" fontFamily="PT Mono">
-                recomendações dos filmes mais bem avaliados.
+                best rated movies recomendation.
               </Text>
             </Box>
           </Flex>
           <Box mb="2rem" w="100%" textAlign="center">
-            <RouteLink to="/signup">
+            <Link as={RouteLink} to="/signup">
               <Button bg="white" color="black" padding="1rem 2rem">
-                Venha fazer parte!
+                Come and join us!
               </Button>
-            </RouteLink>
+            </Link>
           </Box>
         </Box>
         <Box
@@ -252,9 +251,7 @@ export const Landpage = () => {
             maxWidth="75%"
             margin="auto"
           >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-            nisl turpis, vehicula ac turpis dignissim, finibus interdum nulla.
-            Nunc posuere mi tellus, sed interdum purus placerat vitae.
+            Take a look on our community and intuitive design!
           </Heading>
           <Box display="flex" justifyContent="center" w="85%" margin="auto">
             <ReactPlayer
@@ -267,11 +264,11 @@ export const Landpage = () => {
         <Breadcrumb width="100%" bg="#4E4E4E" textAlign="center" mt="4rem">
           <BreadcrumbItem color="white">
             <Text padding="1rem">
-              developed by equipe 3 © all rights reserved
+              developed by group 3 © all rights reserved
             </Text>
           </BreadcrumbItem>
         </Breadcrumb>
       </Box>
-    </div>
+    </Box>
   );
 };
