@@ -54,7 +54,7 @@ interface IRegister {
   confirmPassword: string;
 }
 
-export const Register = () => {
+const Register = () => {
   // { problem = null }: IInput
   // const [colors, setColors] = useState<string>("default");
 
@@ -325,3 +325,5 @@ export const Register = () => {
     </>
   );
 };
+
+export default Register

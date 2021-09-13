@@ -48,7 +48,7 @@ import { useState, useEffect } from "react";
 //   default: "gray.500",
 // };
 
-export const Login = () =>
+const Login = () =>
   // { problem = null }: IInput
   {
     // const [colors, setColors] = useState<string>("default");
@@ -297,3 +297,5 @@ export const Login = () =>
       </>
     );
   };
+
+  export default Login

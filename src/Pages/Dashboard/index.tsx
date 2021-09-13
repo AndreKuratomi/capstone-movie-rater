@@ -1,10 +1,12 @@
 import ContainerDashboard from "../../Components/Container";
 import DashboardComponent from "../../Components/Dashboard";
 
-export const Dashboard = () => {
+const Dashboard = () => {
   return (
     <ContainerDashboard>
       <DashboardComponent />
     </ContainerDashboard>
   );
 };
+
+export default Dashboard

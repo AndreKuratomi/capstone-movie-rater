@@ -13,7 +13,7 @@ import Carousel from "react-multi-carousel";
 import "./styles.css";
 import About from "../../Assets/img/about.png";
 
-export const AboutUs = () => {
+const AboutUs = () => {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -172,3 +172,5 @@ export const AboutUs = () => {
     </Box>
   );
 };
+
+export default AboutUs

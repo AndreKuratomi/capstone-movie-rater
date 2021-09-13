@@ -25,7 +25,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Link as RouteLink } from "react-router-dom";
 
-export const Landpage = () => {
+const Landpage = () => {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -272,3 +272,5 @@ export const Landpage = () => {
     </Box>
   );
 };
+
+export default Landpage
