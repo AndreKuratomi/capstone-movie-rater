@@ -13,25 +13,37 @@ import {
 interface ModalFailProps {
   isOpen: boolean;
   onClose: () => void;
-  // page: string;
+  page: string;
+  buttonInfo: string;
 }
 
-export const ModalFail = ({ isOpen, onClose }: ModalFailProps) => {
+export const ModalFail = ({
+  isOpen,
+  onClose,
+  page,
+  buttonInfo,
+}: ModalFailProps) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>Modal Title</ModalHeader>
-        <ModalCloseButton />
+      <ModalContent borderRadius="10" w="90%">
+        <ModalHeader
+          bg="red.500"
+          borderTopLeftRadius="10"
+          borderTopRightRadius="10"
+          color="fontColor.white100"
+        >
+          Ops..!
+        </ModalHeader>
+        {/* <ModalCloseButton /> */}
         <ModalBody>
-          <Text>Falha no !</Text>
+          <Text align="center">Falha no {page}!</Text>
         </ModalBody>
 
-        <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={onClose}>
-            Verifique os dados informados.
+        <ModalFooter justifyContent="center">
+          <Button colorScheme="blue" onClick={onClose}>
+            Verifique {buttonInfo}
           </Button>
-          <Button variant="ghost">Secondary Action</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
