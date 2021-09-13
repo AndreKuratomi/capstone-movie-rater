@@ -6,6 +6,7 @@ import { useAuth } from "../Auth";
 import jwtDecode, { JwtPayload } from "jwt-decode";
 
 import axios from "axios";
+import { jsx } from "@emotion/react";
 interface IMovies {
   children: ReactNode;
 }
@@ -35,19 +36,18 @@ interface IMoviesContext {
   searchedMovies: IMoviesList[];
   getSpecificMovie: (specifcMovie: IMoviesList) => void;
   aboutMovie: IMoviesList;
-  AddToFavorites: (data: IMoviesList) => void;
+  AddToFavorites: (data: IMoviesList, token: string) => void;
 }
 
 const MoviesContext = createContext({} as IMoviesContext);
 export const MoviesProvider = ({ children }: IMovies) => {
   const TMDBapi =
     "https://api.themoviedb.org/3/search/movie?api_key=4b5de5fed14a8cc95ec876f973db1f9c&query=";
-  const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
+
   const [movies, setMovies] = useState([]);
   const [searchedMovies, setSearchedMovies] = useState([]);
   const [aboutMovie, setAboutMovie] = useState({});
-  const decode = jwtDecode<JwtPayload>(token);
-  console.log(decode.sub);
+
   const getMovies = (page: number) => {
     api
       .get(`movies?page=${page}`)
@@ -60,7 +60,8 @@ export const MoviesProvider = ({ children }: IMovies) => {
   const getSpecificMovie = (specifcMovie: IMoviesList) => {
     setAboutMovie(specifcMovie);
   };
-  const AddToFavorites = (data: IMoviesList) => {
+  const AddToFavorites = (data: IMoviesList, token: string) => {
+    const decode = jwtDecode<JwtPayload>(token);
     const Addedmovie = {
       userId: Number(decode.sub),
       adult: data.adult,
