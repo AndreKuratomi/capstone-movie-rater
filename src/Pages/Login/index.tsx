@@ -163,7 +163,7 @@ export const Login = () =>
                         // icon={<FaUserAlt />}
                         size="md"
                         variant="outlined"
-                        placeholder="Usuário"
+                        placeholder="Username"
                         {...register("username")}
                       />
                       <FormErrorMessage>
@@ -195,7 +195,7 @@ export const Login = () =>
                         bg="#FFF"
                         // borderColor={statusColor[colors]}
                         // color={statusColor[colors]}
-                        placeholder="Senha"
+                        placeholder="Password"
                         size="md"
                         type="password"
                         variant="outlined"
@@ -207,7 +207,7 @@ export const Login = () =>
                     </InputGroup>
                   </Stack>
                   <Button bg="#F00" color="white" margin-top="10" type="submit">
-                    Registrar
+                    Enter
                   </Button>
                 </FormControl>
               ) : (
@@ -228,7 +228,7 @@ export const Login = () =>
                         // icon={<FaUserAlt />}
                         size="md"
                         variant="outlined"
-                        placeholder="Usuário"
+                        placeholder="Username"
                         {...register("username")}
                       />
                       <FormErrorMessage>
@@ -260,7 +260,7 @@ export const Login = () =>
                         bg="#FFF"
                         // borderColor={statusColor[colors]}
                         // color={statusColor[colors]}
-                        placeholder="Senha"
+                        placeholder="Password"
                         size="md"
                         type="password"
                         variant="outlined"
@@ -272,7 +272,7 @@ export const Login = () =>
                     </InputGroup>
                   </Stack>
                   <Button bg="#F00" color="white" margin-top="10" type="submit">
-                    Registrar
+                    Enter
                   </Button>
                 </FormControl>
               )}
@@ -281,13 +281,13 @@ export const Login = () =>
               <Stack spacing="3.5">
                 <Flex align="center" color="white" direction="column">
                   <Text as="span" align="center">
-                    Ainda não tem cadastro? Então vamos ao{" "}
-                    <Link as={ReachLink} to="/register">
-                      Cadastro
+                    Not a member yet? Come and join us {" "}
+                    <Link as={ReachLink} to="/signup">
+                      Sign Up
                     </Link>
                   </Text>
                   <Link marginTop="2" as={ReachLink} to="/">
-                    Voltar para a página principal
+                    Back to homepage
                   </Link>
                 </Flex>
               </Stack>

@@ -156,7 +156,7 @@ export const Register = () => {
                     icon={<FaUserAlt />}
                     size="md"
                     variant="outlined"
-                    placeholder="Usuário"
+                    placeholder="Username"
                     {...register("username")}
                   />
                   <FormErrorMessage>
@@ -190,7 +190,7 @@ export const Register = () => {
                     bg="#FFF"
                     // borderColor={statusColor[colors]}
                     // color={statusColor[colors]}
-                    placeholder="Senha"
+                    placeholder="Password"
                     size="md"
                     type="password"
                     variant="outlined"
@@ -206,7 +206,7 @@ export const Register = () => {
                     bg="#FFF"
                     // borderColor={statusColor[colors]}
                     // color={statusColor[colors]}
-                    placeholder="Confirmação de senha"
+                    placeholder="Password confirmation"
                     size="md"
                     type="password"
                     variant="outlined"
@@ -218,7 +218,7 @@ export const Register = () => {
                 </InputGroup>
               </Stack>
               <Button bg="#F00" color="white" margin-top="10" type="submit">
-                Registrar
+                Register
               </Button>
             </FormControl>
           ) : (
@@ -239,7 +239,7 @@ export const Register = () => {
                     icon={<FaUserAlt />}
                     size="md"
                     variant="outlined"
-                    placeholder="Usuário"
+                    placeholder="Username"
                     {...register("username")}
                   />
                   <FormErrorMessage>
@@ -273,7 +273,7 @@ export const Register = () => {
                     bg="#FFF"
                     // borderColor={statusColor[colors]}
                     // color={statusColor[colors]}
-                    placeholder="Senha"
+                    placeholder="Password"
                     size="md"
                     type="password"
                     variant="outlined"
@@ -289,7 +289,7 @@ export const Register = () => {
                     bg="#FFF"
                     // borderColor={statusColor[colors]}
                     // color={statusColor[colors]}
-                    placeholder="Confirmação de senha"
+                    placeholder="Password confirmation"
                     size="md"
                     type="password"
                     variant="outlined"
@@ -301,7 +301,7 @@ export const Register = () => {
                 </InputGroup>
               </Stack>
               <Button bg="#F00" color="white" margin-top="10" type="submit">
-                Registrar
+                Register
               </Button>
             </FormControl>
           )}
@@ -310,13 +310,13 @@ export const Register = () => {
           <Stack spacing="3.5">
             <Flex align="center" color="white" direction="column">
               <Text as="span" align="center">
-                Já tem cadastro? Então vamos ao{" "}
+                Already a member? Go to {" "}
                 <Link as={ReachLink} to="/login">
                   Login
                 </Link>
               </Text>
               <Link as={ReachLink} to="/">
-                Voltar para a página principal
+                Back to homepage
               </Link>
             </Flex>
           </Stack>
