@@ -33,7 +33,20 @@ interface IRegister {
   password: string;
 }
 
+<<<<<<< HEAD
 export const Register = () => {
+=======
+const Register = () => {
+  // { problem = null }: IInput
+  // const [colors, setColors] = useState<string>("default");
+
+  // useEffect(() => {
+  //   if (!problem) {
+  //     return setColors("error");
+  //   }
+  // }, [problem]);
+
+>>>>>>> b018c87c2dcaeed326d265ccb17560f23e04a7c1
   const formSchema = yup.object().shape({
     username: yup
       .string()
@@ -93,9 +106,19 @@ export const Register = () => {
               >
                 <Stack spacing="5">
                   <Input
+<<<<<<< HEAD
                     error={errors.username}
                     icon={FaUserAlt}
                     placeholder="Usuário"
+=======
+                    bg="#FFF"
+                    // borderColor={statusColor[colors]}
+                    // color={statusColor[colors]}
+                    icon={<FaUserAlt />}
+                    size="md"
+                    variant="outlined"
+                    placeholder="Username"
+>>>>>>> b018c87c2dcaeed326d265ccb17560f23e04a7c1
                     {...register("username")}
                   />
                   <Input
@@ -106,25 +129,53 @@ export const Register = () => {
                     {...register("email")}
                   />
                   <Input
+<<<<<<< HEAD
                     error={errors.password}
                     icon={FaLock}
                     placeholder="Senha"
+=======
+                    bg="#FFF"
+                    // borderColor={statusColor[colors]}
+                    // color={statusColor[colors]}
+                    placeholder="Password"
+                    size="md"
+>>>>>>> b018c87c2dcaeed326d265ccb17560f23e04a7c1
                     type="password"
                     {...register("password")}
                   />
                   <Input
+<<<<<<< HEAD
                     error={errors.confirmPassword}
                     icon={FaLock}
                     placeholder="Confirmar senha"
+=======
+                    bg="#FFF"
+                    // borderColor={statusColor[colors]}
+                    // color={statusColor[colors]}
+                    placeholder="Password confirmation"
+                    size="md"
+>>>>>>> b018c87c2dcaeed326d265ccb17560f23e04a7c1
                     type="password"
                     {...register("confirmPassword")}
                   />
+<<<<<<< HEAD
                 </Stack>
                 <Button bg="#F00" color="white" margin-top="10" type="submit">
                   Registrar
                 </Button>
               </FormControl>
             </Box>
+=======
+                  {!!errors && (
+                    <FormErrorMessage>{errors.message}</FormErrorMessage>
+                  )}
+                </InputGroup>
+              </Stack>
+              <Button bg="#F00" color="white" margin-top="10" type="submit">
+                Register
+              </Button>
+            </FormControl>
+>>>>>>> b018c87c2dcaeed326d265ccb17560f23e04a7c1
           ) : (
             <Box bgImage={LogoRegister}>
               <FormControl
@@ -134,9 +185,19 @@ export const Register = () => {
               >
                 <Stack spacing="7">
                   <Input
+<<<<<<< HEAD
                     error={errors.username}
                     icon={FaUserAlt}
                     placeholder="Usuário"
+=======
+                    bg="#FFF"
+                    // borderColor={statusColor[colors]}
+                    // color={statusColor[colors]}
+                    icon={<FaUserAlt />}
+                    size="md"
+                    variant="outlined"
+                    placeholder="Username"
+>>>>>>> b018c87c2dcaeed326d265ccb17560f23e04a7c1
                     {...register("username")}
                   />
                   <Input
@@ -146,12 +207,23 @@ export const Register = () => {
                     {...register("email")}
                   />
                   <Input
+<<<<<<< HEAD
                     error={errors.password}
                     icon={FaLock}
                     placeholder="Senha"
+=======
+                    bg="#FFF"
+                    // borderColor={statusColor[colors]}
+                    // color={statusColor[colors]}
+                    placeholder="Password"
+                    size="md"
+                    type="password"
+                    variant="outlined"
+>>>>>>> b018c87c2dcaeed326d265ccb17560f23e04a7c1
                     {...register("password")}
                   />
                   <Input
+<<<<<<< HEAD
                     error={errors.confirmPassword}
                     icon={FaLock}
                     placeholder="Confirmar senha"
@@ -163,19 +235,39 @@ export const Register = () => {
                 </Button>
               </FormControl>
             </Box>
+=======
+                    bg="#FFF"
+                    // borderColor={statusColor[colors]}
+                    // color={statusColor[colors]}
+                    placeholder="Password confirmation"
+                    size="md"
+                    type="password"
+                    variant="outlined"
+                    {...register("confirmPassword")}
+                  />
+                  {!!errors && (
+                    <FormErrorMessage>{errors.message}</FormErrorMessage>
+                  )}
+                </InputGroup>
+              </Stack>
+              <Button bg="#F00" color="white" margin-top="10" type="submit">
+                Register
+              </Button>
+            </FormControl>
+>>>>>>> b018c87c2dcaeed326d265ccb17560f23e04a7c1
           )}
         </form>
         <Box marginTop="3.5">
           <Stack spacing="3.5">
             <Flex align="center" color="white" direction="column">
               <Text as="span" align="center">
-                Já tem cadastro? Então vamos ao{" "}
+                Already a member? Go to {" "}
                 <Link as={ReachLink} to="/login">
                   Login
                 </Link>
               </Text>
               <Link as={ReachLink} to="/">
-                Voltar para a página principal
+                Back to homepage
               </Link>
             </Flex>
           </Stack>
@@ -184,3 +276,5 @@ export const Register = () => {
     </>
   );
 };
+
+export default Register

@@ -4,20 +4,23 @@ import BoxContainer from "../BoxContainer";
 import MovieContainer from "../MovieContainer";
 import { useMovies } from "../../Providers/Movies/index";
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const DashboardComponent = () => {
-  const { getMovies, movies } = useMovies();
-  const [count, setCount] = useState<number>(0);
-  const imgurl = "https://image.tmdb.org/t/p/original";
-
+  const history = useHistory();
+  const { getMovies, movies, getSpecificMovie } = useMovies();
   const UpMovies = movies.filter((movie) => {
     const date = movie.release_date?.replaceAll("-", "");
     return Number(date) > 202109;
   });
+  const [count, setCount] = useState<number>(Math.floor(Math.random() * 20));
+  const [page, setPage] = useState<number>(1);
+  const imgurl = "https://image.tmdb.org/t/p/original";
+  console.log(UpMovies.length);
 
   useEffect(() => {
     if (movies.length < 1) {
-      getMovies();
+      getMovies(page);
     }
   }, [movies, getMovies]);
   console.log(movies);
@@ -35,12 +38,18 @@ const DashboardComponent = () => {
       <MovieContainer type="column">
         {UpMovies.length > 1 ? (
           <BoxContainer
-            increase={() => setCount(count + 1)}
-            decrease={() => (count > 1 ? setCount(count - 1) : null)}
+            increase={() =>
+              count < UpMovies.length ? setCount(count + 1) : setCount(count)
+            }
+            decrease={() => (count > 1 ? setCount(count - 1) : setCount(count))}
             type="Upcomming"
             bgImg={imgurl + UpMovies[count].backdrop_path}
           >
             <MovieCard
+              onClick={() => {
+                getSpecificMovie(UpMovies[count]);
+                history.push("/aboutmovie");
+              }}
               type="upComing"
               release_date={UpMovies[count].release_date}
               title={UpMovies[count].title}
@@ -61,6 +70,10 @@ const DashboardComponent = () => {
         <BoxContainer>
           {movies?.map((movie) => (
             <MovieCard
+              onClick={() => {
+                getSpecificMovie(movie);
+                history.push("/aboutmovie");
+              }}
               title={movie.title}
               poster_path={imgurl + movie.poster_path}
             />
@@ -77,6 +90,10 @@ const DashboardComponent = () => {
         <BoxContainer>
           {movies?.map((movie) => (
             <MovieCard
+              onClick={() => {
+                getSpecificMovie(movie);
+                history.push("/aboutmovie");
+              }}
               title={movie.title}
               poster_path={imgurl + movie.poster_path}
             />

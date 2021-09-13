@@ -5,44 +5,18 @@ import { Button } from "@chakra-ui/button";
 import BoxContainer from "../BoxContainer";
 import { Input } from "@chakra-ui/react";
 import { useMovies } from "../../Providers/Movies";
-import { useHistory } from "react-router";
+import { FormControl } from "@chakra-ui/form-control";
+
 import { BsSearch } from "react-icons/bs";
 import { useEffect, useState } from "react";
 
-const BrowseMovies = () => {
-  const history = useHistory();
-  const { getMovies, movies, searchMovies, searchedMovies, getSpecificMovie } =
-    useMovies();
-  const [page, setPage] = useState<number>(1);
-  const [text, setText] = useState<string>("");
-  const [isSearch, setIsSearch] = useState<boolean>(false);
-  const imgurl = "https://image.tmdb.org/t/p/original";
+const MyMoviesComponent = () => {
+  const [findMovie, setFindMovie] = useState<string>("");
   const handleSearch = () => {
-    searchMovies(text);
-    setIsSearch(true);
   };
 
-  useEffect(() => {
-    if (movies.length < 1) {
-      getMovies(page);
-    }
-    if (text === "") {
-      setIsSearch(false);
-    }
+  useEffect(() => {}, []);
 
-    console.log(searchedMovies);
-  }, [
-    movies,
-    getMovies,
-    page,
-    searchedMovies,
-    text,
-    isSearch,
-    setText,
-    setIsSearch,
-    searchMovies.length,
-  ]);
-  console.log(movies);
   return (
     <Flex
       w="85%"
@@ -54,7 +28,7 @@ const BrowseMovies = () => {
       <MovieContainer>
         <Flex w="100%" mb="25px" justifyContent="flex-end">
           <Input
-            onChange={(e) => setText(e.target.value)}
+            onChange={(e) => setFindMovie(e.target.value)}
             w="60%"
             color="fontColor.pinkLight"
             borderColor="fontColor.black800"
@@ -78,38 +52,30 @@ const BrowseMovies = () => {
           mb="3px"
           color="fontColor.pinkLight"
         >
-          Browse Movies
+          My Movies
         </Heading>
         <BoxContainer type="Browse">
-          {isSearch
-            ? searchedMovies.map((movie) => (
+          {/* {isSearch
+            ? searchedMyMovies.map((movie) => (
                 <MovieCard
-                  onClick={() => {
-                    getSpecificMovie(movie);
-                    history.push("/aboutmovie");
-                  }}
                   release_date={movie.release_date}
                   popularity={movie.popularity}
                   title={movie.original_title}
                   poster_path={imgurl + movie.poster_path}
                 />
               ))
-            : movies.map((movie) => (
+            : mymovies.map((movie) => (
                 <MovieCard
-                  onClick={() => {
-                    getSpecificMovie(movie);
-                    history.push("/aboutmovie");
-                  }}
                   release_date={movie.release_date}
                   popularity={movie.popularity}
                   title={movie.original_title}
                   poster_path={imgurl + movie.poster_path}
                 />
-              ))}
+              ))} */}
         </BoxContainer>
       </MovieContainer>
     </Flex>
   );
 };
 
-export default BrowseMovies;
+export default MyMoviesComponent

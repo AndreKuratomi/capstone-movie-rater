@@ -1,7 +1,10 @@
 import { Grid, GridItem, Box, Heading, Flex } from "@chakra-ui/layout";
 import { Img } from "@chakra-ui/image";
+import { useMovies } from "../../Providers/Movies";
 
 const SpecificMovieContainer = () => {
+  const { getSpecificMovie, aboutMovie } = useMovies();
+  const imgurl = "https://image.tmdb.org/t/p/original";
   return (
     <Flex flexDirection="column" h="100%">
       <Box
@@ -15,7 +18,7 @@ const SpecificMovieContainer = () => {
           <Img
             w="70%"
             cursor="pointer"
-            src="https://image.tmdb.org/t/p/original/pUK9duiCK1PKqWA5rRQ4XBMHITH.jpg"
+            src={imgurl + aboutMovie.poster_path}
             borderRadius="8px"
           />
         </Box>
@@ -25,11 +28,16 @@ const SpecificMovieContainer = () => {
             w="48%"
             h="100%"
             borderRadius="15px"
-            padding="10px"
+            padding="20px"
             bgColor="brown.dark"
           >
-            <Heading w="100%" fontSize="20px" color="fontColor.white100">
-              lkasjdljalsjdlkaj
+            <Heading
+              w="100%"
+              fontSize="20px"
+              lineHeight="30px"
+              color="fontColor.pinkLight"
+            >
+              {aboutMovie.overview}
             </Heading>
           </Box>
         </Box>
@@ -39,25 +47,25 @@ const SpecificMovieContainer = () => {
           mb="6px"
           fontWeight="400"
           fontSize="18px"
-          color="fontColor.white100"
+          color="fontColor.pinkLight"
         >
-          Data de lançamento
+          data de lançamento: <b>{aboutMovie.release_date}</b>
         </Heading>
         <Heading
           mb="6px"
           fontWeight="400"
           fontSize="18px"
-          color="fontColor.white100"
+          color="fontColor.pinkLight"
         >
-          popularidade
+          popularidade: <b>{aboutMovie.popularity}</b>
         </Heading>
         <Heading
           mb="6px"
           fontWeight="400"
           fontSize="18px"
-          color="fontColor.white100"
+          color="fontColor.pinkLight"
         >
-          linguagem original
+          linguagem original: <b>{aboutMovie.original_language}</b>
         </Heading>
       </Box>
       <Box display="flex" flexDirection="column">
@@ -71,29 +79,35 @@ const SpecificMovieContainer = () => {
           Reviews
         </Heading>
 
-        {[1, 2, 4, 4].map((element) => (
-          <Flex ml="20px" flexDirection="row" mb="5px">
-            <Img
-              w="50px"
-              h="50px"
-              borderRadius="50%"
-              cursor="pointer"
-              src="https://image.tmdb.org/t/p/original/pUK9duiCK1PKqWA5rRQ4XBMHITH.jpg"
-            />
-            <Box
-              ml="25px"
-              w="48%"
-              h="130px"
-              borderRadius="15px"
-              padding="10px"
-              bgColor="brown.dark"
-            >
-              <Heading w="100%" fontSize="20px" color="fontColor.white100">
-                lkasjdljalsjdlkaj
-              </Heading>
-            </Box>
-          </Flex>
-        ))}
+        {aboutMovie.review ? (
+          aboutMovie.review?.map((review) => (
+            <Flex ml="20px" flexDirection="row" mb="5px">
+              <Img
+                w="50px"
+                h="50px"
+                borderRadius="50%"
+                cursor="pointer"
+                src="https://image.tmdb.org/t/p/original/pUK9duiCK1PKqWA5rRQ4XBMHITH.jpg"
+              />
+              <Box
+                ml="25px"
+                w="48%"
+                h="130px"
+                borderRadius="15px"
+                padding="10px"
+                bgColor="brown.dark"
+              >
+                <Heading w="100%" fontSize="20px" color="fontColor.white100">
+                  {review}
+                </Heading>
+              </Box>
+            </Flex>
+          ))
+        ) : (
+          <Heading ml="20px" color="fontColor.pinkLight">
+            Esse filme ainda não tem nenhum review
+          </Heading>
+        )}
       </Box>
     </Flex>
   );

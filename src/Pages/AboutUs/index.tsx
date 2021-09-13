@@ -11,10 +11,9 @@ import InfoCard from "../../Components/InfoCard";
 import "react-multi-carousel/lib/styles.css";
 import Carousel from "react-multi-carousel";
 import "./styles.css";
-import { BiRightArrow, BiLeftArrow } from "react-icons/bi";
 import About from "../../Assets/img/about.png";
 
-export const AboutUs = () => {
+const AboutUs = () => {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -109,55 +108,56 @@ export const AboutUs = () => {
             backgroundImage={About}
             backgroundRepeat="no-repeat"
             backgroundSize="100%"
-            backgroundColor="rgba(31, 3, 3, 0.096)"
           >
-            <Text textAlign="center" fontSize="2xl">
-              texto sobre a equipe bem aquuuui texto texto texto texto texto
-              texto
-            </Text>
-            <Box margin="auto">
-              <Carousel
-                responsive={responsive}
-                infinite={true}
-                containerClass="carousel-container"
-                removeArrowOnDeviceType={["tablet", "mobile"]}
-              >
-                <InfoCard
-                  name="Maikol"
-                  description="Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
-                  image="https://share-cdn.picrew.me/shareImg/org/202109/1242662_uvvFgnyd.png"
-                  linkedin="https://www.linkedin.com/in/maikol-moraes-107b57205/"
-                  email="maikolmoraesas@gmail.com"
-                />
-                <InfoCard
-                  name="Maikol"
-                  description="Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
-                  image="https://share-cdn.picrew.me/shareImg/org/202109/1242662_uvvFgnyd.png"
-                  linkedin="https://www.linkedin.com/in/maikol-moraes-107b57205/"
-                  email="maikolmoraesas@gmail.com"
-                />
-                <InfoCard
-                  name="Maikol"
-                  description="Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
-                  image="https://share-cdn.picrew.me/shareImg/org/202109/1242662_uvvFgnyd.png"
-                  linkedin="https://www.linkedin.com/in/maikol-moraes-107b57205/"
-                  email="maikolmoraesas@gmail.com"
-                />
-                <InfoCard
-                  name="Maikol"
-                  description="Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
-                  image="https://share-cdn.picrew.me/shareImg/org/202109/1242662_uvvFgnyd.png"
-                  linkedin="https://www.linkedin.com/in/maikol-moraes-107b57205/"
-                  email="maikolmoraesas@gmail.com"
-                />
-                <InfoCard
-                  name="Maikol"
-                  description="Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
-                  image="https://share-cdn.picrew.me/shareImg/org/202109/1242662_uvvFgnyd.png"
-                  linkedin="https://www.linkedin.com/in/maikol-moraes-107b57205/"
-                  email="maikolmoraesas@gmail.com"
-                />
-              </Carousel>
+            <Box bg="rgba(0, 0, 0, 0.671)">
+              <Text textAlign="center" fontSize="2xl">
+                texto sobre a equipe bem aquuuui texto texto texto texto texto
+                texto
+              </Text>
+              <Box margin="auto">
+                <Carousel
+                  responsive={responsive}
+                  infinite={true}
+                  containerClass="carousel-container"
+                  removeArrowOnDeviceType={["tablet", "mobile"]}
+                >
+                  <InfoCard
+                    name="Maikol"
+                    description="Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
+                    image="https://share-cdn.picrew.me/shareImg/org/202109/1242662_uvvFgnyd.png"
+                    linkedin="https://www.linkedin.com/in/maikol-moraes-107b57205/"
+                    email="maikolmoraesas@gmail.com"
+                  />
+                  <InfoCard
+                    name="Maikol"
+                    description="Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
+                    image="https://share-cdn.picrew.me/shareImg/org/202109/1242662_uvvFgnyd.png"
+                    linkedin="https://www.linkedin.com/in/maikol-moraes-107b57205/"
+                    email="maikolmoraesas@gmail.com"
+                  />
+                  <InfoCard
+                    name="Maikol"
+                    description="Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
+                    image="https://share-cdn.picrew.me/shareImg/org/202109/1242662_uvvFgnyd.png"
+                    linkedin="https://www.linkedin.com/in/maikol-moraes-107b57205/"
+                    email="maikolmoraesas@gmail.com"
+                  />
+                  <InfoCard
+                    name="Maikol"
+                    description="Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
+                    image="https://share-cdn.picrew.me/shareImg/org/202109/1242662_uvvFgnyd.png"
+                    linkedin="https://www.linkedin.com/in/maikol-moraes-107b57205/"
+                    email="maikolmoraesas@gmail.com"
+                  />
+                  <InfoCard
+                    name="Maikol"
+                    description="Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
+                    image="https://share-cdn.picrew.me/shareImg/org/202109/1242662_uvvFgnyd.png"
+                    linkedin="https://www.linkedin.com/in/maikol-moraes-107b57205/"
+                    email="maikolmoraesas@gmail.com"
+                  />
+                </Carousel>
+              </Box>
             </Box>
           </Box>
         )}
@@ -172,3 +172,5 @@ export const AboutUs = () => {
     </Box>
   );
 };
+
+export default AboutUs
