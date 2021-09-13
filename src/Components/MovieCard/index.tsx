@@ -2,9 +2,11 @@ import { Img } from "@chakra-ui/image";
 import { VStack, Box, Text, Heading } from "@chakra-ui/layout";
 import { Menu, MenuButton, MenuList } from "@chakra-ui/menu";
 import { HiPlus } from "react-icons/hi";
+import { AiFillPlusCircle } from "react-icons/ai";
 
 interface IMoviesList {
   onClick?: () => void;
+  AddToFavorite?: (movie: IMoviesList) => void;
   type?: string;
   adult?: boolean;
   backdrop_path?: string;
@@ -29,6 +31,7 @@ const MovieCard = ({
   type,
   poster_path,
   onClick,
+  AddToFavorite,
 }: IMoviesList) => {
   return type === "upComing" ? (
     <VStack
@@ -37,6 +40,7 @@ const MovieCard = ({
       h="100%"
       minW="130px"
       ml="25px"
+      position="relative"
     >
       <Img
         cursor="pointer"
@@ -46,6 +50,17 @@ const MovieCard = ({
         w="130px"
         h="70%"
       />
+      <Box
+        onClick={AddToFavorite}
+        cursor="pointer"
+        fontSize="25px"
+        color="fontColor.pinkLight"
+        position="absolute"
+        top="2"
+        right="1"
+      >
+        <AiFillPlusCircle />
+      </Box>
       <Menu>
         <MenuButton
           display="flex"

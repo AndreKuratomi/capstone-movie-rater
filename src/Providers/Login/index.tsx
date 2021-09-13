@@ -22,14 +22,14 @@ export const LoginProvider = ({ children }: LoginProviderProps) => {
   const history = useHistory();
   const signIn = (data: ILogin) => {
     api
-      .post("login/", data)
+      .post("login", data)
       .then((response) => {
-        const { access } = response.data;
-        const decoded = jwtDecode<JwtPayload>(access);
-        setAuth(access);
+        const { accessToken } = response.data;
+        const decoded = jwtDecode<JwtPayload>(accessToken);
+        setAuth(accessToken);
         // "Login feito com sucesso!";
         history.push("/dashboard", { user: decoded.sub });
-        localStorage.setItem("@movies: token", JSON.stringify(access));
+        localStorage.setItem("@movies: token", JSON.stringify(accessToken));
       })
       .catch(
         (_) => "Não foi possível fazer o login. Verifique dados informados"
