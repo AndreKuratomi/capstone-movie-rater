@@ -70,19 +70,6 @@ const AllGroups = () => {
         </BoxContainer>
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
-          <ModalContent w="80%" h="50%">
-            <ModalHeader>Chat</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody w="100%" h="100%">
-              <Chat />
-            </ModalBody>
-
-            <ModalFooter>
-              <Button colorScheme="blue" mr={3} onClick={onClose}>
-                Close
-              </Button>
-            </ModalFooter>
-          </ModalContent>
         </Modal>
 
         <BoxContainer>
@@ -102,19 +89,6 @@ const AllGroups = () => {
 
           <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
-            <ModalContent w="80%" h="50%">
-              <ModalHeader>CHAT</ModalHeader>
-              <ModalCloseButton />
-              <ModalBody w="100%" h="100%">
-                <Chat />
-              </ModalBody>
-
-              <ModalFooter>
-                <Button colorScheme="blue" mr={3} onClick={onClose}>
-                  Close
-                </Button>
-              </ModalFooter>
-            </ModalContent>
           </Modal>
         </BoxContainer>
         <BoxContainer>
@@ -132,18 +106,12 @@ const AllGroups = () => {
 
           <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
-            <ModalContent w="80%" h="100%">
+            <ModalContent w="70%" h="60%">
               <ModalHeader>CHAT</ModalHeader>
               <ModalCloseButton />
               <ModalBody w="100%" h="50%">
                 <Chat />
               </ModalBody>
-
-              <ModalFooter>
-                <Button colorScheme="blue" mr={3} onClick={onClose}>
-                  Close
-                </Button>
-              </ModalFooter>
             </ModalContent>
           </Modal>
         </BoxContainer>

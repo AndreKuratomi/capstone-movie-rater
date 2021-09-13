@@ -39,7 +39,9 @@ function Chat() {
             }}
             required
           ></Input>
-          <Button type="submit">Send</Button>
+          <Button type="submit" bg="#440000" color="white">
+            Send
+          </Button>
         </form>
       </Box>
     </Box>
