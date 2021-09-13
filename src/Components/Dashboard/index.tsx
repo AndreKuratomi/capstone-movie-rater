@@ -4,9 +4,11 @@ import BoxContainer from "../BoxContainer";
 import MovieContainer from "../MovieContainer";
 import { useMovies } from "../../Providers/Movies/index";
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const DashboardComponent = () => {
-  const { getMovies, movies } = useMovies();
+  const history = useHistory();
+  const { getMovies, movies, getSpecificMovie } = useMovies();
   const UpMovies = movies.filter((movie) => {
     const date = movie.release_date?.replaceAll("-", "");
     return Number(date) > 202109;
@@ -44,6 +46,10 @@ const DashboardComponent = () => {
             bgImg={imgurl + UpMovies[count].backdrop_path}
           >
             <MovieCard
+              onClick={() => {
+                getSpecificMovie(UpMovies[count]);
+                history.push("/aboutmovie");
+              }}
               type="upComing"
               release_date={UpMovies[count].release_date}
               title={UpMovies[count].title}
@@ -64,6 +70,10 @@ const DashboardComponent = () => {
         <BoxContainer>
           {movies?.map((movie) => (
             <MovieCard
+              onClick={() => {
+                getSpecificMovie(movie);
+                history.push("/aboutmovie");
+              }}
               title={movie.title}
               poster_path={imgurl + movie.poster_path}
             />
@@ -80,6 +90,10 @@ const DashboardComponent = () => {
         <BoxContainer>
           {movies?.map((movie) => (
             <MovieCard
+              onClick={() => {
+                getSpecificMovie(movie);
+                history.push("/aboutmovie");
+              }}
               title={movie.title}
               poster_path={imgurl + movie.poster_path}
             />
