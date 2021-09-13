@@ -104,12 +104,14 @@ const AllGroups = () => {
           </Text>
           <Button onClick={onOpen} rightIcon={<MdArrowForward />}></Button>
 
-          <Modal isOpen={isOpen} onClose={onClose}>
+          <Modal isOpen={isOpen} onClose={onClose} size="2xl">
             <ModalOverlay />
-            <ModalContent w="70%" h="60%">
-              <ModalHeader>CHAT</ModalHeader>
-              <ModalCloseButton />
-              <ModalBody w="100%" h="50%">
+            <ModalContent h="60%">
+              <ModalHeader bg="#440000" color="white">
+                Bem vindo ao CHAT!
+              </ModalHeader>
+              <ModalCloseButton focusBorderColor="none" color="white" />
+              <ModalBody w="100%" h="50%" overflow="scroll" padding="0px">
                 <Chat />
               </ModalBody>
             </ModalContent>
