@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 import { Box, Flex, Button, Input } from "@chakra-ui/react";
-const socket = io("http://localhost:7000");
+const socket = io("https://chat-capstone-g5.herokuapp.com/");
 const userName = "User " + parseInt(Math.random() * 10);
 function Chat() {
   const [message, setMessage] = useState("");
