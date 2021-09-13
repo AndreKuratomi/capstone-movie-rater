@@ -8,7 +8,7 @@ interface IBoxContainer {
   children: ReactNode;
   type?: string | undefined;
   decrease?: () => void;
-  increase?: () => void;
+  increase?: () => void | undefined;
 }
 
 const BoxContainer = ({

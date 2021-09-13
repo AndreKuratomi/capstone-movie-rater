@@ -1,4 +1,15 @@
-import { Box, Heading, Text, Image, Link, Flex } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Text,
+  Image,
+  Link,
+  Flex,
+  Menu,
+  MenuItem,
+  MenuButton,
+  MenuList,
+} from "@chakra-ui/react";
 import { AiFillLinkedin, AiOutlineMail } from "react-icons/ai";
 
 interface InfoCardProps {
@@ -25,7 +36,7 @@ const InfoCard = ({
       textAlign="center"
       border="1px solid black"
     >
-      <Image src={image} border="1px solid black" />
+      <Image src={image} border="1px solid black" borderRadius="100%" />
       <Heading>{name}</Heading>
       <Text>{description}</Text>
       <Box fontSize="14px">
@@ -37,7 +48,10 @@ const InfoCard = ({
         </Flex>
         <Flex alignItems="center">
           <AiOutlineMail />
-          <Text>{email}</Text>
+          <Menu>
+            <MenuButton>Email</MenuButton>
+            <MenuList color="black">{email}</MenuList>
+          </Menu>
         </Flex>
       </Box>
     </Box>

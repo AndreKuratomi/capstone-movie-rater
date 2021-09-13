@@ -83,10 +83,11 @@ const MovieCard = ({
     <VStack
       justifyContent="center"
       alignItems="center"
-      h="230px"
+      h="270px"
       minW="130px"
       mt="5px"
       ml="25px"
+      mb="5px"
       mr="25px"
     >
       <Img
@@ -97,7 +98,14 @@ const MovieCard = ({
         w="130px"
         h="80%"
       />
-      <Heading fontWeight="200" fontSize="20px" color="fontColor.white100">
+      <Heading
+        fontWeight="200"
+        fontSize="15px"
+        h="40px"
+        w="120px"
+        m="0"
+        color="fontColor.white100"
+      >
         {title}
       </Heading>
     </VStack>
