@@ -128,15 +128,15 @@ const BoxContainer = ({
           borderRadius: "24px",
         },
       }}
-      bgColor="black.transparent800"
+      bgColor="rgba(29, 22, 22, 0.8)"
       h="80%"
-      mb="8px"
       display="flex"
       flexDirection="row"
       justifyContent="space-between"
       borderRadius="15px"
       bgSize="fill"
       bgPosition="center"
+      mb="8px"
     >
       {children}
     </Box>
