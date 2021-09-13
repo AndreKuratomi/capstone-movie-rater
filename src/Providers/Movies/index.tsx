@@ -3,6 +3,7 @@ import api from "../../Services/api";
 import { ReactNode } from "react";
 import { useAuth } from "../Auth";
 import { Dispatch, SetStateAction } from "react";
+
 import axios from "axios";
 interface IMovies {
   children: ReactNode;
@@ -22,6 +23,7 @@ interface IMoviesList {
   video?: boolean;
   vote_average?: number;
   vote_count?: number;
+  review?: string[];
 }
 
 interface IMoviesContext {
@@ -30,6 +32,8 @@ interface IMoviesContext {
   searchMovies: (searchText: string) => void;
   movies: IMoviesList[];
   searchedMovies: IMoviesList[];
+  getSpecificMovie: (specifcMovie: IMoviesList) => void;
+  aboutMovie: IMoviesList;
 }
 
 const MoviesContext = createContext({} as IMoviesContext);
@@ -39,6 +43,8 @@ export const MoviesProvider = ({ children }: IMovies) => {
   const { auth } = useAuth();
   const [movies, setMovies] = useState([]);
   const [searchedMovies, setSearchedMovies] = useState([]);
+  const [aboutMovie, setAboutMovie] = useState({});
+  console.log(aboutMovie);
 
   const getMovies = (page: number) => {
     api
@@ -48,6 +54,9 @@ export const MoviesProvider = ({ children }: IMovies) => {
         setMovies(response.data[0].results);
       })
       .catch((err) => console.log("Grupos não podem ser carregados"));
+  };
+  const getSpecificMovie = (specifcMovie: IMoviesList) => {
+    setAboutMovie(specifcMovie);
   };
 
   const searchMovies = (searchText: string) => {
@@ -62,7 +71,15 @@ export const MoviesProvider = ({ children }: IMovies) => {
 
   return (
     <MoviesContext.Provider
-      value={{ searchMovies, getMovies, movies, setMovies, searchedMovies }}
+      value={{
+        searchMovies,
+        getMovies,
+        movies,
+        setMovies,
+        searchedMovies,
+        getSpecificMovie,
+        aboutMovie,
+      }}
     >
       {children}
     </MoviesContext.Provider>
