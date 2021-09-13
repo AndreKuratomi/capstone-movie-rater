@@ -10,9 +10,7 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   useMediaQuery,
-  Link
 } from "@chakra-ui/react";
-import ReactImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import "./styles.css";
 import Group from "../../Assets/img/group.png";
@@ -22,31 +20,35 @@ import Faixa from "../../Assets/img/faixa.png";
 import Movie from "../../Assets/img/cinema.jpg";
 import Banner from "../../Assets/img/fundo1.png";
 import ReactPlayer from "react-player/youtube";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import { Link as RouteLink } from "react-router-dom";
 
 export const Landpage = () => {
-  const images = [
-    {
-      original: "https://picsum.photos/id/1018/1000/600/",
-      thumbnail: "https://picsum.photos/id/1018/250/150/",
-      description: "Descrição de um filmeeeeeeeeeeeeeeeeeeeee",
+  const responsive = {
+    superLargeDesktop: {
+      breakpoint: { max: 4000, min: 3000 },
+      items: 1,
     },
-    {
-      original: "https://picsum.photos/id/1015/1000/600/",
-      thumbnail: "https://picsum.photos/id/1015/250/150/",
-      description: "Descrição de um filmeeeeeeeeeeeeeeeeeeeee",
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 1,
     },
-    {
-      original: "https://picsum.photos/id/1019/1000/600/",
-      thumbnail: "https://picsum.photos/id/1019/250/150/",
-      description: "Descrição de um filmeeeeeeeeeeeeeeeeeeeee",
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 1,
     },
-  ];
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
+  };
 
   const [mobileVersion] = useMediaQuery("(max-width: 500px)");
   const [tabletVersion] = useMediaQuery("(max-width: 768px)");
 
   return (
-    <Box>
+    <div>
       {mobileVersion ? <NavMobile /> : <NavBar />}
       <Box
         bg="black"
@@ -74,7 +76,7 @@ export const Landpage = () => {
             outline="none"
             href="#video"
           >
-            <Link href="#video">Site overview</Link>
+            <a href="#video">Conheça o site</a>
           </Button>
         ) : (
           <Button
@@ -91,7 +93,7 @@ export const Landpage = () => {
             outline="none"
             href="#video"
           >
-            <Link href="#video">Site overview</Link>
+            <a href="#video">Conheça o site</a>
           </Button>
         )}
 
@@ -104,7 +106,7 @@ export const Landpage = () => {
           mt="1rem"
         >
           <Heading fontFamily="PT Mono" mt="3rem" textAlign="center">
-            Welcome to MovieRater!
+            bem vindo ao movierater!
           </Heading>
           <Heading
             maxWidth="50rem"
@@ -114,21 +116,63 @@ export const Landpage = () => {
             textAlign="justify"
             fontSize="2xl"
           >
-            All thrending movies in the same place!
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+            nisl turpis, vehicula ac turpis dignissim, finibus interdum nulla.
+            Nunc posuere mi tellus, sed interdum purus placerat vitae.
           </Heading>
-          <ReactImageGallery
-            items={images}
-            showThumbnails={false}
-            showFullscreenButton={false}
-            useBrowserFullscreen={false}
-            showPlayButton={false}
-            showBullets={true}
-            autoPlay={true}
-          />
+        </Box>
+        <Box w="60%">
+          <Carousel
+            responsive={responsive}
+            infinite={true}
+            containerClass="carousel-container"
+            removeArrowOnDeviceType={["tablet", "mobile"]}
+          >
+            <Box>
+              <Image src="https://picsum.photos/id/1018/1000/600/" />
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Curabitur vestibulum ut dolor vel malesuada. Donec tincidunt,
+                nisl id bibendum dapibus, libero massa vehicula mi, at tempor ex
+                dui vel ligula. Donec euismod tempor volutpat. Morbi eu urna
+                finibus mauris egestas scelerisque.{" "}
+              </Text>
+            </Box>
+            <Box>
+              <Image src="https://picsum.photos/id/1018/1000/600/" />
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Curabitur vestibulum ut dolor vel malesuada. Donec tincidunt,
+                nisl id bibendum dapibus, libero massa vehicula mi, at tempor ex
+                dui vel ligula. Donec euismod tempor volutpat. Morbi eu urna
+                finibus mauris egestas scelerisque.{" "}
+              </Text>
+            </Box>
+            <Box>
+              <Image src="https://picsum.photos/id/1018/1000/600/" />
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Curabitur vestibulum ut dolor vel malesuada. Donec tincidunt,
+                nisl id bibendum dapibus, libero massa vehicula mi, at tempor ex
+                dui vel ligula. Donec euismod tempor volutpat. Morbi eu urna
+                finibus mauris egestas scelerisque.{" "}
+              </Text>
+            </Box>
+            <Box>
+              <Image src="https://picsum.photos/id/1018/1000/600/" />
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Curabitur vestibulum ut dolor vel malesuada. Donec tincidunt,
+                nisl id bibendum dapibus, libero massa vehicula mi, at tempor ex
+                dui vel ligula. Donec euismod tempor volutpat. Morbi eu urna
+                finibus mauris egestas scelerisque.{" "}
+              </Text>
+            </Box>
+          </Carousel>
         </Box>
         <Box backgroundImage={Faixa} backgroundRepeat="no-repeat" width="100%">
-          <Heading textAlign="center" mt="13rem" fontFamily="PT Mono">
-            What can you do on MovieRater?
+          <Heading textAlign="center" mt="9rem" fontFamily="PT Mono">
+            O que se pode fazer no site?
           </Heading>
           <Flex
             flexWrap="wrap"
@@ -149,7 +193,7 @@ export const Landpage = () => {
             >
               <Image src={Film} alt="film" width="70%" />
               <Text maxWidth="10rem" mt="1rem" fontFamily="PT Mono">
-                post and share reviews of your favorite movies.
+                publique e veja review dos seus filmes favoritos.
               </Text>
             </Box>
             <Box
@@ -165,7 +209,7 @@ export const Landpage = () => {
             >
               <Image src={Group} alt="group" width="70%" />
               <Text maxWidth="10rem" mt="1rem" fontFamily="PT Mono">
-                join group chats with people of same interests.
+                entre em grupos com pessoas com o mesmo gosto que você.
               </Text>
             </Box>
             <Box
@@ -181,14 +225,16 @@ export const Landpage = () => {
             >
               <Image src={Best} alt="fav" width="70%" />
               <Text maxWidth="10rem" mt="0.75rem" fontFamily="PT Mono">
-                best rated movies recomendation.
+                recomendações dos filmes mais bem avaliados.
               </Text>
             </Box>
           </Flex>
           <Box mb="2rem" w="100%" textAlign="center">
-            <Button bg="white" color="black" padding="1rem 2rem">
-              Come and join us!
-            </Button>
+            <RouteLink to="/signup">
+              <Button bg="white" color="black" padding="1rem 2rem">
+                Venha fazer parte!
+              </Button>
+            </RouteLink>
           </Box>
         </Box>
         <Box
@@ -198,8 +244,17 @@ export const Landpage = () => {
           width="100%"
           backgroundPosition="bottom"
         >
-          <Heading textAlign="center" mb="2rem" mt="2rem" fontFamily="PT Mono">
-            Take a look on our community and intuitive design!
+          <Heading
+            textAlign="center"
+            mb="2rem"
+            mt="2rem"
+            fontFamily="PT Mono"
+            maxWidth="75%"
+            margin="auto"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+            nisl turpis, vehicula ac turpis dignissim, finibus interdum nulla.
+            Nunc posuere mi tellus, sed interdum purus placerat vitae.
           </Heading>
           <Box display="flex" justifyContent="center" w="85%" margin="auto">
             <ReactPlayer
@@ -212,11 +267,11 @@ export const Landpage = () => {
         <Breadcrumb width="100%" bg="#4E4E4E" textAlign="center" mt="4rem">
           <BreadcrumbItem color="white">
             <Text padding="1rem">
-              developed by group 3 © all rights reserved
+              developed by equipe 3 © all rights reserved
             </Text>
           </BreadcrumbItem>
         </Breadcrumb>
       </Box>
-    </Box>
+    </div>
   );
 };
