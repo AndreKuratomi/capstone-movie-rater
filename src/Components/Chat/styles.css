@@ -1,0 +1,20 @@
+.ballon {
+  position: relative;
+  background: #ffce49;
+  border-radius: 0.4em;
+}
+
+.ballon:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 18px solid transparent;
+  border-right-color: #ffce49;
+  border-left: 0;
+  border-top: 0;
+  margin-top: -9px;
+  margin-left: -18px;
+}
