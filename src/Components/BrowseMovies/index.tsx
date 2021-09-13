@@ -8,12 +8,13 @@ import { useMovies } from "../../Providers/Movies";
 import { useHistory } from "react-router";
 import { BsSearch } from "react-icons/bs";
 import { useEffect, useState } from "react";
+import Paginator from "./paginator";
 
 const BrowseMovies = () => {
   const history = useHistory();
   const { getMovies, movies, searchMovies, searchedMovies, getSpecificMovie } =
     useMovies();
-  const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState<number>(2);
   const [text, setText] = useState<string>("");
   const [isSearch, setIsSearch] = useState<boolean>(false);
   const imgurl = "https://image.tmdb.org/t/p/original";
@@ -23,18 +24,17 @@ const BrowseMovies = () => {
   };
 
   useEffect(() => {
-    if (movies.length < 1) {
-      getMovies(page);
-    }
+    getMovies(page);
+
     if (text === "") {
       setIsSearch(false);
     }
 
     console.log(searchedMovies);
   }, [
-    movies,
     getMovies,
     page,
+    setPage,
     searchedMovies,
     text,
     isSearch,
@@ -80,6 +80,11 @@ const BrowseMovies = () => {
         >
           Browse Movies
         </Heading>
+
+        <Paginator
+          setPreviouPage={() => setPage(page - 1)}
+          setNextPage={() => setPage(page + 1)}
+        />
         <BoxContainer type="Browse">
           {isSearch
             ? searchedMovies.map((movie) => (
