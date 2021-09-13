@@ -63,7 +63,7 @@ const Login = () => {
     console.log(data);
     // signIn(data);
     api
-      .post("/login/", data)
+      .post("login/", data)
       .then((response) => {
         const { accessToken } = response.data;
         const decoded = jwtDecode<JwtPayload>(accessToken);
@@ -74,12 +74,10 @@ const Login = () => {
           JSON.stringify(accessToken)
         );
         onModalSuccessOpen();
-        console.log("Login realizado com sucesso! Prosseguir");
         history.push("/dashboard", { user: decoded.sub });
       })
       .catch((_) => {
         onModalFailOpen();
-        console.log("Falha no login! Verifique os dados informados");
       });
   };
 
@@ -100,8 +98,18 @@ const Login = () => {
 
   return (
     <>
-      <ModalSuccess isOpen={inModalSuccessOpen} onClose={onModalSuccessClose} />
-      <ModalFail isOpen={inModalFailOpen} onClose={onModalFailClose} />
+      <ModalSuccess
+        isOpen={inModalSuccessOpen}
+        onClose={onModalSuccessClose}
+        page="Login"
+        onClick={() => history.push("/dashboard")}
+      />
+      <ModalFail
+        isOpen={inModalFailOpen}
+        onClose={onModalFailClose}
+        page="login"
+        buttonInfo="os dados informados"
+      />
 
       {mobileVersion ? <NavMobile /> : <NavBar />}
 
@@ -131,7 +139,7 @@ const Login = () => {
                   />
                 </Stack>
                 <Button bg="#F00" color="white" margin-top="10" type="submit">
-                  Registrar
+                  Logar
                 </Button>
               </FormControl>
             </Box>
@@ -147,17 +155,19 @@ const Login = () => {
                     error={errors.email}
                     icon={MdEmail}
                     placeholder="Email"
+                    type="email"
                     {...register("email")}
                   />
                   <Input
                     error={errors.password}
                     icon={FaLock}
                     placeholder="Senha"
+                    type="password"
                     {...register("password")}
                   />
                 </Stack>
                 <Button bg="#F00" color="white" margin-top="2" type="submit">
-                  Registrar
+                  Logar
                 </Button>
               </FormControl>
             </Box>
@@ -166,7 +176,7 @@ const Login = () => {
         <Box marginTop="3.5">
           <Stack spacing="3.5">
             <Flex align="center" color="white" direction="column">
-              <Text>
+              <Text as="span" align="center">
                 Ainda não tem cadastro? Então vamos ao{" "}
                 <Link as={ReachLink} to="/signup">
                   Cadastro

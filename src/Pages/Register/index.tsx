@@ -85,12 +85,9 @@ export const Register = () => {
       .post("register", data)
       .then((_) => {
         onModalSuccessOpen();
-        history.push("/login");
-        // console.log("Cadastro realizado com sucesso! Prosseguir");
       })
       .catch((_) => {
         onModalFailOpen();
-        // console.log("Falha no cadastro!"))
       });
   };
 
@@ -99,8 +96,18 @@ export const Register = () => {
 
   return (
     <>
-      <ModalSuccess isOpen={isModalSuccessOpen} onClose={onModalSuccessClose} />
-      <ModalFail isOpen={isModalFailOpen} onClose={onModalFailClose} />
+      <ModalSuccess
+        isOpen={isModalSuccessOpen}
+        onClose={onModalSuccessClose}
+        page="Cadastro"
+        onClick={() => history.push("/login")}
+      />
+      <ModalFail
+        isOpen={isModalFailOpen}
+        onClose={onModalFailClose}
+        page="cadastro"
+        buttonInfo="o email informado"
+      />
 
       {mobileVersion ? <NavMobile /> : <NavBar />}
 
@@ -165,18 +172,21 @@ export const Register = () => {
                     error={errors.email}
                     icon={MdEmail}
                     placeholder="Email"
+                    type="email"
                     {...register("email")}
                   />
                   <Input
                     error={errors.password}
                     icon={FaLock}
                     placeholder="Senha"
+                    type="password"
                     {...register("password")}
                   />
                   <Input
                     error={errors.confirmPassword}
                     icon={FaLock}
                     placeholder="Confirmar senha"
+                    type="password"
                     {...register("confirmPassword")}
                   />
                 </Stack>
@@ -191,13 +201,13 @@ export const Register = () => {
           <Stack spacing="3.5">
             <Flex align="center" color="white" direction="column">
               <Text as="span" align="center">
-                Already a member? Go to{" "}
+                Já tem cadastro? Então vamos ao{" "}
                 <Link as={ReachLink} to="/login">
                   Login
                 </Link>
               </Text>
               <Link as={ReachLink} to="/">
-                Back to homepage
+                Voltar para a página principal
               </Link>
             </Flex>
           </Stack>
