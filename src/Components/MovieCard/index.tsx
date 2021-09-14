@@ -7,6 +7,7 @@ import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
 interface IMoviesList {
   onClick?: () => void;
   AddToFavorite?: (movie: IMoviesList) => void;
+  getSpecificMovie?: (movie: IMoviesList) => void;
   type?: string;
   adult?: boolean;
   backdrop_path?: string;
@@ -32,6 +33,7 @@ const MovieCard = ({
   poster_path,
   onClick,
   AddToFavorite,
+  getSpecificMovie,
 }: IMoviesList) => {
   return type === "upComing" ? (
     <VStack
@@ -107,7 +109,7 @@ const MovieCard = ({
       mr="25px"
     >
       <Box
-        onClick={AddToFavorite}
+        onClick={onClick}
         cursor="pointer"
         fontSize="25px"
         color="fontColor.pinkLight"
@@ -118,7 +120,7 @@ const MovieCard = ({
         <AiFillMinusCircle />
       </Box>
       <Img
-        onClick={onClick}
+        onClick={getSpecificMovie}
         cursor="pointer"
         src={backdrop_path || poster_path}
         borderRadius="8px"
