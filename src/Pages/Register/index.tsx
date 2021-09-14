@@ -17,6 +17,7 @@ import {
 } from "@chakra-ui/react";
 
 import { Input } from "../../Components/Form/Input";
+import { Select } from "../../Components/Form/Select";
 
 import { Flex, Stack } from "@chakra-ui/layout";
 import { FaUserAlt, FaLock } from "react-icons/fa";
@@ -51,6 +52,7 @@ export const Register = () => {
       .string()
       .required("Preenchimento obrigatório!")
       .oneOf([yup.ref("password")], "As senhas devem ser idênticas!"),
+    selectGenre: yup.string().required("Preenchimento obrigatório!"),
   });
 
   const {
@@ -61,6 +63,7 @@ export const Register = () => {
     resolver: yupResolver(formSchema),
   });
 
+  console.log(errors.selectGenre?.message);
   const history = useHistory();
 
   const toast = useToast();
@@ -114,9 +117,8 @@ export const Register = () => {
               backgroundImage={LogoRegister}
               backgroundRepeat="no-repeat"
               backgroundSize="cover"
-              height="100%"
             >
-              <Image src={LogoRegister} />
+              {/* <Image src={LogoRegister} /> */}
               <FormControl
                 align="center"
                 //
@@ -151,6 +153,19 @@ export const Register = () => {
                     type="password"
                     {...register("confirmPassword")}
                   />
+                  <Select
+                    bg="#FFF"
+                    color="gray.500"
+                    error={errors.selectGenre}
+                    placeholder="Gênero favorito de filme:"
+                    {...register("selectGenre")}
+                  >
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                  </Select>
                 </Stack>
                 <Button bg="#F00" color="white" mt="5" type="submit">
                   Registrar
@@ -193,6 +208,19 @@ export const Register = () => {
                     type="password"
                     {...register("confirmPassword")}
                   />
+                  <Select
+                    bg="#FFF"
+                    color="gray.500"
+                    error={errors.selectGenre}
+                    placeholder="Gênero favorito de filme:"
+                    {...register("selectGenre")}
+                  >
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                  </Select>
                 </Stack>
                 <Button bg="#F00" color="white" mt="6" type="submit">
                   Registrar
