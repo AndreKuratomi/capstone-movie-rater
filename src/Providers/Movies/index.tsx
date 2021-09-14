@@ -40,7 +40,7 @@ interface IMoviesContext {
   getSpecificMovie: (specifcMovie: IMoviesList) => void;
   aboutMovie: IMoviesList;
   AddToFavorites: (data: IMoviesList, token: string) => void;
-  addReviews: (data: IMoviesList, textValue: string) => void;
+  addReviews: (data: IMoviesList, textValue: string, token: string) => void;
 }
 
 const MoviesContext = createContext({} as IMoviesContext);
@@ -54,7 +54,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
   const [aboutMovie, setAboutMovie] = useState({});
   const [review, setReview] = useState([]);
 
-  const {auth} = useAuth()
+  const { auth } = useAuth();
 
   const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
   const getMovies = (page: number) => {
@@ -80,6 +80,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
   };
   const AddToFavorites = (data: IMoviesList, token: string) => {
     const decode = jwtDecode<JwtPayload>(token);
+    delete data.id;
     const Addedmovie = {
       userId: Number(decode.sub),
       ...data,
@@ -117,8 +118,6 @@ export const MoviesProvider = ({ children }: IMovies) => {
       })
       .catch((err) => console.log("Review não podem ser carregados"));
   };
-
-  
 
   return (
     <MoviesContext.Provider
