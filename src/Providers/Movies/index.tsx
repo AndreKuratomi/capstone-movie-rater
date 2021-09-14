@@ -37,6 +37,8 @@ interface IMoviesContext {
   review: IReview[];
   getMovies: (page: number) => void;
   setMovies: any;
+
+  DeleteFromFavorites: (movieId: number, token: string) => void;
   getReview: (movieId: number, token: string) => void;
   getFavorites: (user: number) => void;
   searchMovies: (searchText: string) => void;
@@ -112,6 +114,17 @@ export const MoviesProvider = ({ children }: IMovies) => {
       console.log("filme ja adicionado");
     }
   };
+  const DeleteFromFavorites = (movieId: number, token: string) => {
+    console.log("entrou na funcão");
+    api
+      .delete(`favorites/${movieId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        console.log(res, "deletou");
+      })
+      .catch((err) => console.log(err));
+  };
   const searchMovies = (searchText: string) => {
     axios
       .get(TMDBapi + searchText)
@@ -160,6 +173,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
     <MoviesContext.Provider
       value={{
         addReviews,
+        DeleteFromFavorites,
         favorites,
         getFavorites,
         searchMovies,
