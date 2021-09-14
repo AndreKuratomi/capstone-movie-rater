@@ -5,6 +5,7 @@ import MovieContainer from "../MovieContainer";
 import { useMovies } from "../../Providers/Movies/index";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import jwtDecode, { JwtPayload } from "jwt-decode";
 
 const DashboardComponent = () => {
   const history = useHistory();
@@ -24,15 +25,15 @@ const DashboardComponent = () => {
   const [count, setCount] = useState<number>(Math.floor(Math.random() * 20));
   const [page, setPage] = useState<number>(1);
   const imgurl = "https://image.tmdb.org/t/p/original";
-  console.log(UpMovies.length);
 
+  const decode = jwtDecode<JwtPayload>(token);
   useEffect(() => {
     if (movies.length < 1) {
       getMovies(page);
     }
-    getFavorites(3);
-  }, [getFavorites, favorites]);
-  console.log(movies);
+    getFavorites(Number(decode.sub));
+  }, [getFavorites]);
+
   return (
     <Flex
       w="85%"

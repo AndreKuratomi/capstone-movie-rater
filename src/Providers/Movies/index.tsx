@@ -75,11 +75,11 @@ export const MoviesProvider = ({ children }: IMovies) => {
       })
       .then((response) => {
         setFavorites(response.data);
-        console.log(favorites);
       });
   };
   const AddToFavorites = (data: IMoviesList, token: string) => {
     const decode = jwtDecode<JwtPayload>(token);
+    delete data.id;
     const Addedmovie = {
       userId: Number(decode.sub),
       ...data,
