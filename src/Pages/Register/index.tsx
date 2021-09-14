@@ -12,20 +12,16 @@ import {
   FormControl,
   Link,
   Text,
-  useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 
 import { Input } from "../../Components/Form/Input";
-import { ModalSuccess } from "../../Components/ModalResults/ModalSuccess";
-import { ModalFail } from "../../Components/ModalResults/ModalFail";
 
 import { Flex, Stack } from "@chakra-ui/layout";
 import { FaUserAlt, FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
 import LogoRegister from "../../Assets/img/img register.png";
-
-// import { useRegister } from "../../Providers/Register";
 
 import NavBar from "../../Components/NavBar";
 import NavMobile from "../../Components/NavMobile";
@@ -64,19 +60,27 @@ export const Register = () => {
     resolver: yupResolver(formSchema),
   });
 
-  const {
-    isOpen: isModalSuccessOpen,
-    onOpen: onModalSuccessOpen,
-    onClose: onModalSuccessClose,
-  } = useDisclosure();
-
-  const {
-    isOpen: isModalFailOpen,
-    onOpen: onModalFailOpen,
-    onClose: onModalFailClose,
-  } = useDisclosure();
-
   const history = useHistory();
+
+  const toast = useToast();
+
+  const addSuccessToast = () => {
+    toast({
+      title: "Cadastro realizado com sucesso!",
+      description: "",
+      status: "success",
+      duration: 5000,
+    });
+  };
+
+  const addFailToast = () => {
+    toast({
+      title: "Falha no cadastro!",
+      description: "Verifique o email cadastrado",
+      status: "error",
+      duration: 5000,
+    });
+  };
 
   const submitFunction = (data: IRegister) => {
     console.log(data);
@@ -84,10 +88,11 @@ export const Register = () => {
     api
       .post("register", data)
       .then((_) => {
-        onModalSuccessOpen();
+        addSuccessToast();
+        history.push("/login");
       })
       .catch((_) => {
-        onModalFailOpen();
+        addFailToast();
       });
   };
 
@@ -96,19 +101,6 @@ export const Register = () => {
 
   return (
     <>
-      <ModalSuccess
-        isOpen={isModalSuccessOpen}
-        onClose={onModalSuccessClose}
-        page="Cadastro"
-        onClick={() => history.push("/login")}
-      />
-      <ModalFail
-        isOpen={isModalFailOpen}
-        onClose={onModalFailClose}
-        page="cadastro"
-        buttonInfo="o email informado"
-      />
-
       {mobileVersion ? <NavMobile /> : <NavBar />}
 
       <Flex align="center" bg="#000" direction="column" height="100vh">

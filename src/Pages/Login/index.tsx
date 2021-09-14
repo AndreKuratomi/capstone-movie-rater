@@ -14,7 +14,7 @@ import {
   FormControl,
   Link,
   Text,
-  useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 
 import LogoLogin from "../../Assets/img/img login.png";
@@ -23,10 +23,7 @@ import { FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
 import { Input } from "../../Components/Form/Input";
-import { ModalSuccess } from "../../Components/ModalResults/ModalSuccess";
-import { ModalFail } from "../../Components/ModalResults/ModalFail";
 
-// import { useLogin } from "../../Providers/Login";
 import NavBar from "../../Components/NavBar";
 import NavMobile from "../../Components/NavMobile";
 
@@ -55,13 +52,30 @@ const Login = () => {
     resolver: yupResolver(formSchema),
   });
 
-  // const { signIn } = useLogin();
   const { setAuth } = useAuth();
   const history = useHistory();
 
+  const toast = useToast();
+
+  const addSuccessToast = () => {
+    toast({
+      title: "Login realizado com sucesso!",
+      description: "",
+      status: "success",
+      duration: 5000,
+    });
+  };
+
+  const addFailToast = () => {
+    toast({
+      title: "Falha no login!",
+      description: "Verifique os dados preenchidos!",
+      status: "error",
+      duration: 5000,
+    });
+  };
+
   const submitFunction = (data: ILogin) => {
-    console.log(data);
-    // signIn(data);
     api
       .post("login/", data)
       .then((response) => {
@@ -73,44 +87,19 @@ const Login = () => {
           "@movies: token",
           JSON.stringify(accessToken)
         );
-        onModalSuccessOpen();
+        addSuccessToast();
         history.push("/dashboard", { user: decoded.sub });
       })
       .catch((_) => {
-        onModalFailOpen();
+        addFailToast();
       });
   };
-
-  const {
-    isOpen: inModalSuccessOpen,
-    onOpen: onModalSuccessOpen,
-    onClose: onModalSuccessClose,
-  } = useDisclosure();
-
-  const {
-    isOpen: inModalFailOpen,
-    onOpen: onModalFailOpen,
-    onClose: onModalFailClose,
-  } = useDisclosure();
 
   const [mobileVersion] = useMediaQuery("(max-width: 768px)");
   const [desktopVersion] = useMediaQuery("(min-width:768px)");
 
   return (
     <>
-      <ModalSuccess
-        isOpen={inModalSuccessOpen}
-        onClose={onModalSuccessClose}
-        page="Login"
-        onClick={() => history.push("/dashboard")}
-      />
-      <ModalFail
-        isOpen={inModalFailOpen}
-        onClose={onModalFailClose}
-        page="login"
-        buttonInfo="os dados informados"
-      />
-
       {mobileVersion ? <NavMobile /> : <NavBar />}
 
       <Flex align="center" bg="#000" direction="column" height="100vh">
