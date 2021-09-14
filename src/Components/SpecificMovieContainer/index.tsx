@@ -4,14 +4,20 @@ import { useMovies } from "../../Providers/Movies";
 import { Input, Button } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { IMoviesList } from "../../Providers/Movies";
+import jwtDecode, { JwtPayload } from "jwt-decode";
+import { number } from "yup";
+
 const SpecificMovieContainer = () => {
   const { getSpecificMovie, aboutMovie } = useMovies();
   const imgurl = "https://image.tmdb.org/t/p/original";
-  const [review, setReview] = useState<string>("");
-  const { addReviews } = useMovies();
+  const [comments, setComments] = useState<string>("");
+  const { addReviews, getReview, review } = useMovies();
   const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
-  useEffect(() => {}, []);
-
+  useEffect(() => {
+    aboutMovie.id && getReview(aboutMovie.id, token);
+  }, [getReview]);
+  console.log(review);
+  const decoded = jwtDecode<JwtPayload>(token);
   return (
     <Flex flexDirection="column" h="100%">
       <Box
@@ -85,26 +91,33 @@ const SpecificMovieContainer = () => {
         >
           Reviews
         </Heading>
-        <Input
-          onChange={(e) => setReview(e.target.value)}
-          w="100%"
-          h="80%"
-          color="fontColor.pinkLight"
-          borderColor="fontColor.black800"
-          bgColor="brown.dark"
-        />
-        <hr />
-        <Button
-          hover="fontColor.black800"
-          bgColor="brown.dark"
-          color="fontColor.pinkLight"
-          onClick={() =>
-            aboutMovie.id &&
-            addReviews(aboutMovie, review, token, aboutMovie.id)
-          }
-        />
-        {aboutMovie.review ? (
-          aboutMovie.review?.map((review) => (
+        <Box display="flex" flexDirection="column" alignItems="center">
+          <Input
+            onChange={(e) => setComments(e.target.value)}
+            w="100%"
+            color="fontColor.pinkLight"
+            borderColor="fontColor.black800"
+            placeholder="Digite o que achou do filme"
+            bgColor="brown.dark"
+          />
+
+          <Button
+            mt="10px"
+            w="40%"
+            hover="fontColor.black800"
+            bgColor="brown.dark"
+            color="fontColor.pinkLight"
+            onClick={() =>
+              aboutMovie.id &&
+              addReviews(aboutMovie.id, comments, Number(decoded.sub), token)
+            }
+          >
+            {" "}
+            Adicionar review{" "}
+          </Button>
+        </Box>
+        {review ? (
+          review?.map((comment, index) => (
             <Flex ml="20px" flexDirection="row" mb="5px">
               <Img
                 w="50px"
@@ -122,7 +135,7 @@ const SpecificMovieContainer = () => {
                 bgColor="brown.dark"
               >
                 <Heading w="100%" fontSize="20px" color="fontColor.white100">
-                  {review}
+                  {comment.comment}
                 </Heading>
               </Box>
             </Flex>
