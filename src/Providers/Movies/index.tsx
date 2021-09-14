@@ -70,7 +70,6 @@ export const MoviesProvider = ({ children }: IMovies) => {
       })
       .then((response) => {
         setFavorites(response.data);
-        console.log(favorites);
       });
   };
   const AddToFavorites = (data: IMoviesList, token: string) => {
