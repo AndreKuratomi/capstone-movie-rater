@@ -10,7 +10,7 @@ import { jsx } from "@emotion/react";
 interface IMovies {
   children: ReactNode;
 }
-interface IMoviesList {
+export interface IMoviesList {
   adult?: boolean;
   backdrop_path?: string;
   genre_ids?: number[];
@@ -31,7 +31,7 @@ interface IMoviesList {
 interface IMoviesContext {
   getMovies: (page: number) => void;
   setMovies: any;
-  setReview: any;
+
   getFavorites: (user: number) => void;
   searchMovies: (searchText: string) => void;
   movies: IMoviesList[];
@@ -40,7 +40,7 @@ interface IMoviesContext {
   getSpecificMovie: (specifcMovie: IMoviesList) => void;
   aboutMovie: IMoviesList;
   AddToFavorites: (data: IMoviesList, token: string) => void;
-  addReviews: (data: IMoviesList, textValue: string) => void;
+  addReviews: (data: IMoviesList, textValue: string, token: string) => void;
 }
 
 const MoviesContext = createContext({} as IMoviesContext);
@@ -52,9 +52,8 @@ export const MoviesProvider = ({ children }: IMovies) => {
   const [searchedMovies, setSearchedMovies] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [aboutMovie, setAboutMovie] = useState({});
-  const [review, setReview] = useState([]);
 
-  const {auth} = useAuth()
+  const { auth } = useAuth();
 
   const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
   const getMovies = (page: number) => {
@@ -108,18 +107,16 @@ export const MoviesProvider = ({ children }: IMovies) => {
       ...data,
     };
     axios
-      .patch(`movies`, data, {
+      .patch(`movies`, movieReview, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
-        setReview(response.data.results);
+        console.log("funcionou");
       })
       .catch((err) => console.log("Review não podem ser carregados"));
   };
-
-  
 
   return (
     <MoviesContext.Provider
@@ -128,7 +125,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
         favorites,
         getFavorites,
         searchMovies,
-        setReview,
+
         getMovies,
         movies,
         setMovies,
