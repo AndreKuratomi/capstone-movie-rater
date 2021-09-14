@@ -31,7 +31,7 @@ const DashboardComponent = () => {
       getMovies(page);
     }
     getFavorites(3);
-  }, []);
+  }, [getFavorites, favorites]);
   console.log(movies);
   return (
     <Flex
@@ -80,6 +80,7 @@ const DashboardComponent = () => {
         <BoxContainer>
           {movies?.map((movie) => (
             <MovieCard
+              AddToFavorite={() => AddToFavorites(movie, token)}
               onClick={() => {
                 getSpecificMovie(movie);
                 history.push("/aboutmovie");

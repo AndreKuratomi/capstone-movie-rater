@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/layout";
-import { ReactNode } from "hoist-non-react-statics/node_modules/@types/react";
+import { ReactNode } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 

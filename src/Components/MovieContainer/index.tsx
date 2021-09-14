@@ -1,5 +1,5 @@
 import { Flex } from "@chakra-ui/layout";
-import { ReactNode } from "hoist-non-react-statics/node_modules/@types/react";
+import { ReactNode } from "react";
 
 interface IMovieContainer {
   children: ReactNode;
