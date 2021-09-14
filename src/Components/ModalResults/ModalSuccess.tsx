@@ -13,25 +13,37 @@ import {
 interface ModalSuccessProps {
   isOpen: boolean;
   onClose: () => void;
-  // page: string;
+  page: string;
+  onClick: () => void;
 }
 
-export const ModalSuccess = ({ isOpen, onClose }: ModalSuccessProps) => {
+export const ModalSuccess = ({
+  isOpen,
+  onClose,
+  page,
+  onClick,
+}: ModalSuccessProps) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>Modal Title</ModalHeader>
+      <ModalContent borderRadius="10" w="90%">
+        <ModalHeader
+          bg="green.500"
+          borderTopLeftRadius="10"
+          borderTopRightRadius="10"
+          color="fontColor.white100"
+        >
+          Sucesso!
+        </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Text> realizado com sucesso!</Text>
+          <Text align="center"> {page} realizado com sucesso!</Text>
         </ModalBody>
 
-        <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={onClose}>
+        <ModalFooter justifyContent="center">
+          <Button colorScheme="blue" onClick={onClick}>
             Prosseguir
           </Button>
-          <Button variant="ghost">Secondary Action</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

@@ -6,6 +6,7 @@ import { useAuth } from "../Auth";
 import jwtDecode, { JwtPayload } from "jwt-decode";
 
 import axios from "axios";
+import { jsx } from "@emotion/react";
 interface IMovies {
   children: ReactNode;
 }
@@ -30,24 +31,28 @@ interface IMoviesList {
 interface IMoviesContext {
   getMovies: (page: number) => void;
   setMovies: any;
+  setReview: any;
   searchMovies: (searchText: string) => void;
   movies: IMoviesList[];
   searchedMovies: IMoviesList[];
   getSpecificMovie: (specifcMovie: IMoviesList) => void;
   aboutMovie: IMoviesList;
-  AddToFavorites: (data: IMoviesList) => void;
+  AddToFavorites: (data: IMoviesList, token: string) => void;
+  addReviews: (data: IMoviesList, id: IMoviesList) => void;
 }
 
 const MoviesContext = createContext({} as IMoviesContext);
 export const MoviesProvider = ({ children }: IMovies) => {
   const TMDBapi =
     "https://api.themoviedb.org/3/search/movie?api_key=4b5de5fed14a8cc95ec876f973db1f9c&query=";
-  const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
+
   const [movies, setMovies] = useState([]);
   const [searchedMovies, setSearchedMovies] = useState([]);
   const [aboutMovie, setAboutMovie] = useState({});
-  // const decode = jwtDecode<JwtPayload>(token);
-  // console.log(decode.sub);
+  const [review, setReview] = useState([]);
+
+  const {auth} = useAuth()
+
   const getMovies = (page: number) => {
     api
       .get(`movies?page=${page}`)
@@ -60,7 +65,8 @@ export const MoviesProvider = ({ children }: IMovies) => {
   const getSpecificMovie = (specifcMovie: IMoviesList) => {
     setAboutMovie(specifcMovie);
   };
-  const AddToFavorites = (data: IMoviesList) => {
+  const AddToFavorites = (data: IMoviesList, token: string) => {
+    const decode = jwtDecode<JwtPayload>(token);
     const Addedmovie = {
       userId: Number(1),
       ...data
@@ -80,10 +86,31 @@ export const MoviesProvider = ({ children }: IMovies) => {
       .catch((err) => console.log("Grupo não podem ser carregados"));
   };
 
+  const addReviews = (data: IMoviesList, id: IMoviesList) => {
+    const movieReview = {
+      userId: Number(1),
+      ...data,
+    };
+    axios
+      .patch(`movies/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${auth}`,
+        },
+      })
+      .then((response) => {
+        setReview(response.data.results);
+      })
+      .catch((err) => console.log("Review não podem ser carregados"));
+  };
+
+  
+
   return (
     <MoviesContext.Provider
       value={{
+        addReviews,
         searchMovies,
+        setReview,
         getMovies,
         movies,
         setMovies,

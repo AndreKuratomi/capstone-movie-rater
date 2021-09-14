@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 const DashboardComponent = () => {
   const history = useHistory();
   const { getMovies, movies, getSpecificMovie, AddToFavorites } = useMovies();
+  const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
   const UpMovies = movies.filter((movie) => {
     const date = movie.release_date?.replaceAll("-", "");
     return Number(date) > 202109;
@@ -46,7 +47,7 @@ const DashboardComponent = () => {
             bgImg={imgurl + UpMovies[count].backdrop_path}
           >
             <MovieCard
-              AddToFavorite={() => AddToFavorites(UpMovies[count])}
+              AddToFavorite={() => AddToFavorites(UpMovies[count], token)}
               onClick={() => {
                 getSpecificMovie(UpMovies[count]);
                 history.push("/aboutmovie");
