@@ -31,6 +31,7 @@ interface IMoviesList {
 interface IMoviesContext {
   getMovies: (page: number) => void;
   setMovies: any;
+  setReview: any;
   getFavorites: (user: number) => void;
   searchMovies: (searchText: string) => void;
   movies: IMoviesList[];
@@ -39,6 +40,7 @@ interface IMoviesContext {
   getSpecificMovie: (specifcMovie: IMoviesList) => void;
   aboutMovie: IMoviesList;
   AddToFavorites: (data: IMoviesList, token: string) => void;
+  addReviews: (data: IMoviesList, textValue: string) => void;
 }
 
 const MoviesContext = createContext({} as IMoviesContext);
@@ -50,6 +52,10 @@ export const MoviesProvider = ({ children }: IMovies) => {
   const [searchedMovies, setSearchedMovies] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [aboutMovie, setAboutMovie] = useState({});
+  const [review, setReview] = useState([]);
+
+  const {auth} = useAuth()
+
   const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
   const getMovies = (page: number) => {
     api
@@ -70,7 +76,6 @@ export const MoviesProvider = ({ children }: IMovies) => {
       })
       .then((response) => {
         setFavorites(response.data);
-        console.log(favorites);
       });
   };
   const AddToFavorites = (data: IMoviesList, token: string) => {
@@ -96,12 +101,33 @@ export const MoviesProvider = ({ children }: IMovies) => {
       .catch((err) => console.log("Grupo não podem ser carregados"));
   };
 
+  const addReviews = (data: IMoviesList, textValue: string, token: string) => {
+    const movieReview = {
+      review: textValue,
+      ...data,
+    };
+    axios
+      .patch(`movies`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setReview(response.data.results);
+      })
+      .catch((err) => console.log("Review não podem ser carregados"));
+  };
+
+  
+
   return (
     <MoviesContext.Provider
       value={{
+        addReviews,
         favorites,
         getFavorites,
         searchMovies,
+        setReview,
         getMovies,
         movies,
         setMovies,

@@ -1,10 +1,14 @@
 import { Grid, GridItem, Box, Heading, Flex } from "@chakra-ui/layout";
 import { Img } from "@chakra-ui/image";
 import { useMovies } from "../../Providers/Movies";
+import {Input, Button} from "@chakra-ui/react"
 
 const SpecificMovieContainer = () => {
   const { getSpecificMovie, aboutMovie } = useMovies();
   const imgurl = "https://image.tmdb.org/t/p/original";
+
+  const { addReviews, setReview } = useMovies()
+
   return (
     <Flex flexDirection="column" h="100%">
       <Box
@@ -78,7 +82,20 @@ const SpecificMovieContainer = () => {
         >
           Reviews
         </Heading>
-
+        <Input
+          onChange={(e) => setReview(e.target.value)}
+          w="60%"
+          color="fontColor.pinkLight"
+          borderColor="fontColor.black800"
+          bgColor="brown.dark"
+        />
+        <hr />
+        <Button
+          hover="fontColor.black800"
+          bgColor="brown.dark"
+          color="fontColor.pinkLight"
+          onClick={() => addReviews}
+        />
         {aboutMovie.review ? (
           aboutMovie.review?.map((review) => (
             <Flex ml="20px" flexDirection="row" mb="5px">
