@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { createContext, useContext, useEffect, useState } from "react";
 import api from "../../Services/api";
 import { ReactNode } from "react";
