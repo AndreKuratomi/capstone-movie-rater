@@ -40,7 +40,7 @@ interface IMoviesContext {
   getSpecificMovie: (specifcMovie: IMoviesList) => void;
   aboutMovie: IMoviesList;
   AddToFavorites: (data: IMoviesList, token: string) => void;
-  addReviews: (data: IMoviesList, id: IMoviesList) => void;
+  addReviews: (data: IMoviesList, textValue: string) => void;
 }
 
 const MoviesContext = createContext({} as IMoviesContext);
@@ -102,15 +102,15 @@ export const MoviesProvider = ({ children }: IMovies) => {
       .catch((err) => console.log("Grupo não podem ser carregados"));
   };
 
-  const addReviews = (data: IMoviesList, id: IMoviesList) => {
+  const addReviews = (data: IMoviesList, textValue: string, token: string) => {
     const movieReview = {
-      userId: Number(1),
+      review: textValue,
       ...data,
     };
     axios
-      .patch(`movies/${id}`, data, {
+      .patch(`movies`, data, {
         headers: {
-          Authorization: `Bearer ${auth}`,
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
