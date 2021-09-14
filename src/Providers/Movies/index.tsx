@@ -40,7 +40,12 @@ interface IMoviesContext {
   getSpecificMovie: (specifcMovie: IMoviesList) => void;
   aboutMovie: IMoviesList;
   AddToFavorites: (data: IMoviesList, token: string) => void;
-  addReviews: (data: IMoviesList, textValue: string, token: string) => void;
+  addReviews: (
+    data: IMoviesList,
+    textValue: string,
+    token: string,
+    id: number
+  ) => void;
 }
 
 const MoviesContext = createContext({} as IMoviesContext);
@@ -50,7 +55,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
 
   const [movies, setMovies] = useState([]);
   const [searchedMovies, setSearchedMovies] = useState([]);
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState<IMoviesList[]>([]);
   const [aboutMovie, setAboutMovie] = useState({});
 
   const { auth } = useAuth();
@@ -78,18 +83,28 @@ export const MoviesProvider = ({ children }: IMovies) => {
       });
   };
   const AddToFavorites = (data: IMoviesList, token: string) => {
+    let isInFavorite = false;
     const decode = jwtDecode<JwtPayload>(token);
     delete data.id;
     const Addedmovie = {
       userId: Number(decode.sub),
       ...data,
     };
-
-    api
-      .post("favorites", Addedmovie, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((_) => console.log("filme adicionado"));
+    favorites.map((movie) => {
+      if (movie.title !== data.title) {
+      } else {
+        isInFavorite = true;
+      }
+    });
+    if (!isInFavorite) {
+      api
+        .post("favorites", Addedmovie, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((_) => console.log("filme adicionado"));
+    } else {
+      console.log("filme ja adicionado");
+    }
   };
   const searchMovies = (searchText: string) => {
     axios
@@ -101,13 +116,19 @@ export const MoviesProvider = ({ children }: IMovies) => {
       .catch((err) => console.log("Grupo não podem ser carregados"));
   };
 
-  const addReviews = (data: IMoviesList, textValue: string, token: string) => {
+  const addReviews = (
+    data: IMoviesList,
+    textValue: string,
+    token: string,
+    id: number
+  ) => {
+    console.log(data);
     const movieReview = {
-      review: textValue,
+      review: [textValue],
       ...data,
     };
-    axios
-      .patch(`movies`, movieReview, {
+    api
+      .put(`movies/${id}`, movieReview, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -115,7 +136,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
       .then((response) => {
         console.log("funcionou");
       })
-      .catch((err) => console.log("Review não podem ser carregados"));
+      .catch((err) => console.log("Review não podem ser carregados", err));
   };
 
   return (
@@ -125,7 +146,6 @@ export const MoviesProvider = ({ children }: IMovies) => {
         favorites,
         getFavorites,
         searchMovies,
-
         getMovies,
         movies,
         setMovies,

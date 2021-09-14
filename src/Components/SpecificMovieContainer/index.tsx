@@ -98,7 +98,10 @@ const SpecificMovieContainer = () => {
           hover="fontColor.black800"
           bgColor="brown.dark"
           color="fontColor.pinkLight"
-          onClick={() => addReviews(aboutMovie, review, token)}
+          onClick={() =>
+            aboutMovie.id &&
+            addReviews(aboutMovie, review, token, aboutMovie.id)
+          }
         />
         {aboutMovie.review ? (
           aboutMovie.review?.map((review) => (
