@@ -21,7 +21,7 @@ const BrowseMovies = () => {
     AddToFavorites,
   } = useMovies();
   const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
-  const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState<number>(7);
   const [text, setText] = useState<string>("");
   const [isSearch, setIsSearch] = useState<boolean>(false);
   const imgurl = "https://image.tmdb.org/t/p/original";
