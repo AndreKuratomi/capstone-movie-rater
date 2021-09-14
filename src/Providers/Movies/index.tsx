@@ -40,7 +40,7 @@ interface IMoviesContext {
   getSpecificMovie: (specifcMovie: IMoviesList) => void;
   aboutMovie: IMoviesList;
   AddToFavorites: (data: IMoviesList, token: string) => void;
-  addReviews: (data: IMoviesList, textValue: string) => void;
+  addReviews: (data: IMoviesList, textValue: string, token: string) => void;
 }
 
 const MoviesContext = createContext({} as IMoviesContext);
