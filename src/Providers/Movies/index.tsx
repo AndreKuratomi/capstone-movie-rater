@@ -31,8 +31,10 @@ interface IMoviesList {
 interface IMoviesContext {
   getMovies: (page: number) => void;
   setMovies: any;
+  getFavorites: (user: number) => void;
   searchMovies: (searchText: string) => void;
   movies: IMoviesList[];
+  favorites: IMoviesList[];
   searchedMovies: IMoviesList[];
   getSpecificMovie: (specifcMovie: IMoviesList) => void;
   aboutMovie: IMoviesList;
@@ -46,8 +48,9 @@ export const MoviesProvider = ({ children }: IMovies) => {
 
   const [movies, setMovies] = useState([]);
   const [searchedMovies, setSearchedMovies] = useState([]);
+  const [favorites, setFavorites] = useState([]);
   const [aboutMovie, setAboutMovie] = useState({});
-
+  const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
   const getMovies = (page: number) => {
     api
       .get(`movies?page=${page}`)
@@ -60,28 +63,27 @@ export const MoviesProvider = ({ children }: IMovies) => {
   const getSpecificMovie = (specifcMovie: IMoviesList) => {
     setAboutMovie(specifcMovie);
   };
+  const getFavorites = (userId: number) => {
+    api
+      .get(`favorites?userId=${userId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        setFavorites(response.data);
+        console.log(favorites);
+      });
+  };
   const AddToFavorites = (data: IMoviesList, token: string) => {
     const decode = jwtDecode<JwtPayload>(token);
     const Addedmovie = {
       userId: Number(decode.sub),
-      adult: data.adult,
-      backdrop_path: data.backdrop_path,
-      genre_ids: data.genre_ids,
-      original_language: data.original_language,
-      original_title: data.original_title,
-      overview: data.overview,
-      popularity: data.popularity,
-      poster_path: data.poster_path,
-      release_date: data.release_date,
-      title: data.title,
-      video: data.video,
-      vote_average: data.vote_average,
-      vote_count: data.vote_count,
-      id: data.id,
+      ...data,
     };
 
     api
-      .post("favorites", Addedmovie)
+      .post("favorites", Addedmovie, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((_) => console.log("filme adicionado"));
   };
   const searchMovies = (searchText: string) => {
@@ -97,6 +99,8 @@ export const MoviesProvider = ({ children }: IMovies) => {
   return (
     <MoviesContext.Provider
       value={{
+        favorites,
+        getFavorites,
         searchMovies,
         getMovies,
         movies,
