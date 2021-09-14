@@ -12,6 +12,11 @@ import "react-multi-carousel/lib/styles.css";
 import Carousel from "react-multi-carousel";
 import "./styles.css";
 import About from "../../Assets/img/about.png";
+import carlos from "../../Assets/img/carlos.png"
+import gabi from "../../Assets/img/gabi.png"
+import rafael from "../../Assets/img/rafael.png"
+import maikol from "../../Assets/img/maikol.png"
+import andre from "../../Assets/img/andre.png"
 
 const AboutUs = () => {
   const responsive = {
@@ -59,41 +64,41 @@ const AboutUs = () => {
                 containerClass="carousel-container"
                 removeArrowOnDeviceType={["tablet", "mobile"]}
               >
-                <InfoCard
-                  name="Maikol"
-                  description="Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
-                  image="https://share-cdn.picrew.me/shareImg/org/202109/1242662_uvvFgnyd.png"
-                  linkedin="https://www.linkedin.com/in/maikol-moraes-107b57205/"
-                  email="maikolmoraesas@gmail.com"
-                />
-                <InfoCard
-                  name="Maikol"
-                  description="Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
-                  image="https://share-cdn.picrew.me/shareImg/org/202109/1242662_uvvFgnyd.png"
-                  linkedin="https://www.linkedin.com/in/maikol-moraes-107b57205/"
-                  email="maikolmoraesas@gmail.com"
-                />
-                <InfoCard
-                  name="Maikol"
-                  description="Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
-                  image="https://share-cdn.picrew.me/shareImg/org/202109/1242662_uvvFgnyd.png"
-                  linkedin="https://www.linkedin.com/in/maikol-moraes-107b57205/"
-                  email="maikolmoraesas@gmail.com"
-                />
-                <InfoCard
-                  name="Maikol"
-                  description="Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
-                  image="https://share-cdn.picrew.me/shareImg/org/202109/1242662_uvvFgnyd.png"
-                  linkedin="https://www.linkedin.com/in/maikol-moraes-107b57205/"
-                  email="maikolmoraesas@gmail.com"
-                />
-                <InfoCard
-                  name="Maikol"
-                  description="Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
-                  image="https://share-cdn.picrew.me/shareImg/org/202109/1242662_uvvFgnyd.png"
-                  linkedin="https://www.linkedin.com/in/maikol-moraes-107b57205/"
-                  email="maikolmoraesas@gmail.com"
-                />
+        <InfoCard
+                    name="Carlos"
+                    description="Scrum Master"
+                    image={carlos}
+                    linkedin="https://www.linkedin.com/in/carlos-lima-773337215/"
+                    email="hiro1kz77@gmail.com"
+                  />
+                  <InfoCard
+                    name="Gabriela"
+                    description="Tech Leader"
+                    image={gabi}
+                    linkedin="https://www.linkedin.com/in/gabriela-avelino/"
+                    email="gabrielarodrigues432@gmail.com"
+                  />
+                  <InfoCard
+                    name="Rafael"
+                    description="Product Owner"
+                    image={rafael}
+                    linkedin="https://www.linkedin.com/in/rafael-leonardo-839516211/"
+                    email="rafael.zoe26@gmail.com"
+                  />
+                  <InfoCard
+                    name="Maikol"
+                    description="Quality Assurance"
+                    image={maikol}
+                    linkedin="https://www.linkedin.com/in/maikol-moraes-107b57205/"
+                    email="maikolmoraesas@gmail.com"
+                  />
+                  <InfoCard
+                    name="André"
+                    description="Quality Assurance"
+                    image={andre}
+                    linkedin="https://www.linkedin.com/in/andre-kuratomi/"
+                    email="andrekuratomi@gmail.com"
+                  />
               </Carousel>
             </Box>
           </Box>
@@ -111,8 +116,8 @@ const AboutUs = () => {
           >
             <Box bg="rgba(0, 0, 0, 0.671)">
               <Text textAlign="center" fontSize="2xl">
-                texto sobre a equipe bem aquuuui texto texto texto texto texto
-                texto
+                Somos desenvolvedores apaixonados por filmes, que decidimos criar uma plataforma
+                mais intuitiva!
               </Text>
               <Box margin="auto">
                 <Carousel
@@ -122,39 +127,39 @@ const AboutUs = () => {
                   removeArrowOnDeviceType={["tablet", "mobile"]}
                 >
                   <InfoCard
+                    name="Carlos"
+                    description="Scrum Master"
+                    image={carlos}
+                    linkedin="https://www.linkedin.com/in/carlos-lima-773337215/"
+                    email="hiro1kz77@gmail.com"
+                  />
+                  <InfoCard
+                    name="Gabriela"
+                    description="Tech Leader"
+                    image={gabi}
+                    linkedin="https://www.linkedin.com/in/gabriela-avelino/"
+                    email="gabrielarodrigues432@gmail.com"
+                  />
+                  <InfoCard
+                    name="Rafael"
+                    description="Product Owner"
+                    image={rafael}
+                    linkedin="https://www.linkedin.com/in/rafael-leonardo-839516211/"
+                    email="rafael.zoe26@gmail.com"
+                  />
+                  <InfoCard
                     name="Maikol"
-                    description="Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
-                    image="https://share-cdn.picrew.me/shareImg/org/202109/1242662_uvvFgnyd.png"
+                    description="Quality Assurance"
+                    image={maikol}
                     linkedin="https://www.linkedin.com/in/maikol-moraes-107b57205/"
                     email="maikolmoraesas@gmail.com"
                   />
                   <InfoCard
-                    name="Maikol"
-                    description="Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
-                    image="https://share-cdn.picrew.me/shareImg/org/202109/1242662_uvvFgnyd.png"
-                    linkedin="https://www.linkedin.com/in/maikol-moraes-107b57205/"
-                    email="maikolmoraesas@gmail.com"
-                  />
-                  <InfoCard
-                    name="Maikol"
-                    description="Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
-                    image="https://share-cdn.picrew.me/shareImg/org/202109/1242662_uvvFgnyd.png"
-                    linkedin="https://www.linkedin.com/in/maikol-moraes-107b57205/"
-                    email="maikolmoraesas@gmail.com"
-                  />
-                  <InfoCard
-                    name="Maikol"
-                    description="Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
-                    image="https://share-cdn.picrew.me/shareImg/org/202109/1242662_uvvFgnyd.png"
-                    linkedin="https://www.linkedin.com/in/maikol-moraes-107b57205/"
-                    email="maikolmoraesas@gmail.com"
-                  />
-                  <InfoCard
-                    name="Maikol"
-                    description="Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
-                    image="https://share-cdn.picrew.me/shareImg/org/202109/1242662_uvvFgnyd.png"
-                    linkedin="https://www.linkedin.com/in/maikol-moraes-107b57205/"
-                    email="maikolmoraesas@gmail.com"
+                    name="André"
+                    description="Quality Assurance"
+                    image={andre}
+                    linkedin="https://www.linkedin.com/in/andre-kuratomi/"
+                    email="andrekuratomi@gmail.com"
                   />
                 </Carousel>
               </Box>
