@@ -28,11 +28,19 @@ export interface IMoviesList {
   vote_count?: number;
   review?: string[];
 }
+interface IReview {
+  movieId: number;
+  comment: string;
+  userId: number;
+}
 
 interface IMoviesContext {
+  review: IReview[];
   getMovies: (page: number) => void;
   setMovies: any;
-  setReview: any;
+
+  DeleteFromFavorites: (movieId: number, token: string) => void;
+  getReview: (movieId: number, token: string) => void;
   getFavorites: (user: number) => void;
   searchMovies: (searchText: string) => void;
   movies: IMoviesList[];
@@ -41,7 +49,12 @@ interface IMoviesContext {
   getSpecificMovie: (specifcMovie: IMoviesList) => void;
   aboutMovie: IMoviesList;
   AddToFavorites: (data: IMoviesList, token: string) => void;
-  addReviews: (data: IMoviesList, textValue: string, token: string) => void;
+  addReviews: (
+    movieId: number,
+    comment: string,
+    userId: number,
+    token: string
+  ) => void;
 }
 
 const MoviesContext = createContext({} as IMoviesContext);
@@ -51,10 +64,9 @@ export const MoviesProvider = ({ children }: IMovies) => {
 
   const [movies, setMovies] = useState([]);
   const [searchedMovies, setSearchedMovies] = useState([]);
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState<IMoviesList[]>([]);
   const [aboutMovie, setAboutMovie] = useState({});
   const [review, setReview] = useState([]);
-
   const { auth } = useAuth();
 
   const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
@@ -80,18 +92,39 @@ export const MoviesProvider = ({ children }: IMovies) => {
       });
   };
   const AddToFavorites = (data: IMoviesList, token: string) => {
+    let isInFavorite = false;
     const decode = jwtDecode<JwtPayload>(token);
     delete data.id;
     const Addedmovie = {
       userId: Number(decode.sub),
       ...data,
     };
-
+    favorites.map((movie) => {
+      if (movie.title !== data.title) {
+      } else {
+        isInFavorite = true;
+      }
+    });
+    if (!isInFavorite) {
+      api
+        .post("favorites", Addedmovie, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((_) => console.log("filme adicionado"));
+    } else {
+      console.log("filme ja adicionado");
+    }
+  };
+  const DeleteFromFavorites = (movieId: number, token: string) => {
+    console.log("entrou na funcão");
     api
-      .post("favorites", Addedmovie, {
+      .delete(`favorites/${movieId}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((_) => console.log("filme adicionado"));
+      .then((res) => {
+        console.log(res, "deletou");
+      })
+      .catch((err) => console.log(err));
   };
   const searchMovies = (searchText: string) => {
     axios
@@ -103,31 +136,48 @@ export const MoviesProvider = ({ children }: IMovies) => {
       .catch((err) => console.log("Grupo não podem ser carregados"));
   };
 
-  const addReviews = (data: IMoviesList, textValue: string, token: string) => {
+  const getReview = (movieId: number, token: string) => {
+    api
+      .get(`reviews?movieId=${movieId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        setReview(response.data);
+      })
+      .catch((err) => console.log("Movies não podem ser carregados"));
+  };
+
+  const addReviews = (
+    movieId: number,
+    comment: string,
+    userId: number,
+    token: string
+  ) => {
     const movieReview = {
-      review: textValue,
-      ...data,
+      movieId: movieId,
+      comment: comment,
+      userId: userId,
     };
-    axios
-      .patch(`movies`, data, {
+    api
+      .post(`reviews/`, movieReview, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
-        setReview(response.data.results);
+        console.log("funcionou");
       })
-      .catch((err) => console.log("Review não podem ser carregados"));
+      .catch((err) => console.log("Review não podem ser carregados", err));
   };
 
   return (
     <MoviesContext.Provider
       value={{
         addReviews,
+        DeleteFromFavorites,
         favorites,
         getFavorites,
         searchMovies,
-        setReview,
         getMovies,
         movies,
         setMovies,
@@ -135,6 +185,8 @@ export const MoviesProvider = ({ children }: IMovies) => {
         getSpecificMovie,
         aboutMovie,
         AddToFavorites,
+        getReview,
+        review,
       }}
     >
       {children}
