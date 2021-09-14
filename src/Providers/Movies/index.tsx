@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { createContext, useContext, useEffect, useState } from "react";
 import api from "../../Services/api";
 import { ReactNode } from "react";
@@ -10,7 +11,7 @@ import { jsx } from "@emotion/react";
 interface IMovies {
   children: ReactNode;
 }
-interface IMoviesList {
+export interface IMoviesList {
   adult?: boolean;
   backdrop_path?: string;
   genre_ids?: number[];
