@@ -1,13 +1,16 @@
 import { Grid, GridItem, Box, Heading, Flex } from "@chakra-ui/layout";
 import { Img } from "@chakra-ui/image";
 import { useMovies } from "../../Providers/Movies";
-import {Input, Button} from "@chakra-ui/react"
-
+import { Input, Button } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { IMoviesList } from "../../Providers/Movies";
 const SpecificMovieContainer = () => {
   const { getSpecificMovie, aboutMovie } = useMovies();
   const imgurl = "https://image.tmdb.org/t/p/original";
-
-  const { addReviews, setReview } = useMovies()
+  const [review, setReview] = useState<string>("");
+  const { addReviews } = useMovies();
+  const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
+  useEffect(() => {}, []);
 
   return (
     <Flex flexDirection="column" h="100%">
@@ -84,7 +87,8 @@ const SpecificMovieContainer = () => {
         </Heading>
         <Input
           onChange={(e) => setReview(e.target.value)}
-          w="60%"
+          w="100%"
+          h="80%"
           color="fontColor.pinkLight"
           borderColor="fontColor.black800"
           bgColor="brown.dark"
@@ -94,7 +98,10 @@ const SpecificMovieContainer = () => {
           hover="fontColor.black800"
           bgColor="brown.dark"
           color="fontColor.pinkLight"
-          onClick={() => addReviews}
+          onClick={() =>
+            aboutMovie.id &&
+            addReviews(aboutMovie, review, token, aboutMovie.id)
+          }
         />
         {aboutMovie.review ? (
           aboutMovie.review?.map((review) => (
