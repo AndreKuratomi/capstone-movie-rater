@@ -32,8 +32,10 @@ interface IMoviesContext {
   getMovies: (page: number) => void;
   setMovies: any;
   setReview: any;
+  getFavorites: (user: number) => void;
   searchMovies: (searchText: string) => void;
   movies: IMoviesList[];
+  favorites: IMoviesList[];
   searchedMovies: IMoviesList[];
   getSpecificMovie: (specifcMovie: IMoviesList) => void;
   aboutMovie: IMoviesList;
@@ -48,11 +50,13 @@ export const MoviesProvider = ({ children }: IMovies) => {
 
   const [movies, setMovies] = useState([]);
   const [searchedMovies, setSearchedMovies] = useState([]);
+  const [favorites, setFavorites] = useState([]);
   const [aboutMovie, setAboutMovie] = useState({});
   const [review, setReview] = useState([]);
 
   const {auth} = useAuth()
 
+  const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
   const getMovies = (page: number) => {
     api
       .get(`movies?page=${page}`)
@@ -65,15 +69,27 @@ export const MoviesProvider = ({ children }: IMovies) => {
   const getSpecificMovie = (specifcMovie: IMoviesList) => {
     setAboutMovie(specifcMovie);
   };
+  const getFavorites = (userId: number) => {
+    api
+      .get(`favorites?userId=${userId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        setFavorites(response.data);
+        console.log(favorites);
+      });
+  };
   const AddToFavorites = (data: IMoviesList, token: string) => {
     const decode = jwtDecode<JwtPayload>(token);
     const Addedmovie = {
-      userId: Number(1),
-      ...data
+      userId: Number(decode.sub),
+      ...data,
     };
 
     api
-      .post("favorites", Addedmovie)
+      .post("favorites", Addedmovie, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((_) => console.log("filme adicionado"));
   };
   const searchMovies = (searchText: string) => {
@@ -109,6 +125,8 @@ export const MoviesProvider = ({ children }: IMovies) => {
     <MoviesContext.Provider
       value={{
         addReviews,
+        favorites,
+        getFavorites,
         searchMovies,
         setReview,
         getMovies,

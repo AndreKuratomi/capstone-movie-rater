@@ -12,13 +12,16 @@ import {
   ModalBody,
   ModalFooter,
   Image,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import Chat from "../Chat";
 import { BsSearch } from "react-icons/bs";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { MdArrowForward } from "react-icons/md";
+import MenuMobile from "../MenuMobile";
 const AllGroups = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <Flex
       w="85%"
@@ -26,6 +29,7 @@ const AllGroups = () => {
       justifyContent="flex-start"
       alignItems="center"
       flexDirection="column"
+      margin="auto"
     >
       <MovieContainer>
         <Flex w="100%" mb="25px" justifyContent="flex-end">

@@ -12,8 +12,15 @@ import { useAuth } from "../../Providers/Auth";
 
 const BrowseMovies = () => {
   const history = useHistory();
-  const { getMovies, movies, searchMovies, searchedMovies, getSpecificMovie } =
-    useMovies();
+  const {
+    getMovies,
+    movies,
+    searchMovies,
+    searchedMovies,
+    getSpecificMovie,
+    AddToFavorites,
+  } = useMovies();
+  const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
   const [page, setPage] = useState<number>(1);
   const [text, setText] = useState<string>("");
   const [isSearch, setIsSearch] = useState<boolean>(false);
@@ -86,6 +93,7 @@ const BrowseMovies = () => {
           {isSearch
             ? searchedMovies.map((movie) => (
                 <MovieCard
+                  AddToFavorite={() => AddToFavorites(movie, token)}
                   onClick={() => {
                     getSpecificMovie(movie);
                     history.push("/aboutmovie");
@@ -98,6 +106,7 @@ const BrowseMovies = () => {
               ))
             : movies.map((movie) => (
                 <MovieCard
+                  AddToFavorite={() => AddToFavorites(movie, token)}
                   onClick={() => {
                     getSpecificMovie(movie);
                     history.push("/aboutmovie");

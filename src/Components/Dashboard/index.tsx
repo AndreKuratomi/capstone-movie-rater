@@ -8,7 +8,14 @@ import { useHistory } from "react-router-dom";
 
 const DashboardComponent = () => {
   const history = useHistory();
-  const { getMovies, movies, getSpecificMovie, AddToFavorites } = useMovies();
+  const {
+    getMovies,
+    movies,
+    getSpecificMovie,
+    AddToFavorites,
+    favorites,
+    getFavorites,
+  } = useMovies();
   const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
   const UpMovies = movies.filter((movie) => {
     const date = movie.release_date?.replaceAll("-", "");
@@ -23,7 +30,8 @@ const DashboardComponent = () => {
     if (movies.length < 1) {
       getMovies(page);
     }
-  }, [movies, getMovies]);
+    getFavorites(3);
+  }, []);
   console.log(movies);
   return (
     <Flex
@@ -90,8 +98,9 @@ const DashboardComponent = () => {
           My movies
         </Heading>
         <BoxContainer>
-          {movies?.map((movie) => (
+          {favorites?.map((movie) => (
             <MovieCard
+              type="favorites"
               onClick={() => {
                 getSpecificMovie(movie);
                 history.push("/aboutmovie");
