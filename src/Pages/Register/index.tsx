@@ -6,12 +6,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import api from "../../Services/api";
 
 import {
-  useMediaQuery,
   Box,
   Button,
   FormControl,
+  Image,
   Link,
   Text,
+  useMediaQuery,
   useToast,
 } from "@chakra-ui/react";
 
@@ -66,19 +67,21 @@ export const Register = () => {
 
   const addSuccessToast = () => {
     toast({
-      title: "Cadastro realizado com sucesso!",
       description: "",
-      status: "success",
       duration: 5000,
+      position: "top",
+      status: "success",
+      title: "Cadastro realizado com sucesso!",
     });
   };
 
   const addFailToast = () => {
     toast({
-      title: "Falha no cadastro!",
       description: "Verifique o email cadastrado",
-      status: "error",
       duration: 5000,
+      position: "top",
+      status: "error",
+      title: "Falha no cadastro!",
     });
   };
 
@@ -106,13 +109,21 @@ export const Register = () => {
       <Flex align="center" bg="#000" direction="column" height="100vh">
         <form onSubmit={handleSubmit(submitFunction)}>
           {mobileVersion ? (
-            <Box bgImage={LogoRegister}>
+            <Box
+              bg="#000"
+              backgroundImage={LogoRegister}
+              backgroundRepeat="no-repeat"
+              backgroundSize="cover"
+              height="100%"
+            >
+              <Image src={LogoRegister} />
               <FormControl
                 align="center"
+                //
                 borderBottom="4px solid white"
                 padding="1.5rem 4rem"
               >
-                <Stack spacing="5">
+                <Stack spacing="4">
                   <Input
                     error={errors.username}
                     icon={FaUserAlt}
@@ -141,7 +152,7 @@ export const Register = () => {
                     {...register("confirmPassword")}
                   />
                 </Stack>
-                <Button bg="#F00" color="white" margin-top="10" type="submit">
+                <Button bg="#F00" color="white" mt="5" type="submit">
                   Registrar
                 </Button>
               </FormControl>
@@ -150,10 +161,11 @@ export const Register = () => {
             <Box bgImage={LogoRegister}>
               <FormControl
                 align="center"
+                // backgroundColor="#FFF"
                 borderBottom="4px solid white"
                 padding="3.5rem 10rem"
               >
-                <Stack spacing="7">
+                <Stack spacing="4">
                   <Input
                     error={errors.username}
                     icon={FaUserAlt}
@@ -182,7 +194,7 @@ export const Register = () => {
                     {...register("confirmPassword")}
                   />
                 </Stack>
-                <Button bg="#F00" color="white" margin-top="2" type="submit">
+                <Button bg="#F00" color="white" mt="6" type="submit">
                   Registrar
                 </Button>
               </FormControl>

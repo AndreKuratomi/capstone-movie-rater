@@ -59,19 +59,21 @@ const Login = () => {
 
   const addSuccessToast = () => {
     toast({
-      title: "Login realizado com sucesso!",
       description: "",
-      status: "success",
       duration: 5000,
+      position: "top",
+      status: "success",
+      title: "Login realizado com sucesso!",
     });
   };
 
   const addFailToast = () => {
     toast({
-      title: "Falha no login!",
       description: "Verifique os dados preenchidos!",
-      status: "error",
       duration: 5000,
+      position: "top",
+      status: "error",
+      title: "Falha no login!",
     });
   };
 
@@ -127,7 +129,7 @@ const Login = () => {
                     {...register("password")}
                   />
                 </Stack>
-                <Button bg="#F00" color="white" margin-top="10" type="submit">
+                <Button bg="#F00" color="white" mt="4" type="submit">
                   Logar
                 </Button>
               </FormControl>
@@ -155,7 +157,7 @@ const Login = () => {
                     {...register("password")}
                   />
                 </Stack>
-                <Button bg="#F00" color="white" margin-top="2" type="submit">
+                <Button bg="#F00" color="white" mt="4" type="submit">
                   Logar
                 </Button>
               </FormControl>
