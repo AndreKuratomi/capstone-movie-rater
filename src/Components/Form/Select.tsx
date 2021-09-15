@@ -53,7 +53,20 @@ const SelectBase: ForwardRefRenderFunction<
         ref={ref}
       />
 
-      {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
+      {!!error && (
+        <FormErrorMessage
+          align="center"
+          backgroundColor="#000"
+          color="red.500"
+          fontStyle=""
+          fontWeight="bold"
+          justifyContent="center"
+          marginTop="1"
+          width="190px"
+        >
+          {error.message}
+        </FormErrorMessage>
+      )}
     </FormControl>
   );
 };

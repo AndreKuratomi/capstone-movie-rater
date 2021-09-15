@@ -106,22 +106,34 @@ export const Register = () => {
   const [desktopVersion] = useMediaQuery("(min-width:768px)");
 
   return (
-    <>
+    <Box bg="#000" align="center">
       {mobileVersion ? <NavMobile /> : <NavBar />}
 
+      {mobileVersion ? (
+        <Image
+          src={LogoRegister}
+          alt="LogoRegister"
+          position="absolute"
+          top="0px"
+          width="100%"
+        />
+      ) : (
+        <Image
+          src={LogoRegister}
+          alt="LogoRegister"
+          position="absolute"
+          top="0px"
+          right="335px"
+          width="50%"
+        />
+      )}
+
       <Flex align="center" bg="#000" direction="column" height="100vh">
-        <form onSubmit={handleSubmit(submitFunction)}>
-          {mobileVersion ? (
-            <Box
-              bg="#000"
-              backgroundImage={LogoRegister}
-              backgroundRepeat="no-repeat"
-              backgroundSize="cover"
-            >
-              {/* <Image src={LogoRegister} /> */}
+        {mobileVersion ? (
+          <Box position="absolute" top="110px" right="0px">
+            <form onSubmit={handleSubmit(submitFunction)}>
               <FormControl
                 align="center"
-                //
                 borderBottom="4px solid white"
                 padding="1.5rem 4rem"
               >
@@ -160,25 +172,60 @@ export const Register = () => {
                     placeholder="Gênero favorito de filme:"
                     {...register("selectGenre")}
                   >
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                    <option value="E">E</option>
+                    <option value="Ação">Ação</option>
+                    <option value="Aventura">Aventura</option>
+                    <option value="Animação">Animação</option>
+                    <option value="Cinema TV">Cinema TV</option>
+                    <option value="Comédia">Comédia</option>
+                    <option value="Crime">Crime</option>
+                    <option value="Documentário">Documentário</option>
+                    <option value="Família">Família</option>
+                    <option value="Fantasia">Fantasia</option>
+                    <option value="Faroeste">Faroeste</option>
+                    <option value="Ficção científica">Ficção científica</option>
+                    <option value="Guerra">Guerra</option>
+                    <option value="História">História</option>
+                    <option value="Música">Música</option>
+                    <option value="Mistério">Mistério</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Terror">Terror</option>
+                    <option value="Thriller">Thriller</option>
                   </Select>
                 </Stack>
-                <Button bg="#F00" color="white" mt="5" type="submit">
+                <Button
+                  bg="red.500"
+                  color="white"
+                  mt="5"
+                  type="submit"
+                  _hover={{ bg: "red.500" }}
+                >
                   Registrar
                 </Button>
               </FormControl>
+            </form>
+            <Box marginTop="3.5">
+              <Stack spacing="3.5">
+                <Flex align="center" color="white" direction="column">
+                  <Text as="span" align="center">
+                    Já tem cadastro? Então vamos ao{" "}
+                    <Link as={ReachLink} to="/login">
+                      Login
+                    </Link>
+                  </Text>
+                  <Link as={ReachLink} to="/">
+                    Voltar para a página principal
+                  </Link>
+                </Flex>
+              </Stack>
             </Box>
-          ) : (
-            <Box bgImage={LogoRegister}>
+          </Box>
+        ) : (
+          <Box position="absolute" top="100px" right="490px">
+            <form onSubmit={handleSubmit(submitFunction)}>
               <FormControl
                 align="center"
-                // backgroundColor="#FFF"
                 borderBottom="4px solid white"
-                padding="3.5rem 10rem"
+                padding="1.5rem 4rem"
               >
                 <Stack spacing="4">
                   <Input
@@ -215,37 +262,56 @@ export const Register = () => {
                     placeholder="Gênero favorito de filme:"
                     {...register("selectGenre")}
                   >
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                    <option value="E">E</option>
+                    <option value="Ação">Ação</option>
+                    <option value="Aventura">Aventura</option>
+                    <option value="Animação">Animação</option>
+                    <option value="Cinema TV">Cinema TV</option>
+                    <option value="Comédia">Comédia</option>
+                    <option value="Crime">Crime</option>
+                    <option value="Documentário">Documentário</option>
+                    <option value="Família">Família</option>
+                    <option value="Fantasia">Fantasia</option>
+                    <option value="Faroeste">Faroeste</option>
+                    <option value="Ficção científica">Ficção científica</option>
+                    <option value="Guerra">Guerra</option>
+                    <option value="História">História</option>
+                    <option value="Música">Música</option>
+                    <option value="Mistério">Mistério</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Terror">Terror</option>
+                    <option value="Thriller">Thriller</option>
                   </Select>
                 </Stack>
-                <Button bg="#F00" color="white" mt="6" type="submit">
+                <Button
+                  bg="red.500"
+                  color="white"
+                  mt="5"
+                  type="submit"
+                  _hover={{ bg: "red.500" }}
+                >
                   Registrar
                 </Button>
               </FormControl>
+            </form>
+            <Box marginTop="3.5">
+              <Stack spacing="3.5">
+                <Flex align="center" color="white" direction="column">
+                  <Text as="span" align="center">
+                    Já tem cadastro? Então vamos ao{" "}
+                    <Link as={ReachLink} to="/login">
+                      Login
+                    </Link>
+                  </Text>
+                  <Link as={ReachLink} to="/">
+                    Voltar para a página principal
+                  </Link>
+                </Flex>
+              </Stack>
             </Box>
-          )}
-        </form>
-        <Box marginTop="3.5">
-          <Stack spacing="3.5">
-            <Flex align="center" color="white" direction="column">
-              <Text as="span" align="center">
-                Já tem cadastro? Então vamos ao{" "}
-                <Link as={ReachLink} to="/login">
-                  Login
-                </Link>
-              </Text>
-              <Link as={ReachLink} to="/">
-                Voltar para a página principal
-              </Link>
-            </Flex>
-          </Stack>
-        </Box>
+          </Box>
+        )}
       </Flex>
-    </>
+    </Box>
   );
 };
 
