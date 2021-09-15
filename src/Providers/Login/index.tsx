@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 interface LoginProviderProps {
   children: ReactNode;
 }
-interface ILogin {
+export interface ILogin {
   username: string;
   password: string;
 }
