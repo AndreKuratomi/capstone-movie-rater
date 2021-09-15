@@ -12,6 +12,7 @@ import {
   Box,
   Button,
   FormControl,
+  Image,
   Link,
   Text,
   useToast,
@@ -101,19 +102,39 @@ const Login = () => {
   const [desktopVersion] = useMediaQuery("(min-width:768px)");
 
   return (
-    <>
+    <Box bg="#000" align="center">
       {mobileVersion ? <NavMobile /> : <NavBar />}
 
+      {mobileVersion ? (
+        <Image
+          src={LogoLogin}
+          alt="LogoLogin"
+          position="absolute"
+          top="0px"
+          right="3 5px"
+          width="80%"
+        />
+      ) : (
+        <Image
+          src={LogoLogin}
+          alt="LogoLogin"
+          position="absolute"
+          top="0px"
+          right="380px"
+          width="30%"
+        />
+      )}
+
       <Flex align="center" bg="#000" direction="column" height="100vh">
-        <form onSubmit={handleSubmit(submitFunction)}>
-          {mobileVersion ? (
-            <Box bgImage={LogoLogin}>
+        {mobileVersion ? (
+          <Box position="absolute" top="160px" right="0px">
+            <form onSubmit={handleSubmit(submitFunction)}>
               <FormControl
                 align="center"
                 borderBottom="4px solid white"
                 padding="1.5rem 4rem"
               >
-                <Stack spacing="5">
+                <Stack spacing="4">
                   <Input
                     error={errors.email}
                     icon={MdEmail}
@@ -129,19 +150,42 @@ const Login = () => {
                     {...register("password")}
                   />
                 </Stack>
-                <Button bg="#F00" color="white" mt="4" type="submit">
-                  Logar
+                <Button
+                  bg="red.500"
+                  color="white"
+                  mt="5"
+                  type="submit"
+                  _hover={{ bg: "red.500" }}
+                >
+                  Registrar
                 </Button>
               </FormControl>
+            </form>
+            <Box marginTop="3.5">
+              <Stack spacing="3.5">
+                <Flex align="center" color="white" direction="column">
+                  <Text as="span" align="center">
+                    Já tem cadastro? Então vamos ao{" "}
+                    <Link as={ReachLink} to="/login">
+                      Login
+                    </Link>
+                  </Text>
+                  <Link as={ReachLink} to="/">
+                    Voltar para a página principal
+                  </Link>
+                </Flex>
+              </Stack>
             </Box>
-          ) : (
-            <Box bgImage={LogoLogin}>
+          </Box>
+        ) : (
+          <Box position="absolute" top="240px" right="480px">
+            <form onSubmit={handleSubmit(submitFunction)}>
               <FormControl
                 align="center"
                 borderBottom="4px solid white"
-                padding="3.5rem 10rem"
+                padding="1.5rem 4rem"
               >
-                <Stack spacing="7">
+                <Stack spacing="4">
                   <Input
                     error={errors.email}
                     icon={MdEmail}
@@ -157,30 +201,36 @@ const Login = () => {
                     {...register("password")}
                   />
                 </Stack>
-                <Button bg="#F00" color="white" mt="4" type="submit">
-                  Logar
+                <Button
+                  bg="red.500"
+                  color="white"
+                  mt="5"
+                  type="submit"
+                  _hover={{ bg: "red.500" }}
+                >
+                  Registrar
                 </Button>
               </FormControl>
+            </form>
+            <Box marginTop="3.5">
+              <Stack spacing="3.5">
+                <Flex align="center" color="white" direction="column">
+                  <Text as="span" align="center">
+                    Já tem cadastro? Então vamos ao{" "}
+                    <Link as={ReachLink} to="/signup">
+                      Cadastro
+                    </Link>
+                  </Text>
+                  <Link as={ReachLink} to="/">
+                    Voltar para a página principal
+                  </Link>
+                </Flex>
+              </Stack>
             </Box>
-          )}
-        </form>
-        <Box marginTop="3.5">
-          <Stack spacing="3.5">
-            <Flex align="center" color="white" direction="column">
-              <Text as="span" align="center">
-                Ainda não tem cadastro? Então vamos ao{" "}
-                <Link as={ReachLink} to="/signup">
-                  Cadastro
-                </Link>
-              </Text>
-              <Link as={ReachLink} to="/">
-                Voltar para a página principal
-              </Link>
-            </Flex>
-          </Stack>
-        </Box>
+          </Box>
+        )}
       </Flex>
-    </>
+    </Box>
   );
 };
 

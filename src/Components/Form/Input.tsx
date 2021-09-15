@@ -28,7 +28,7 @@ type inputColorOptions = {
 };
 
 const statusColor: inputColorOptions = {
-  error: "red.300",
+  error: "red.800",
   default: "gray.500",
 };
 
@@ -45,7 +45,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   }, [error]);
 
   return (
-    <FormControl isInvalid={!!error}>
+    <FormControl isInvalid={!!error} textAlign="center">
       <InputGroup>
         {Icon && (
           <InputLeftElement flexDirection="column">
@@ -65,7 +65,20 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
           ref={ref}
         />
       </InputGroup>
-      {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
+      {!!error && (
+        <FormErrorMessage
+          align="center"
+          backgroundColor="#000"
+          color="red.500"
+          fontStyle=""
+          fontWeight="bold"
+          justifyContent="center"
+          marginTop="1"
+          // width="190px"
+        >
+          {error.message}
+        </FormErrorMessage>
+      )}
     </FormControl>
   );
 };
