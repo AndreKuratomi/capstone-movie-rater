@@ -9,7 +9,6 @@ import {
   Box,
   Button,
   FormControl,
-  Image,
   Link,
   Text,
   useMediaQuery,
@@ -23,7 +22,7 @@ import { Flex, Stack } from "@chakra-ui/layout";
 import { FaUserAlt, FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
-import LogoRegister from "../../Assets/img/img register.png";
+import LogoRegister from "../../Assets/img/img_register.png";
 
 import NavBar from "../../Components/NavBar";
 import NavMobile from "../../Components/NavMobile";
@@ -102,215 +101,208 @@ export const Register = () => {
       });
   };
 
-  const [mobileVersion] = useMediaQuery("(max-width: 768px)");
-  const [desktopVersion] = useMediaQuery("(min-width:768px)");
+  const [mobileVersion] = useMediaQuery("(max-width: 500px)");
+  const [desktopVersion] = useMediaQuery("(max-width:768px)");
 
   return (
-    <Box bg="#000" align="center">
-      {mobileVersion ? <NavMobile /> : <NavBar />}
+    <Box bg="#000" overflow="hidden">
+      <Box
+        align="center"
+        bgImage={`url(${LogoRegister})`}
+        backgroundPosition="center"
+        backgroundRepeat="no-repeat"
+        backgroundSize="contain"
+      >
+        {mobileVersion ? <NavMobile /> : <NavBar />}
 
-      {mobileVersion ? (
-        <Image
-          src={LogoRegister}
-          alt="LogoRegister"
-          position="absolute"
-          top="0px"
-          width="100%"
-        />
-      ) : (
-        <Image
-          src={LogoRegister}
-          alt="LogoRegister"
-          position="absolute"
-          top="0px"
-          right="335px"
-          width="50%"
-        />
-      )}
-
-      <Flex align="center" bg="#000" direction="column" height="100vh">
-        {mobileVersion ? (
-          <Box position="absolute" top="110px" right="0px">
-            <form onSubmit={handleSubmit(submitFunction)}>
-              <FormControl
-                align="center"
-                borderBottom="4px solid white"
-                padding="1.5rem 4rem"
-              >
-                <Stack spacing="4">
-                  <Input
-                    error={errors.username}
-                    icon={FaUserAlt}
-                    placeholder="Usuário"
-                    {...register("username")}
-                  />
-                  <Input
-                    error={errors.email}
-                    icon={MdEmail}
-                    placeholder="Email"
-                    type="email"
-                    {...register("email")}
-                  />
-                  <Input
-                    error={errors.password}
-                    icon={FaLock}
-                    placeholder="Senha"
-                    type="password"
-                    {...register("password")}
-                  />
-                  <Input
-                    error={errors.confirmPassword}
-                    icon={FaLock}
-                    placeholder="Confirmar senha"
-                    type="password"
-                    {...register("confirmPassword")}
-                  />
-                  <Select
-                    bg="#FFF"
-                    color="gray.500"
-                    error={errors.selectGenre}
-                    placeholder="Gênero favorito de filme:"
-                    {...register("selectGenre")}
-                  >
-                    <option value="Ação">Ação</option>
-                    <option value="Aventura">Aventura</option>
-                    <option value="Animação">Animação</option>
-                    <option value="Cinema TV">Cinema TV</option>
-                    <option value="Comédia">Comédia</option>
-                    <option value="Crime">Crime</option>
-                    <option value="Documentário">Documentário</option>
-                    <option value="Família">Família</option>
-                    <option value="Fantasia">Fantasia</option>
-                    <option value="Faroeste">Faroeste</option>
-                    <option value="Ficção científica">Ficção científica</option>
-                    <option value="Guerra">Guerra</option>
-                    <option value="História">História</option>
-                    <option value="Música">Música</option>
-                    <option value="Mistério">Mistério</option>
-                    <option value="Romance">Romance</option>
-                    <option value="Terror">Terror</option>
-                    <option value="Thriller">Thriller</option>
-                  </Select>
-                </Stack>
-                <Button
-                  bg="red.500"
-                  color="white"
-                  mt="5"
-                  type="submit"
-                  _hover={{ bg: "red.500" }}
+        <Flex align="center" direction="column" height="100vh">
+          {mobileVersion ? (
+            <Box bg="rgba(0, 0, 0, 0.4)">
+              <form onSubmit={handleSubmit(submitFunction)}>
+                <FormControl
+                  align="center"
+                  borderBottom="4px solid white"
+                  padding="1.5rem 4rem"
                 >
-                  Registrar
-                </Button>
-              </FormControl>
-            </form>
-            <Box marginTop="3.5">
-              <Stack spacing="3.5">
-                <Flex align="center" color="white" direction="column">
-                  <Text as="span" align="center">
-                    Já tem cadastro? Então vamos ao{" "}
-                    <Link as={ReachLink} to="/login">
-                      Login
-                    </Link>
-                  </Text>
-                  <Link as={ReachLink} to="/">
-                    Voltar para a página principal
-                  </Link>
-                </Flex>
-              </Stack>
-            </Box>
-          </Box>
-        ) : (
-          <Box position="absolute" top="100px" right="490px">
-            <form onSubmit={handleSubmit(submitFunction)}>
-              <FormControl
-                align="center"
-                borderBottom="4px solid white"
-                padding="1.5rem 4rem"
-              >
-                <Stack spacing="4">
-                  <Input
-                    error={errors.username}
-                    icon={FaUserAlt}
-                    placeholder="Usuário"
-                    {...register("username")}
-                  />
-                  <Input
-                    error={errors.email}
-                    icon={MdEmail}
-                    placeholder="Email"
-                    type="email"
-                    {...register("email")}
-                  />
-                  <Input
-                    error={errors.password}
-                    icon={FaLock}
-                    placeholder="Senha"
-                    type="password"
-                    {...register("password")}
-                  />
-                  <Input
-                    error={errors.confirmPassword}
-                    icon={FaLock}
-                    placeholder="Confirmar senha"
-                    type="password"
-                    {...register("confirmPassword")}
-                  />
-                  <Select
-                    bg="#FFF"
-                    color="gray.500"
-                    error={errors.selectGenre}
-                    placeholder="Gênero favorito de filme:"
-                    {...register("selectGenre")}
+                  <Stack spacing="4">
+                    <Input
+                      error={errors.username}
+                      icon={FaUserAlt}
+                      placeholder="Usuário"
+                      {...register("username")}
+                    />
+                    <Input
+                      error={errors.email}
+                      icon={MdEmail}
+                      placeholder="Email"
+                      type="email"
+                      {...register("email")}
+                    />
+                    <Input
+                      error={errors.password}
+                      icon={FaLock}
+                      placeholder="Senha"
+                      type="password"
+                      {...register("password")}
+                    />
+                    <Input
+                      error={errors.confirmPassword}
+                      icon={FaLock}
+                      placeholder="Confirmar senha"
+                      type="password"
+                      {...register("confirmPassword")}
+                    />
+                    <Select
+                      bg="#FFF"
+                      color="gray.500"
+                      error={errors.selectGenre}
+                      placeholder="Gênero favorito de filme:"
+                      {...register("selectGenre")}
+                    >
+                      <option value="Ação">Ação</option>
+                      <option value="Aventura">Aventura</option>
+                      <option value="Animação">Animação</option>
+                      <option value="Cinema TV">Cinema TV</option>
+                      <option value="Comédia">Comédia</option>
+                      <option value="Crime">Crime</option>
+                      <option value="Documentário">Documentário</option>
+                      <option value="Família">Família</option>
+                      <option value="Fantasia">Fantasia</option>
+                      <option value="Faroeste">Faroeste</option>
+                      <option value="Ficção científica">
+                        Ficção científica
+                      </option>
+                      <option value="Guerra">Guerra</option>
+                      <option value="História">História</option>
+                      <option value="Música">Música</option>
+                      <option value="Mistério">Mistério</option>
+                      <option value="Romance">Romance</option>
+                      <option value="Terror">Terror</option>
+                      <option value="Thriller">Thriller</option>
+                    </Select>
+                  </Stack>
+                  <Button
+                    bg="red.500"
+                    color="white"
+                    mt="5"
+                    type="submit"
+                    _hover={{ bg: "red.500" }}
                   >
-                    <option value="Ação">Ação</option>
-                    <option value="Aventura">Aventura</option>
-                    <option value="Animação">Animação</option>
-                    <option value="Cinema TV">Cinema TV</option>
-                    <option value="Comédia">Comédia</option>
-                    <option value="Crime">Crime</option>
-                    <option value="Documentário">Documentário</option>
-                    <option value="Família">Família</option>
-                    <option value="Fantasia">Fantasia</option>
-                    <option value="Faroeste">Faroeste</option>
-                    <option value="Ficção científica">Ficção científica</option>
-                    <option value="Guerra">Guerra</option>
-                    <option value="História">História</option>
-                    <option value="Música">Música</option>
-                    <option value="Mistério">Mistério</option>
-                    <option value="Romance">Romance</option>
-                    <option value="Terror">Terror</option>
-                    <option value="Thriller">Thriller</option>
-                  </Select>
-                </Stack>
-                <Button
-                  bg="red.500"
-                  color="white"
-                  mt="5"
-                  type="submit"
-                  _hover={{ bg: "red.500" }}
-                >
-                  Registrar
-                </Button>
-              </FormControl>
-            </form>
-            <Box marginTop="3.5">
-              <Stack spacing="3.5">
-                <Flex align="center" color="white" direction="column">
-                  <Text as="span" align="center">
-                    Já tem cadastro? Então vamos ao{" "}
-                    <Link as={ReachLink} to="/login">
-                      Login
+                    Registrar
+                  </Button>
+                </FormControl>
+              </form>
+              <Box marginTop="3.5">
+                <Stack spacing="3.5">
+                  <Flex align="center" color="white" direction="column">
+                    <Text as="span" align="center">
+                      Já tem cadastro? Então vamos ao{" "}
+                      <Link as={ReachLink} to="/login">
+                        Login
+                      </Link>
+                    </Text>
+                    <Link as={ReachLink} to="/">
+                      Voltar para a página principal
                     </Link>
-                  </Text>
-                  <Link as={ReachLink} to="/">
-                    Voltar para a página principal
-                  </Link>
-                </Flex>
-              </Stack>
+                  </Flex>
+                </Stack>
+              </Box>
             </Box>
-          </Box>
-        )}
-      </Flex>
+          ) : (
+            <Box bg="rgba(0, 0, 0, 0.4)">
+              <form onSubmit={handleSubmit(submitFunction)}>
+                <FormControl
+                  align="center"
+                  borderBottom="4px solid white"
+                  padding="1.5rem 4rem"
+                >
+                  <Stack spacing="4">
+                    <Input
+                      error={errors.username}
+                      icon={FaUserAlt}
+                      placeholder="Usuário"
+                      {...register("username")}
+                    />
+                    <Input
+                      error={errors.email}
+                      icon={MdEmail}
+                      placeholder="Email"
+                      type="email"
+                      {...register("email")}
+                    />
+                    <Input
+                      error={errors.password}
+                      icon={FaLock}
+                      placeholder="Senha"
+                      type="password"
+                      {...register("password")}
+                    />
+                    <Input
+                      error={errors.confirmPassword}
+                      icon={FaLock}
+                      placeholder="Confirmar senha"
+                      type="password"
+                      {...register("confirmPassword")}
+                    />
+                    <Select
+                      bg="#FFF"
+                      color="gray.500"
+                      error={errors.selectGenre}
+                      placeholder="Gênero favorito de filme:"
+                      {...register("selectGenre")}
+                    >
+                      <option value="Ação">Ação</option>
+                      <option value="Aventura">Aventura</option>
+                      <option value="Animação">Animação</option>
+                      <option value="Cinema TV">Cinema TV</option>
+                      <option value="Comédia">Comédia</option>
+                      <option value="Crime">Crime</option>
+                      <option value="Documentário">Documentário</option>
+                      <option value="Família">Família</option>
+                      <option value="Fantasia">Fantasia</option>
+                      <option value="Faroeste">Faroeste</option>
+                      <option value="Ficção científica">
+                        Ficção científica
+                      </option>
+                      <option value="Guerra">Guerra</option>
+                      <option value="História">História</option>
+                      <option value="Música">Música</option>
+                      <option value="Mistério">Mistério</option>
+                      <option value="Romance">Romance</option>
+                      <option value="Terror">Terror</option>
+                      <option value="Thriller">Thriller</option>
+                    </Select>
+                  </Stack>
+                  <Button
+                    bg="red.500"
+                    color="white"
+                    mt="5"
+                    type="submit"
+                    _hover={{ bg: "red.500" }}
+                  >
+                    Registrar
+                  </Button>
+                </FormControl>
+              </form>
+              <Box marginTop="3.5">
+                <Stack spacing="3.5">
+                  <Flex align="center" color="white" direction="column">
+                    <Text as="span" align="center">
+                      Já tem cadastro? Então vamos ao{" "}
+                      <Link as={ReachLink} to="/login">
+                        Login
+                      </Link>
+                    </Text>
+                    <Link as={ReachLink} to="/">
+                      Voltar para a página principal
+                    </Link>
+                  </Flex>
+                </Stack>
+              </Box>
+            </Box>
+          )}
+        </Flex>
+      </Box>
     </Box>
   );
 };

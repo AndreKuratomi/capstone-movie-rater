@@ -12,13 +12,12 @@ import {
   Box,
   Button,
   FormControl,
-  Image,
   Link,
   Text,
   useToast,
 } from "@chakra-ui/react";
 
-import LogoLogin from "../../Assets/img/img login.png";
+import LogoLogin from "../../Assets/img/img_login.png";
 import { Flex, Stack } from "@chakra-ui/layout";
 import { FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
@@ -98,36 +97,29 @@ const Login = () => {
       });
   };
 
-  const [mobileVersion] = useMediaQuery("(max-width: 768px)");
+  const [mobileVersion] = useMediaQuery("(max-width: 500px)");
   const [desktopVersion] = useMediaQuery("(min-width:768px)");
 
   return (
-    <Box bg="#000" align="center">
+    <Box
+      align="center"
+      bg="#000"
+      bgImage={`url(${LogoLogin})`}
+      backgroundPosition="center"
+      backgroundRepeat="no-repeat"
+      backgroundSize="contain"
+    >
       {mobileVersion ? <NavMobile /> : <NavBar />}
 
-      {mobileVersion ? (
-        <Image
-          src={LogoLogin}
-          alt="LogoLogin"
-          position="absolute"
-          top="0px"
-          right="3 5px"
-          width="80%"
-        />
-      ) : (
-        <Image
-          src={LogoLogin}
-          alt="LogoLogin"
-          position="absolute"
-          top="0px"
-          right="380px"
-          width="30%"
-        />
-      )}
-
-      <Flex align="center" bg="#000" direction="column" height="100vh">
+      <Flex
+        align="center"
+        bg="rgba(0, 0, 0, 0.4)"
+        direction="column"
+        height="100vh"
+        paddingTop="10%"
+      >
         {mobileVersion ? (
-          <Box position="absolute" top="160px" right="0px">
+          <Box>
             <form onSubmit={handleSubmit(submitFunction)}>
               <FormControl
                 align="center"
@@ -157,7 +149,7 @@ const Login = () => {
                   type="submit"
                   _hover={{ bg: "red.500" }}
                 >
-                  Registrar
+                  Logar
                 </Button>
               </FormControl>
             </form>
@@ -166,8 +158,8 @@ const Login = () => {
                 <Flex align="center" color="white" direction="column">
                   <Text as="span" align="center">
                     Já tem cadastro? Então vamos ao{" "}
-                    <Link as={ReachLink} to="/login">
-                      Login
+                    <Link as={ReachLink} to="/signup">
+                      Cadastro
                     </Link>
                   </Text>
                   <Link as={ReachLink} to="/">
@@ -178,7 +170,7 @@ const Login = () => {
             </Box>
           </Box>
         ) : (
-          <Box position="absolute" top="240px" right="480px">
+          <Box>
             <form onSubmit={handleSubmit(submitFunction)}>
               <FormControl
                 align="center"
@@ -208,7 +200,7 @@ const Login = () => {
                   type="submit"
                   _hover={{ bg: "red.500" }}
                 >
-                  Registrar
+                  Logar
                 </Button>
               </FormControl>
             </form>
