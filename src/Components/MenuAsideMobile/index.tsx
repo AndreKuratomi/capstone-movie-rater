@@ -27,10 +27,10 @@ import {
           </Flex>
           <MenuList bg="white" border="none" color="black" padding="0px">
             <MenuItem><Link as={ReachLink} to="/dashboard">Home</Link></MenuItem>
-            <MenuItem><Link as={ReachLink} to="/movies">Movies</Link></MenuItem>
-            <MenuItem><Link as={ReachLink} to="/groups">Groups</Link></MenuItem>
-            <MenuItem><Link as={ReachLink} to="/mymovies">My movies</Link></MenuItem>
-            <MenuItem><Link as={ReachLink} to="/">Profile</Link></MenuItem>
+            <MenuItem><Link as={ReachLink} to="/movies">Filmes</Link></MenuItem>
+            <MenuItem><Link as={ReachLink} to="/groups">Grupos</Link></MenuItem>
+            <MenuItem><Link as={ReachLink} to="/mymovies">Meus Filmes</Link></MenuItem>
+            <MenuItem><Link as={ReachLink} to="/">Perfil</Link></MenuItem>
           </MenuList>
         </Menu>
       </Flex>

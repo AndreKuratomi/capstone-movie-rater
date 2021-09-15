@@ -51,28 +51,28 @@ const MenuMobile = () => {
             </Box>
             <Box display="flex">
               <RiSearchEyeLine />
-              <Link to="/movies">Movies</Link>
+              <Link to="/movies">Filmes</Link>
             </Box>
             <Box display="flex">
               <TiGroup />
-              <Link to="/groups">Groups</Link>
+              <Link to="/groups">Grupos</Link>
             </Box>
             <Box display="flex">
               <MdMovieCreation />
-              <Link to="/mymovies">My movies</Link>
+              <Link to="/mymovies">Meus Filmes</Link>
             </Box>
           </DrawerBody>
           <DrawerHeader color="red.800" borderBottomWidth="1px">
-            General
+            Geral
           </DrawerHeader>
           <DrawerBody>
             <Box display="flex">
               <CgProfile />
-              <Link to="/">Profile</Link>
+              <Link to="/">Perfil</Link>
             </Box>
             <Box display="flex">
               <RiLogoutBoxFill />
-              <Link to="/">SignOut</Link>
+              <Link to="/">Logout</Link>
             </Box>
           </DrawerBody>
         </DrawerContent>

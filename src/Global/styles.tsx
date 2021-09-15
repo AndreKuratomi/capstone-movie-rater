@@ -16,7 +16,7 @@ export const theme = extendTheme({
       500: "rgba(91, 91, 91, 0.67)",
     },
     black: {
-      transparent500: "rgba(0, 0, 0, 0.5)",
+      transparent500: "rgba(0, 0, 0, 0.74)",
       transparent800: "rgba(0, 0, 0, 0.51)",
     },
     brown: {

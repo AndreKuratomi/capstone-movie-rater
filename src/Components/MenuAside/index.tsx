@@ -21,17 +21,18 @@ const MenuAside = () => {
   return (
     <VStack
       w="250px"
-      minH="100vh"
+      minH="100%"
       bgColor="red.800"
       borderRadius="0px 15px 15px 0px"
       mr="10px"
+      p="0.45rem"
     >
       <Grid
         color="fontColor.white100"
         h="100%"
         w="100%"
         fontFamily="Inder, sans-serif"
-        templateRows="repeat(16, 1fr)"
+        templateRows="repeat(4, 1fr)"
         templateColumns="repeat(6, 1fr)"
         gap={2}
       >
@@ -93,7 +94,11 @@ const MenuAside = () => {
                 lineHeight="35px"
               >
                 <Link as={ReachLink} to="/movies">
+<<<<<<< HEAD
                   Movies
+=======
+                  Filmes
+>>>>>>> bf8b4e687f5f088944858b8450a80824a3218fde
                 </Link>
               </Heading>
             </Box>
@@ -109,7 +114,11 @@ const MenuAside = () => {
                 lineHeight="35px"
               >
                 <Link as={ReachLink} to="/groups">
+<<<<<<< HEAD
                   Groups
+=======
+                  Grupos
+>>>>>>> bf8b4e687f5f088944858b8450a80824a3218fde
                 </Link>
               </Heading>
             </Box>
@@ -125,7 +134,11 @@ const MenuAside = () => {
                 lineHeight="35px"
               >
                 <Link as={ReachLink} to="/mymovies">
+<<<<<<< HEAD
                   My movies
+=======
+                  Meus Filmes
+>>>>>>> bf8b4e687f5f088944858b8450a80824a3218fde
                 </Link>
               </Heading>
             </Box>
@@ -134,7 +147,7 @@ const MenuAside = () => {
         <GridItem rowSpan={4} colSpan={6} justifySelf="flex-start" mt="50px">
           <VStack ml="50px">
             <Heading fontWeight="light" as="h3" fontSize="25px">
-              General
+              Geral
             </Heading>
             <Box display="flex" w="150px">
               <Text fontSize="35px" cursor="pointer">
@@ -148,7 +161,11 @@ const MenuAside = () => {
                 lineHeight="35px"
               >
                 <Link as={ReachLink} to="/">
+<<<<<<< HEAD
                   Profile
+=======
+                  Perfil
+>>>>>>> bf8b4e687f5f088944858b8450a80824a3218fde
                 </Link>
               </Heading>
             </Box>
@@ -163,9 +180,13 @@ const MenuAside = () => {
                 fontWeight="100"
                 lineHeight="35px"
               >
+<<<<<<< HEAD
                 <Link as={ReachLink} to="/">
                   SignOut
                 </Link>
+=======
+                Logout
+>>>>>>> bf8b4e687f5f088944858b8450a80824a3218fde
               </Heading>
             </Box>
           </VStack>
