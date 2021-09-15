@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { createContext, useContext, useEffect, useState } from "react";
 import api from "../../Services/api";
 import { ReactNode } from "react";
@@ -27,11 +28,19 @@ export interface IMoviesList {
   vote_count?: number;
   review?: string[];
 }
+interface IReview {
+  movieId: number;
+  comment: string;
+  userId: number;
+}
 
 interface IMoviesContext {
+  review: IReview[];
   getMovies: (page: number) => void;
   setMovies: any;
 
+  DeleteFromFavorites: (movieId: number, token: string) => void;
+  getReview: (movieId: number, token: string) => void;
   getFavorites: (user: number) => void;
   searchMovies: (searchText: string) => void;
   movies: IMoviesList[];
@@ -41,10 +50,10 @@ interface IMoviesContext {
   aboutMovie: IMoviesList;
   AddToFavorites: (data: IMoviesList, token: string) => void;
   addReviews: (
-    data: IMoviesList,
-    textValue: string,
-    token: string,
-    id: number
+    movieId: number,
+    comment: string,
+    userId: number,
+    token: string
   ) => void;
 }
 
@@ -57,7 +66,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
   const [searchedMovies, setSearchedMovies] = useState([]);
   const [favorites, setFavorites] = useState<IMoviesList[]>([]);
   const [aboutMovie, setAboutMovie] = useState({});
-
+  const [review, setReview] = useState([]);
   const { auth } = useAuth();
 
   const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
@@ -106,6 +115,17 @@ export const MoviesProvider = ({ children }: IMovies) => {
       console.log("filme ja adicionado");
     }
   };
+  const DeleteFromFavorites = (movieId: number, token: string) => {
+    console.log("entrou na funcão");
+    api
+      .delete(`favorites/${movieId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        console.log(res, "deletou");
+      })
+      .catch((err) => console.log(err));
+  };
   const searchMovies = (searchText: string) => {
     axios
       .get(TMDBapi + searchText)
@@ -116,19 +136,30 @@ export const MoviesProvider = ({ children }: IMovies) => {
       .catch((err) => console.log("Grupo não podem ser carregados"));
   };
 
+  const getReview = (movieId: number, token: string) => {
+    api
+      .get(`reviews?movieId=${movieId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        setReview(response.data);
+      })
+      .catch((err) => console.log("Movies não podem ser carregados"));
+  };
+
   const addReviews = (
-    data: IMoviesList,
-    textValue: string,
-    token: string,
-    id: number
+    movieId: number,
+    comment: string,
+    userId: number,
+    token: string
   ) => {
-    console.log(data);
     const movieReview = {
-      review: [textValue],
-      ...data,
+      movieId: movieId,
+      comment: comment,
+      userId: userId,
     };
     api
-      .put(`movies/${id}`, movieReview, {
+      .post(`reviews/`, movieReview, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -143,6 +174,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
     <MoviesContext.Provider
       value={{
         addReviews,
+        DeleteFromFavorites,
         favorites,
         getFavorites,
         searchMovies,
@@ -153,6 +185,8 @@ export const MoviesProvider = ({ children }: IMovies) => {
         getSpecificMovie,
         aboutMovie,
         AddToFavorites,
+        getReview,
+        review,
       }}
     >
       {children}

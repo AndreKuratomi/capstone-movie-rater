@@ -16,6 +16,7 @@ const DashboardComponent = () => {
     AddToFavorites,
     favorites,
     getFavorites,
+    DeleteFromFavorites,
   } = useMovies();
   const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
   const UpMovies = movies.filter((movie) => {
@@ -100,13 +101,14 @@ const DashboardComponent = () => {
           My movies
         </Heading>
         <BoxContainer>
-          {favorites?.map((movie) => (
+          {favorites.map((movie) => (
             <MovieCard
-              type="favorites"
-              onClick={() => {
+              getSpecificMovie={() => {
                 getSpecificMovie(movie);
                 history.push("/aboutmovie");
               }}
+              onClick={() => movie.id && DeleteFromFavorites(movie.id, token)}
+              type="favorites"
               title={movie.title}
               poster_path={imgurl + movie.poster_path}
             />
