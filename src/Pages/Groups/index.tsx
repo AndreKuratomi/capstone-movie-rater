@@ -29,8 +29,8 @@ const Groups = () => {
             alignItems="center"
             flexDirection="column"
           >
-            <AllGroups />
             <MenuMobile />
+            <AllGroups />
           </Flex>
         )}
       </Box>
