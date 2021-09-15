@@ -1,4 +1,3 @@
-
 import MovieContainer from "../MovieContainer";
 import MovieCard from "../MovieCard";
 import { Flex, Heading } from "@chakra-ui/layout";
@@ -21,7 +20,7 @@ const MyMoviesComponent = () => {
   const [findMovie, setFindMovie] = useState<string>("");
   const [search, setSearch] = useState<boolean>(false);
   const [filteredFavorite, setFilteredFavorite] = useState<IMoviesList[]>([])
-  
+
   const history = useHistory()
   const {
     getSpecificMovie,
@@ -44,7 +43,6 @@ const MyMoviesComponent = () => {
     getFavorites(Number(decode.sub))
     if(findMovie === ""){
       setSearch(false)
-      
     }
   }, [findMovie]);
 
@@ -56,6 +54,7 @@ const MyMoviesComponent = () => {
       alignItems="center"
       flexDirection="column"
     >
+      
       <MovieContainer>
         <Flex w="100%" mb="25px" justifyContent="flex-end">
           <Input
