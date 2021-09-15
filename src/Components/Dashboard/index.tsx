@@ -1,4 +1,4 @@
-import { Heading, Flex } from "@chakra-ui/layout";
+import { Heading, Flex, useMediaQuery } from "@chakra-ui/react";
 import MovieCard from "../MovieCard";
 import BoxContainer from "../BoxContainer";
 import MovieContainer from "../MovieContainer";
@@ -6,6 +6,7 @@ import { useMovies } from "../../Providers/Movies/index";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import jwtDecode, { JwtPayload } from "jwt-decode";
+import MenuMobile from "../MenuMobile";
 
 const DashboardComponent = () => {
   const history = useHistory();
@@ -35,6 +36,8 @@ const DashboardComponent = () => {
     getFavorites(Number(decode.sub));
   }, [getFavorites]);
 
+  const [mobileVersion] = useMediaQuery("(max-width: 500px)");
+
   return (
     <Flex
       w="85%"
@@ -43,6 +46,7 @@ const DashboardComponent = () => {
       alignItems="center"
       flexDirection="column"
     >
+      {/* {mobileVersion && <MenuMobile />} */}
       <Heading w="76%" fontWeight="400" mb="3px" color="fontColor.white100">
         Up coming Movies
       </Heading>
