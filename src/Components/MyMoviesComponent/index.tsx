@@ -82,7 +82,7 @@ const MyMoviesComponent = () => {
           mb="3px"
           color="fontColor.pinkLight"
         >
-          My Movies
+          Meus Filmes
         </Heading>
         <BoxContainer type="Browse">
           {

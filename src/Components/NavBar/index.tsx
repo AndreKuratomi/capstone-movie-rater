@@ -25,7 +25,7 @@ const NavBar = () => {
           <Box padding="1rem">
             <BreadcrumbItem padding="0px 5px" color="white">
               <BreadcrumbLink as={Link} to="/aboutus">
-                About Us
+                Sobre nós
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbItem padding="0px 5px" color="white">
@@ -35,7 +35,7 @@ const NavBar = () => {
             </BreadcrumbItem>
             <BreadcrumbItem padding="0px 5px" bg="#C11B1B" color="white">
               <BreadcrumbLink as={Link} to="/signup">
-                Sign Up
+                Cadastro
               </BreadcrumbLink>
             </BreadcrumbItem>
           </Box>

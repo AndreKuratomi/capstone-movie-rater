@@ -48,7 +48,6 @@ const DashboardComponent = () => {
     >
       {/* {mobileVersion && <MenuMobile />} */}
       <Heading w="76%" fontWeight="400" mb="3px" color="fontColor.white100">
-        Up coming Movies
       </Heading>
       <MovieContainer type="column">
         {UpMovies.length > 1 ? (
@@ -81,7 +80,7 @@ const DashboardComponent = () => {
           fontWeight="400"
           color="fontColor.white100"
         >
-          Browse Movies
+          Recomendados
         </Heading>
         <BoxContainer>
           {movies?.map((movie) => (
@@ -102,7 +101,7 @@ const DashboardComponent = () => {
           fontWeight="400"
           color="fontColor.white100"
         >
-          My movies
+          Meus Filmes
         </Heading>
         <BoxContainer>
           {favorites.map((movie) => (

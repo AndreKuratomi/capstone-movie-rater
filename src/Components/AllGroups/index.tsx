@@ -40,8 +40,8 @@ const AllGroups = () => {
             </Button>
           </Flex>
           <Text color="white" padding="0.5rem" maxWidth="60%" margin="auto">
-            Welcome to the group section! Here you can chat with people who have
-            the same insterest as you!
+            Bem vindo ao nosso grupo de chat! Converse com pessoas que compartilham
+            dos mesmos gostos que você!
           </Text>
         </Flex>
         <Heading
@@ -52,7 +52,7 @@ const AllGroups = () => {
           color="white"
           textAlign="center"
         >
-          Groups
+          Grupos
         </Heading>
         <Box
           display="flex"

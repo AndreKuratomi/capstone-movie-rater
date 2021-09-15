@@ -22,6 +22,10 @@ import Movie from "../../Assets/img/cinema.jpg";
 import Banner from "../../Assets/img/fundo1.png";
 import ReactPlayer from "react-player/youtube";
 import Carousel from "react-multi-carousel";
+import shangchi from "../../Assets/img/shangchi.jpg";
+import candyman from "../../Assets/img/candyman.jpg";
+import after from "../../Assets/img/after.png";
+import sweetgirl from "../../Assets/img/sweetgirl.jpg"
 import "react-multi-carousel/lib/styles.css";
 import { Link as RouteLink } from "react-router-dom";
 
@@ -77,7 +81,7 @@ const Landpage = () => {
             outline="none"
             href="#video"
           >
-            <Link href="#video">Site overview</Link>
+            <Link href="#video">Conheça o site</Link>
           </Button>
         ) : (
           <Button
@@ -94,7 +98,7 @@ const Landpage = () => {
             outline="none"
             href="#video"
           >
-            <Link href="#video">Site overview</Link>
+            <Link href="#video">Conheça o site</Link>
           </Button>
         )}
 
@@ -107,7 +111,7 @@ const Landpage = () => {
           mt="1rem"
         >
           <Heading fontFamily="PT Mono" mt="3rem" textAlign="center">
-            Welcome to MovieRater!
+           Bem vindo ao MovieRater!
           </Heading>
           <Heading
             maxWidth="50rem"
@@ -117,7 +121,7 @@ const Landpage = () => {
             textAlign="justify"
             fontSize="2xl"
           >
-            All thrending movies in the same place!
+            Todas as tendências de filmes em um mesmo lugar!
           </Heading>
         </Box>
         <Box w="60%">
@@ -128,50 +132,41 @@ const Landpage = () => {
             removeArrowOnDeviceType={["tablet", "mobile"]}
           >
             <Box>
-              <Image src="https://picsum.photos/id/1018/1000/600/" />
+              <Image src={shangchi}/>
               <Text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Curabitur vestibulum ut dolor vel malesuada. Donec tincidunt,
-                nisl id bibendum dapibus, libero massa vehicula mi, at tempor ex
-                dui vel ligula. Donec euismod tempor volutpat. Morbi eu urna
-                finibus mauris egestas scelerisque.{" "}
+                Shang-Chi é obrigado a confrontar um passado que julgava ter
+                deixado para trás quando é atraído à teia da misteriosa organização 
+                conhecida como os Dez Anéis.{" "}
               </Text>
             </Box>
             <Box>
-              <Image src="https://picsum.photos/id/1018/1000/600/" />
+              <Image src={candyman} />
               <Text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Curabitur vestibulum ut dolor vel malesuada. Donec tincidunt,
-                nisl id bibendum dapibus, libero massa vehicula mi, at tempor ex
-                dui vel ligula. Donec euismod tempor volutpat. Morbi eu urna
-                finibus mauris egestas scelerisque.{" "}
+                Uma "sequência espiritual" do filme de terror de 1992 "Candyman", 
+                que retorna ao bairro de Chicago, agora gentrificado, onde a lenda começou.{" "}
               </Text>
             </Box>
             <Box>
-              <Image src="https://picsum.photos/id/1018/1000/600/" />
+              <Image src={after}/>
               <Text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Curabitur vestibulum ut dolor vel malesuada. Donec tincidunt,
-                nisl id bibendum dapibus, libero massa vehicula mi, at tempor ex
-                dui vel ligula. Donec euismod tempor volutpat. Morbi eu urna
-                finibus mauris egestas scelerisque.{" "}
+                Tessa toma uma decisão que promete mudar a sua vida. Ao mesmo tempo, 
+                algumas revelações sobre sua família e o passado de Hardin 
+                ameaçam atrapalhar seus planos e acabar com o relacionamento 
+                intenso do casal.{" "}
               </Text>
             </Box>
             <Box>
-              <Image src="https://picsum.photos/id/1018/1000/600/" />
+              <Image src={sweetgirl} />
               <Text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Curabitur vestibulum ut dolor vel malesuada. Donec tincidunt,
-                nisl id bibendum dapibus, libero massa vehicula mi, at tempor ex
-                dui vel ligula. Donec euismod tempor volutpat. Morbi eu urna
-                finibus mauris egestas scelerisque.{" "}
+              Um marido devastado jura vingar-se dos responsáveis pela morte 
+              de sua esposa e proteger a única família que lhe resta: sua filha.{" "}
               </Text>
             </Box>
           </Carousel>
         </Box>
         <Box backgroundImage={Faixa} backgroundRepeat="no-repeat" width="100%">
           <Heading textAlign="center" mt="9rem" fontFamily="PT Mono">
-            What can you do on MovieRater?
+            O que você pode fazer no MovieRater?
           </Heading>
           <Flex
             flexWrap="wrap"
@@ -192,7 +187,7 @@ const Landpage = () => {
             >
               <Image src={Film} alt="film" width="70%" />
               <Text maxWidth="10rem" mt="1rem" fontFamily="PT Mono">
-                post and share reviews of your favorite movies.
+                postar e compartilhar reviews dos seus filmes favoritos.
               </Text>
             </Box>
             <Box
@@ -208,7 +203,7 @@ const Landpage = () => {
             >
               <Image src={Group} alt="group" width="70%" />
               <Text maxWidth="10rem" mt="1rem" fontFamily="PT Mono">
-                join group chats with same interests.
+                entrar em grupos de chat com pessoas com o mesmo gosto.
               </Text>
             </Box>
             <Box
@@ -224,14 +219,14 @@ const Landpage = () => {
             >
               <Image src={Best} alt="fav" width="70%" />
               <Text maxWidth="10rem" mt="0.75rem" fontFamily="PT Mono">
-                best rated movies recomendation.
+                recomendações de filmes e lançamentos.
               </Text>
             </Box>
           </Flex>
           <Box mb="2rem" w="100%" textAlign="center">
             <Link as={RouteLink} to="/signup">
               <Button bg="white" color="black" padding="1rem 2rem">
-                Come and join us!
+                Venha fazer parte da nossa comunidade!
               </Button>
             </Link>
           </Box>
@@ -252,7 +247,7 @@ const Landpage = () => {
             maxWidth="75%"
             margin="auto"
           >
-            Take a look on our community and intuitive design!
+            Conheça nossa comunidade e nosso design intuitivo!
           </Heading>
           <Box
             display="flex"

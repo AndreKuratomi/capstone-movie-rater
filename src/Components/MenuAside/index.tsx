@@ -94,7 +94,7 @@ const MenuAside = () => {
                 lineHeight="35px"
               >
                 <Link as={ReachLink} to="/movies">
-                  Movies
+                  Filmes
                 </Link>
               </Heading>
             </Box>
@@ -110,7 +110,7 @@ const MenuAside = () => {
                 lineHeight="35px"
               >
                 <Link as={ReachLink} to="/groups">
-                  Groups
+                  Grupos
                 </Link>
               </Heading>
             </Box>
@@ -126,7 +126,7 @@ const MenuAside = () => {
                 lineHeight="35px"
               >
                 <Link as={ReachLink} to="/mymovies">
-                  My movies
+                  Meus Filmes
                 </Link>
               </Heading>
             </Box>
@@ -135,7 +135,7 @@ const MenuAside = () => {
         <GridItem rowSpan={4} colSpan={6} justifySelf="flex-start" mt="50px">
           <VStack ml="50px">
             <Heading fontWeight="light" as="h3" fontSize="25px">
-              General
+              Geral
             </Heading>
             <Box display="flex" w="150px">
               <Text fontSize="35px" cursor="pointer">
@@ -149,7 +149,7 @@ const MenuAside = () => {
                 lineHeight="35px"
               >
                 <Link as={ReachLink} to="/">
-                  Profile
+                  Perfil
                 </Link>
               </Heading>
             </Box>
@@ -164,7 +164,7 @@ const MenuAside = () => {
                 fontWeight="100"
                 lineHeight="35px"
               >
-                SignOut
+                Logout
               </Heading>
             </Box>
           </VStack>
