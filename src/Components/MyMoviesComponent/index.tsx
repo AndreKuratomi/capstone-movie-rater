@@ -1,4 +1,3 @@
-
 import MovieContainer from "../MovieContainer";
 import MovieCard from "../MovieCard";
 import { Flex, Heading } from "@chakra-ui/layout";
@@ -14,13 +13,14 @@ import { IMoviesList } from "../../Providers/Movies"
 
 interface IMyMoviesComponent{
   setFilteredFavorite: (value: React.SetStateAction<IMoviesList[]>) => void
+
 }
 
 const MyMoviesComponent = () => {
   const [findMovie, setFindMovie] = useState<string>("");
   const [search, setSearch] = useState<boolean>(false);
   const [filteredFavorite, setFilteredFavorite] = useState<IMoviesList[]>([])
-  
+
   const history = useHistory()
   const {
     getSpecificMovie,
@@ -31,34 +31,20 @@ const MyMoviesComponent = () => {
   const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
   const decode = jwtDecode<JwtPayload>(token);
   const imgurl = "https://image.tmdb.org/t/p/original";
+  const filter = favorites.filter((favorite) => 
+         favorite.title?.toUpperCase().includes(findMovie.toUpperCase()));
 
- 
-  // const handleSearch = (findMovie : string) => {
-  //   if (
-  //     favorites.find(
-  //       (favorite) => {if(favorite.title){
-  //         favorite.title.toUpperCase() === findMovie.toUpperCase()
-  //       }}
-  //     )
-  //   ) {
-  //     const filter = favorites.filter(
-  //       (favorite) => {if(favorite.title){
-  //         favorite.title.toUpperCase() === findMovie.toUpperCase()}}
-  //     )
-  //     setFilteredFavorite(filter);
-  //     setSearch(true);
-  //   }
-    
-  //   console.log(favorites)
-  // };
-
+  const handleSearch = () => {
+      setFilteredFavorite(filter)
+      setSearch(true)  
+  };
 
   useEffect(() => {
     getFavorites(Number(decode.sub))
     if(findMovie === ""){
       setSearch(false)
     }
-  }, [getFavorites]);
+  }, [findMovie]);
 
   return (
     <Flex
@@ -68,6 +54,7 @@ const MyMoviesComponent = () => {
       alignItems="center"
       flexDirection="column"
     >
+      
       <MovieContainer>
         <Flex w="100%" mb="25px" justifyContent="flex-end">
           <Input
@@ -83,10 +70,7 @@ const MyMoviesComponent = () => {
             hover="fontColor.black800"
             bgColor="brown.dark"
             color="fontColor.pinkLight"
-            // onClick={() => {
-            //   handleSearch(findMovie);
-            //   setFindMovie("")
-            // }}
+            onClick={handleSearch}
           >
             <BsSearch />
           </Button>
@@ -101,7 +85,22 @@ const MyMoviesComponent = () => {
           My Movies
         </Heading>
         <BoxContainer type="Browse">
-          {favorites?.map((movie) => (
+          {
+          filteredFavorite.length > 0 &&
+          search ?
+          filteredFavorite.map((movie) => (
+            <MovieCard
+              type="favorites"
+              onClick={() => {
+                getSpecificMovie(movie);
+                history.push("/aboutmovie");
+              }}
+              title={movie.title}
+              poster_path={imgurl + movie.poster_path}
+            />
+          ))
+          :
+          favorites.map((movie) => (
             <MovieCard
               type="favorites"
               onClick={() => {
