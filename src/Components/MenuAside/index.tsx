@@ -25,151 +25,131 @@ const MenuAside = () => {
       bgColor="red.800"
       borderRadius="0px 15px 15px 0px"
       mr="10px"
-      p="0.45rem"
     >
-      <Grid
+      <Flex
+        flexDirection="column"
+        alignItems="center"
         color="fontColor.white100"
-        h="100%"
+        h="100vh"
         w="100%"
         fontFamily="Inder, sans-serif"
-        templateRows="repeat(4, 1fr)"
-        templateColumns="repeat(6, 1fr)"
-        gap={2}
       >
-        <GridItem
-          rowSpan={2}
-          colSpan={6}
-          position="relative"
-          ml="10px"
-          mt="15px"
-        >
-          <Flex justifyContent="center">
-            <Image src={Logo} alt="Logo" h="70px" />
-          </Flex>
-        </GridItem>
-        <GridItem
-          justifySelf="center"
-          alignSelf="center"
-          rowSpan={3}
-          colSpan={6}
-        >
-          <Box
-            w="100px"
-            h="100px"
-            borderRadius="50%"
-            bgColor="black.transparent500"
-          />
-        </GridItem>
+        <Flex justifyContent="center">
+          <Image src={Logo} alt="Logo" h="70px" />
+        </Flex>
+        <Box
+          w="100px"
+          h="100px"
+          borderRadius="50%"
+          bgColor="black.transparent500"
+        />
 
-        <GridItem rowSpan={4} colSpan={6} justifySelf="flex-start">
-          <VStack ml="50px">
-            <Heading fontWeight="light" as="h3" fontSize="25px">
-              Menu
+        <VStack>
+          <Heading fontWeight="light" as="h3" fontSize="25px" m="1rem">
+            Menu
+          </Heading>
+          <Box display="flex" w="150px" alignItems="center">
+            <Text fontSize="35px" cursor="pointer">
+              <ImHome3 fontSize="1rem" />
+            </Text>
+            <Heading
+              as="p"
+              fontSize="20PX"
+              ml="5px"
+              fontWeight="100"
+              lineHeight="35px"
+            >
+              <Link as={ReachLink} to="/dashboard">
+                Home
+              </Link>
             </Heading>
-            <Box display="flex" w="150px">
-              <Text fontSize="35px" cursor="pointer">
-                <ImHome3 />
-              </Text>
-              <Heading
-                as="p"
-                fontSize="20PX"
-                ml="5px"
-                fontWeight="100"
-                lineHeight="35px"
-              >
-                <Link as={ReachLink} to="/dashboard">
-                  Home
-                </Link>
-              </Heading>
-            </Box>
-            <Box display="flex" w="150px">
-              <Heading fontSize="35px" as="span" cursor="pointer">
-                <RiSearchEyeLine />
-              </Heading>
-              <Heading
-                as="p"
-                fontSize="20PX"
-                ml="5px"
-                fontWeight="100"
-                lineHeight="35px"
-              >
-                <Link as={ReachLink} to="/movies">
-                  Filmes
-                </Link>
-              </Heading>
-            </Box>
-            <Box display="flex" w="150px">
-              <Heading fontSize="35px" as="span" cursor="pointer">
-                <TiGroup />
-              </Heading>
-              <Heading
-                as="p"
-                fontSize="20PX"
-                ml="5px"
-                fontWeight="100"
-                lineHeight="35px"
-              >
-                <Link as={ReachLink} to="/groups">
-                  Grupos
-                </Link>
-              </Heading>
-            </Box>
-            <Box display="flex" w="150px">
-              <Heading fontSize="35px" as="span" cursor="pointer">
-                <MdMovieCreation />
-              </Heading>
-              <Heading
-                as="p"
-                fontSize="20PX"
-                ml="5px"
-                fontWeight="100"
-                lineHeight="35px"
-              >
-                <Link as={ReachLink} to="/mymovies">
-                  Meus Filmes
-                </Link>
-              </Heading>
-            </Box>
-          </VStack>
-        </GridItem>
-        <GridItem rowSpan={4} colSpan={6} justifySelf="flex-start" mt="50px">
-          <VStack ml="50px">
-            <Heading fontWeight="light" as="h3" fontSize="25px">
-              Geral
+          </Box>
+          <Box display="flex" w="150px" alignItems="center">
+            <Heading fontSize="35px" as="span" cursor="pointer">
+              <RiSearchEyeLine fontSize="1rem" />
             </Heading>
-            <Box display="flex" w="150px">
-              <Text fontSize="35px" cursor="pointer">
-                <CgProfile />
-              </Text>
-              <Heading
-                as="p"
-                fontSize="20PX"
-                ml="5px"
-                fontWeight="100"
-                lineHeight="35px"
-              >
-                <Link as={ReachLink} to="/">
-                  Perfil
-                </Link>
-              </Heading>
-            </Box>
-            <Box display="flex" w="150px">
-              <Heading fontSize="35px" as="span" cursor="pointer">
-                <RiLogoutBoxFill />
-              </Heading>
-              <Heading
-                as="p"
-                fontSize="20PX"
-                ml="5px"
-                fontWeight="100"
-                lineHeight="35px"
-              >
-                Logout
-              </Heading>
-            </Box>
-          </VStack>
-        </GridItem>
-      </Grid>
+            <Heading
+              as="p"
+              fontSize="20PX"
+              ml="5px"
+              fontWeight="100"
+              lineHeight="35px"
+            >
+              <Link as={ReachLink} to="/movies">
+                Filmes
+              </Link>
+            </Heading>
+          </Box>
+          <Box display="flex" w="150px" alignItems="center">
+            <Heading fontSize="35px" as="span" cursor="pointer">
+              <TiGroup fontSize="1rem" />
+            </Heading>
+            <Heading
+              as="p"
+              fontSize="20PX"
+              ml="5px"
+              fontWeight="100"
+              lineHeight="35px"
+            >
+              <Link as={ReachLink} to="/groups">
+                Grupos
+              </Link>
+            </Heading>
+          </Box>
+          <Box display="flex" w="150px" alignItems="center">
+            <Heading fontSize="35px" as="span" cursor="pointer">
+              <MdMovieCreation fontSize="1rem" />
+            </Heading>
+            <Heading
+              as="p"
+              fontSize="20PX"
+              ml="5px"
+              fontWeight="100"
+              lineHeight="35px"
+            >
+              <Link as={ReachLink} to="/mymovies">
+                Meus Filmes
+              </Link>
+            </Heading>
+          </Box>
+        </VStack>
+
+        <VStack>
+          <Heading fontWeight="light" as="h3" fontSize="25px" m="1rem">
+            Geral
+          </Heading>
+          <Box display="flex" w="150px" alignItems="center">
+            <Text fontSize="35px" cursor="pointer">
+              <CgProfile fontSize="1rem" />
+            </Text>
+            <Heading
+              as="p"
+              fontSize="20PX"
+              ml="5px"
+              fontWeight="100"
+              lineHeight="35px"
+            >
+              <Link as={ReachLink} to="/">
+                Perfil
+              </Link>
+            </Heading>
+          </Box>
+          <Box display="flex" w="150px" alignItems="center">
+            <Heading fontSize="35px" as="span" cursor="pointer">
+              <RiLogoutBoxFill fontSize="1rem" />
+            </Heading>
+            <Heading
+              as="p"
+              fontSize="20PX"
+              ml="5px"
+              fontWeight="100"
+              lineHeight="35px"
+            >
+              Logout
+            </Heading>
+          </Box>
+        </VStack>
+      </Flex>
     </VStack>
   );
 };
