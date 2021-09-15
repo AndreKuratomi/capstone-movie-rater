@@ -60,6 +60,7 @@ const MovieCard = ({
         position="absolute"
         top="2"
         right="1"
+        overflow="scroll"
       >
         <AiFillPlusCircle />
       </Box>
