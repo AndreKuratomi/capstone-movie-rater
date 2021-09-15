@@ -100,7 +100,7 @@ const BrowseMovies = () => {
           mb="3px"
           color="fontColor.pinkLight"
         >
-          Browse Movies
+          Filmes
         </Heading>
         <Box
           display="flex"
