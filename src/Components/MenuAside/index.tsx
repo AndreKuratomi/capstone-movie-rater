@@ -1,4 +1,12 @@
-import { VStack, Grid, GridItem, Heading, Box, Text, Flex } from "@chakra-ui/layout";
+import {
+  VStack,
+  Grid,
+  GridItem,
+  Heading,
+  Box,
+  Text,
+  Flex,
+} from "@chakra-ui/layout";
 import Logo from "../../Assets/img/logo.png";
 import { ImHome3 } from "react-icons/im";
 import { RiSearchEyeLine } from "react-icons/ri";
@@ -6,8 +14,8 @@ import { TiGroup } from "react-icons/ti";
 import { MdMovieCreation } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { RiLogoutBoxFill } from "react-icons/ri";
-import { Link as ReachLink } from "react-router-dom"
-import { Link, Image } from "@chakra-ui/react"
+import { Link as ReachLink } from "react-router-dom";
+import { Link, Image } from "@chakra-ui/react";
 
 const MenuAside = () => {
   return (
@@ -35,7 +43,7 @@ const MenuAside = () => {
           mt="15px"
         >
           <Flex justifyContent="center">
-            <Image src={Logo} alt="Logo" h="70px"/>
+            <Image src={Logo} alt="Logo" h="70px" />
           </Flex>
         </GridItem>
         <GridItem
@@ -68,7 +76,9 @@ const MenuAside = () => {
                 fontWeight="100"
                 lineHeight="35px"
               >
-                <Link as={ReachLink} to="/dashboard">Home</Link>
+                <Link as={ReachLink} to="/dashboard">
+                  Home
+                </Link>
               </Heading>
             </Box>
             <Box display="flex" w="150px">
@@ -82,7 +92,9 @@ const MenuAside = () => {
                 fontWeight="100"
                 lineHeight="35px"
               >
-                <Link as={ReachLink} to="/movies">Movies</Link>
+                <Link as={ReachLink} to="/movies">
+                  Movies
+                </Link>
               </Heading>
             </Box>
             <Box display="flex" w="150px">
@@ -96,7 +108,9 @@ const MenuAside = () => {
                 fontWeight="100"
                 lineHeight="35px"
               >
-                <Link as={ReachLink} to="/groups">Groups</Link>
+                <Link as={ReachLink} to="/groups">
+                  Groups
+                </Link>
               </Heading>
             </Box>
             <Box display="flex" w="150px">
@@ -110,7 +124,9 @@ const MenuAside = () => {
                 fontWeight="100"
                 lineHeight="35px"
               >
-                <Link as={ReachLink} to="/mymovies">My movies</Link>
+                <Link as={ReachLink} to="/mymovies">
+                  My movies
+                </Link>
               </Heading>
             </Box>
           </VStack>
@@ -131,7 +147,9 @@ const MenuAside = () => {
                 fontWeight="100"
                 lineHeight="35px"
               >
-                <Link as={ReachLink} to="/">Profile</Link>
+                <Link as={ReachLink} to="/">
+                  Profile
+                </Link>
               </Heading>
             </Box>
             <Box display="flex" w="150px">
@@ -145,7 +163,9 @@ const MenuAside = () => {
                 fontWeight="100"
                 lineHeight="35px"
               >
-                SignOut
+                <Link as={ReachLink} to="/">
+                  SignOut
+                </Link>
               </Heading>
             </Box>
           </VStack>
