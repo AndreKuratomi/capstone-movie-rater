@@ -10,7 +10,7 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   useMediaQuery,
-  Link
+  Link,
 } from "@chakra-ui/react";
 import "react-image-gallery/styles/css/image-gallery.css";
 import "./styles.css";
@@ -237,6 +237,7 @@ const Landpage = () => {
           </Box>
         </Box>
         <Box
+          mt="2rem"
           backgroundImage={Movie}
           backgroundSize="cover"
           backgroundRepeat="no-repeat"
@@ -253,7 +254,13 @@ const Landpage = () => {
           >
             Take a look on our community and intuitive design!
           </Heading>
-          <Box display="flex" justifyContent="center" w="85%" margin="auto">
+          <Box
+            display="flex"
+            justifyContent="center"
+            w="85%"
+            margin="auto"
+            mt="1.5rem"
+          >
             <ReactPlayer
               url="https://www.youtube.com/watch?v=b80TWrBflh8"
               muted={true}
@@ -273,4 +280,4 @@ const Landpage = () => {
   );
 };
 
-export default Landpage
+export default Landpage;
