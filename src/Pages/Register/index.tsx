@@ -2,7 +2,7 @@ import { useHistory, Link as ReachLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-
+import { useState } from "react";
 import api from "../../Services/api";
 
 import {
@@ -64,7 +64,7 @@ export const Register = () => {
 
   console.log(errors.selectGenre?.message);
   const history = useHistory();
-
+  const [username, setUsername] = useState<string>("");
   const toast = useToast();
 
   const addSuccessToast = () => {
@@ -88,8 +88,6 @@ export const Register = () => {
   };
 
   const submitFunction = (data: IRegister) => {
-    console.log(data);
-
     api
       .post("register", data)
       .then((_) => {

@@ -1,6 +1,6 @@
 import MovieContainer from "../MovieContainer";
 import MovieCard from "../MovieCard";
-import { Flex, Heading } from "@chakra-ui/layout";
+import { Flex, Heading, Box } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/button";
 import BoxContainer from "../BoxContainer";
 import { Input } from "@chakra-ui/react";
@@ -9,6 +9,7 @@ import { useHistory } from "react-router";
 import { BsSearch } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../Providers/Auth";
+import { setPriority } from "os";
 
 const BrowseMovies = () => {
   const history = useHistory();
@@ -21,7 +22,8 @@ const BrowseMovies = () => {
     AddToFavorites,
   } = useMovies();
   const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
-  const [page, setPage] = useState<number>(7);
+  const [page, setPage] = useState<number>(1);
+  const [movie, setMovie] = useState<[]>([]);
   const [text, setText] = useState<string>("");
   const [isSearch, setIsSearch] = useState<boolean>(false);
   const imgurl = "https://image.tmdb.org/t/p/original";
@@ -30,7 +32,26 @@ const BrowseMovies = () => {
     setIsSearch(true);
   };
   const { auth } = useAuth();
-  console.log(auth);
+
+  const previousPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
+
+  const nextPages = () => {
+    setPage(page + 1);
+  };
+
+  useEffect(() => {
+    fetch(`movies?page=${page}`)
+      .then((response) => {
+        response.json();
+        getMovies(page);
+      })
+      .catch((err) => console.log("Grupos não podem ser carregados"));
+  }, [page]);
+
   useEffect(() => {
     if (movies.length < 1) {
       getMovies(page);
@@ -38,8 +59,6 @@ const BrowseMovies = () => {
     if (text === "") {
       setIsSearch(false);
     }
-
-    console.log(searchedMovies);
   }, [
     movies,
     getMovies,
@@ -51,7 +70,7 @@ const BrowseMovies = () => {
     setIsSearch,
     searchMovies.length,
   ]);
-  console.log(movies);
+
   return (
     <Flex
       w="85%"
@@ -89,6 +108,33 @@ const BrowseMovies = () => {
         >
           Browse Movies
         </Heading>
+        <Box
+          display="flex"
+          flexDirection="row"
+          justifyContent="space-between"
+          w="80%"
+        >
+          <Button
+            type="submit"
+            bg="#440000"
+            color="white"
+            _hover={{ bg: "#000000" }}
+            focusBorderColor="none"
+            onClick={previousPage}
+          >
+            Anterior
+          </Button>
+          <Button
+            type="submit"
+            bg="#440000"
+            color="white"
+            _hover={{ bg: "#000000" }}
+            focusBorderColor="none"
+            onClick={nextPages}
+          >
+            Próxima
+          </Button>
+        </Box>
         <BoxContainer type="Browse">
           {isSearch
             ? searchedMovies.map((movie) => (

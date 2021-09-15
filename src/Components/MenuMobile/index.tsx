@@ -30,13 +30,17 @@ const MenuMobile = () => {
         width="100%"
         border="none"
         color="black"
+        _focus={{ boxShadow: "none" }}
+        mb="1rem"
+        borderTopLeftRadius="0px"
+        borderTopRightRadius="0px"
       >
         MENU
       </Button>
-      <Drawer placement="bottom" onClose={onClose} isOpen={isOpen}>
+      <Drawer placement="top" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerCloseButton />
+          <DrawerCloseButton _focus={{ boxShadow: "none" }} />
           <DrawerHeader color="red.800" borderBottomWidth="1px">
             Menu
           </DrawerHeader>
