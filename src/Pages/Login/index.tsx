@@ -12,288 +12,226 @@ import {
   Box,
   Button,
   FormControl,
-  FormErrorMessage,
   Image,
-  Input,
-  InputGroup,
-  InputLeftElement,
   Link,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 
 import LogoLogin from "../../Assets/img/img login.png";
 import { Flex, Stack } from "@chakra-ui/layout";
-import { FaUserAlt, FaLock } from "react-icons/fa";
+import { FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
-import { useLogin } from "../../Providers/Login";
+import { Input } from "../../Components/Form/Input";
+
 import NavBar from "../../Components/NavBar";
 import NavMobile from "../../Components/NavMobile";
 
-import { FieldError } from "react-hook-form";
-// import { IconType } from "react-icons/lib";
-import { useState, useEffect } from "react";
+const Login = () => {
+  interface ILogin {
+    username: string;
+    password: string;
+  }
 
-// interface IInput {
-//   problem?: FieldError | null;
-//   // icon: IconType;
-// }
+  const formSchema = yup.object().shape({
+    email: yup
+      .string()
+      .required("Preenchimento obrigatório!")
+      .email("Email inválido!"),
+    password: yup
+      .string()
+      .required("Preenchimento obrigatório!")
+      .min(8, "No mínimo 8 caracteres!"),
+  });
 
-// type inputColorOptions = {
-//   [keys: string]: string;
-// };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(formSchema),
+  });
 
-// const statusColor: inputColorOptions = {
-//   problem: "red.300",
-//   default: "gray.500",
-// };
+  const { setAuth } = useAuth();
+  const history = useHistory();
 
-export const Login = () =>
-  // { problem = null }: IInput
-  {
-    // const [colors, setColors] = useState<string>("default");
+  const toast = useToast();
 
-    // useEffect(() => {
-    //   if (!problem) {
-    //     return setColors("error");
-    //   }
-    // }, [problem]);
-
-    interface ILogin {
-      username: string;
-      email: string;
-      password: string;
-    }
-
-    const formSchema = yup.object().shape({
-      username: yup
-        .string()
-        .required("Required input!")
-        .min(4, "Minimum 4 characters!"),
-      email: yup.string().required("Required input!").email("Not valid email!"),
-      password: yup
-        .string()
-        .required("Required input!")
-        .min(8, "Minimum 8 characters!"),
+  const addSuccessToast = () => {
+    toast({
+      description: "",
+      duration: 5000,
+      position: "top",
+      status: "success",
+      title: "Login realizado com sucesso!",
     });
+  };
 
-    const {
-      register,
-      handleSubmit,
-      formState: { errors },
-    } = useForm({
-      resolver: yupResolver(formSchema),
+  const addFailToast = () => {
+    toast({
+      description: "Verifique os dados preenchidos!",
+      duration: 5000,
+      position: "top",
+      status: "error",
+      title: "Falha no login!",
     });
+  };
 
-    // const { signIn } = useLogin();
-    const { setAuth } = useAuth();
-    const history = useHistory();
-
-    const submitFunction = (data: ILogin) => {
-      // signIn(data);
-      api
-        .post("/login/", data)
-        .then((response) => {
-          const { accessToken } = response.data;
-          const decoded = jwtDecode<JwtPayload>(accessToken);
-          setAuth(accessToken);
-          window.localStorage.clear();
-          window.localStorage.setItem(
-            "@movies: token",
-            JSON.stringify(accessToken)
-          );
-          history.push("/dashboard", { user: decoded.sub });
-        })
-        .catch((_) =>
-          console.log(
-            "Não foi possível fazer o login. Verifique dados informados"
-          )
+  const submitFunction = (data: ILogin) => {
+    api
+      .post("login/", data)
+      .then((response) => {
+        const { accessToken } = response.data;
+        const decoded = jwtDecode<JwtPayload>(accessToken);
+        setAuth(accessToken);
+        window.localStorage.clear();
+        window.localStorage.setItem(
+          "@movies: token",
+          JSON.stringify(accessToken)
         );
-      // history.push("/dashboard");
-    };
+        addSuccessToast();
+        history.push("/dashboard", { user: decoded.sub });
+      })
+      .catch((_) => {
+        addFailToast();
+      });
+  };
 
-    const [mobileVersion] = useMediaQuery("(max-width: 768px)");
-    const [desktopVersion] = useMediaQuery("(min-width:768px)");
+  const [mobileVersion] = useMediaQuery("(max-width: 768px)");
+  const [desktopVersion] = useMediaQuery("(min-width:768px)");
 
-    return (
-      <>
-        {mobileVersion ? <NavMobile /> : <NavBar />}
-        <Box bg="#000">
-          {mobileVersion ? (
-            <Image
-              src={LogoLogin}
-              alt="logoImage"
-              objectFit="cover"
-              bg="#000"
-              w="50%"
-              align="center"
-              z-index="1"
-              margin="0 5rem"
-            />
-          ) : (
-            <Image
-              src={LogoLogin}
-              alt="logoImage"
-              objectFit="cover"
-              bg="#000"
-              w="50%"
-              align="center"
-              z-index="1"
-              margin="0 20rem"
-            />
-          )}
+  return (
+    <Box bg="#000" align="center">
+      {mobileVersion ? <NavMobile /> : <NavBar />}
 
-          <Flex align="center" bg="#000" direction="column" height="100vh">
+      {mobileVersion ? (
+        <Image
+          src={LogoLogin}
+          alt="LogoLogin"
+          position="absolute"
+          top="0px"
+          right="3 5px"
+          width="80%"
+        />
+      ) : (
+        <Image
+          src={LogoLogin}
+          alt="LogoLogin"
+          position="absolute"
+          top="0px"
+          right="380px"
+          width="30%"
+        />
+      )}
+
+      <Flex align="center" bg="#000" direction="column" height="100vh">
+        {mobileVersion ? (
+          <Box position="absolute" top="160px" right="0px">
             <form onSubmit={handleSubmit(submitFunction)}>
-              {mobileVersion ? (
-                <FormControl
-                  align="center"
-                  borderBottom="4px solid white"
-                  padding="1.5rem 4rem"
-                  // w="50%"
-                  // isInvalid={!!problem}
+              <FormControl
+                align="center"
+                borderBottom="4px solid white"
+                padding="1.5rem 4rem"
+              >
+                <Stack spacing="4">
+                  <Input
+                    error={errors.email}
+                    icon={MdEmail}
+                    placeholder="Email"
+                    type="email"
+                    {...register("email")}
+                  />
+                  <Input
+                    error={errors.password}
+                    icon={FaLock}
+                    placeholder="Senha"
+                    type="password"
+                    {...register("password")}
+                  />
+                </Stack>
+                <Button
+                  bg="red.500"
+                  color="white"
+                  mt="5"
+                  type="submit"
+                  _hover={{ bg: "red.500" }}
                 >
-                  <Stack spacing="3.5">
-                    <InputGroup>
-                      <InputLeftElement children={<FaUserAlt />} />
-                      <Input
-                        bg="#FFF"
-                        // borderColor={statusColor[colors]}
-                        // color={statusColor[colors]}
-                        // icon={<FaUserAlt />}
-                        size="md"
-                        variant="outlined"
-                        placeholder="Usuário"
-                        {...register("username")}
-                      />
-                      <FormErrorMessage>
-                        {errors.username?.message}
-                      </FormErrorMessage>
-                      {!!errors && (
-                        <FormErrorMessage>{errors.message}</FormErrorMessage>
-                      )}
-                    </InputGroup>
-                    <InputGroup>
-                      <InputLeftElement children={<MdEmail />} />
-                      <Input
-                        bg="#FFF"
-                        // borderColor={statusColor[colors]}
-                        // color={statusColor[colors]}
-                        placeholder="Email"
-                        size="md"
-                        type="email"
-                        variant="outlined"
-                        {...register("email")}
-                      />
-                      {!!errors && (
-                        <FormErrorMessage>{errors.message}</FormErrorMessage>
-                      )}
-                    </InputGroup>
-                    <InputGroup>
-                      <InputLeftElement children={<FaLock />} />
-                      <Input
-                        bg="#FFF"
-                        // borderColor={statusColor[colors]}
-                        // color={statusColor[colors]}
-                        placeholder="Senha"
-                        size="md"
-                        type="password"
-                        variant="outlined"
-                        {...register("password")}
-                      />
-                      {!!errors && (
-                        <FormErrorMessage>{errors.message}</FormErrorMessage>
-                      )}
-                    </InputGroup>
-                  </Stack>
-                  <Button bg="#F00" color="white" margin-top="10" type="submit">
-                    Registrar
-                  </Button>
-                </FormControl>
-              ) : (
-                <FormControl
-                  align="center"
-                  borderBottom="4px solid white"
-                  padding="3.5rem 10rem"
-                  // w="50%"
-                  // isInvalid={!!problem}
-                >
-                  <Stack spacing="3.5">
-                    <InputGroup>
-                      <InputLeftElement children={<FaUserAlt />} />
-                      <Input
-                        bg="#FFF"
-                        // borderColor={statusColor[colors]}
-                        // color={statusColor[colors]}
-                        // icon={<FaUserAlt />}
-                        size="md"
-                        variant="outlined"
-                        placeholder="Usuário"
-                        {...register("username")}
-                      />
-                      <FormErrorMessage>
-                        {errors.username?.message}
-                      </FormErrorMessage>
-                      {!!errors && (
-                        <FormErrorMessage>{errors.message}</FormErrorMessage>
-                      )}
-                    </InputGroup>
-                    <InputGroup>
-                      <InputLeftElement children={<MdEmail />} />
-                      <Input
-                        bg="#FFF"
-                        // borderColor={statusColor[colors]}
-                        // color={statusColor[colors]}
-                        placeholder="Email"
-                        size="md"
-                        type="email"
-                        variant="outlined"
-                        {...register("email")}
-                      />
-                      {!!errors && (
-                        <FormErrorMessage>{errors.message}</FormErrorMessage>
-                      )}
-                    </InputGroup>
-                    <InputGroup>
-                      <InputLeftElement children={<FaLock />} />
-                      <Input
-                        bg="#FFF"
-                        // borderColor={statusColor[colors]}
-                        // color={statusColor[colors]}
-                        placeholder="Senha"
-                        size="md"
-                        type="password"
-                        variant="outlined"
-                        {...register("password")}
-                      />
-                      {!!errors && (
-                        <FormErrorMessage>{errors.message}</FormErrorMessage>
-                      )}
-                    </InputGroup>
-                  </Stack>
-                  <Button bg="#F00" color="white" margin-top="10" type="submit">
-                    Registrar
-                  </Button>
-                </FormControl>
-              )}
+                  Registrar
+                </Button>
+              </FormControl>
             </form>
             <Box marginTop="3.5">
               <Stack spacing="3.5">
                 <Flex align="center" color="white" direction="column">
                   <Text as="span" align="center">
-                    Ainda não tem cadastro? Então vamos ao{" "}
-                    <Link as={ReachLink} to="/register">
-                      Cadastro
+                    Já tem cadastro? Então vamos ao{" "}
+                    <Link as={ReachLink} to="/login">
+                      Login
                     </Link>
                   </Text>
-                  <Link marginTop="2" as={ReachLink} to="/">
+                  <Link as={ReachLink} to="/">
                     Voltar para a página principal
                   </Link>
                 </Flex>
               </Stack>
             </Box>
-          </Flex>
-        </Box>
-      </>
-    );
-  };
+          </Box>
+        ) : (
+          <Box position="absolute" top="240px" right="480px">
+            <form onSubmit={handleSubmit(submitFunction)}>
+              <FormControl
+                align="center"
+                borderBottom="4px solid white"
+                padding="1.5rem 4rem"
+              >
+                <Stack spacing="4">
+                  <Input
+                    error={errors.email}
+                    icon={MdEmail}
+                    placeholder="Email"
+                    type="email"
+                    {...register("email")}
+                  />
+                  <Input
+                    error={errors.password}
+                    icon={FaLock}
+                    placeholder="Senha"
+                    type="password"
+                    {...register("password")}
+                  />
+                </Stack>
+                <Button
+                  bg="red.500"
+                  color="white"
+                  mt="5"
+                  type="submit"
+                  _hover={{ bg: "red.500" }}
+                >
+                  Registrar
+                </Button>
+              </FormControl>
+            </form>
+            <Box marginTop="3.5">
+              <Stack spacing="3.5">
+                <Flex align="center" color="white" direction="column">
+                  <Text as="span" align="center">
+                    Já tem cadastro? Então vamos ao{" "}
+                    <Link as={ReachLink} to="/signup">
+                      Cadastro
+                    </Link>
+                  </Text>
+                  <Link as={ReachLink} to="/">
+                    Voltar para a página principal
+                  </Link>
+                </Flex>
+              </Stack>
+            </Box>
+          </Box>
+        )}
+      </Flex>
+    </Box>
+  );
+};
+
+export default Login;

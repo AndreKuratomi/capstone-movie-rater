@@ -2,9 +2,12 @@ import { Img } from "@chakra-ui/image";
 import { VStack, Box, Text, Heading } from "@chakra-ui/layout";
 import { Menu, MenuButton, MenuList } from "@chakra-ui/menu";
 import { HiPlus } from "react-icons/hi";
+import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
 
 interface IMoviesList {
   onClick?: () => void;
+  AddToFavorite?: (movie: IMoviesList) => void;
+  getSpecificMovie?: (movie: IMoviesList) => void;
   type?: string;
   adult?: boolean;
   backdrop_path?: string;
@@ -29,6 +32,8 @@ const MovieCard = ({
   type,
   poster_path,
   onClick,
+  AddToFavorite,
+  getSpecificMovie,
 }: IMoviesList) => {
   return type === "upComing" ? (
     <VStack
@@ -37,6 +42,7 @@ const MovieCard = ({
       h="100%"
       minW="130px"
       ml="25px"
+      position="relative"
     >
       <Img
         cursor="pointer"
@@ -46,6 +52,17 @@ const MovieCard = ({
         w="130px"
         h="70%"
       />
+      <Box
+        onClick={AddToFavorite}
+        cursor="pointer"
+        fontSize="25px"
+        color="fontColor.pinkLight"
+        position="absolute"
+        top="2"
+        right="1"
+      >
+        <AiFillPlusCircle />
+      </Box>
       <Menu>
         <MenuButton
           display="flex"
@@ -79,17 +96,71 @@ const MovieCard = ({
         </MenuList>
       </Menu>
     </VStack>
-  ) : (
+  ) : type === "favorites" ? (
     <VStack
       justifyContent="center"
       alignItems="center"
       h="270px"
+      position="relative"
       minW="130px"
       mt="5px"
       ml="25px"
       mb="5px"
       mr="25px"
     >
+      <Box
+        onClick={onClick}
+        cursor="pointer"
+        fontSize="25px"
+        color="fontColor.pinkLight"
+        position="absolute"
+        top="2"
+        right="1"
+      >
+        <AiFillMinusCircle />
+      </Box>
+      <Img
+        onClick={getSpecificMovie}
+        cursor="pointer"
+        src={backdrop_path || poster_path}
+        borderRadius="8px"
+        w="130px"
+        h="80%"
+      />
+      <Heading
+        fontWeight="200"
+        fontSize="15px"
+        h="40px"
+        w="120px"
+        m="0"
+        color="fontColor.white100"
+      >
+        {title}
+      </Heading>
+    </VStack>
+  ) : (
+    <VStack
+      justifyContent="center"
+      alignItems="center"
+      h="270px"
+      position="relative"
+      minW="130px"
+      mt="5px"
+      ml="25px"
+      mb="5px"
+      mr="25px"
+    >
+      <Box
+        onClick={AddToFavorite}
+        cursor="pointer"
+        fontSize="25px"
+        color="fontColor.pinkLight"
+        position="absolute"
+        top="2"
+        right="1"
+      >
+        <AiFillPlusCircle />
+      </Box>
       <Img
         onClick={onClick}
         cursor="pointer"

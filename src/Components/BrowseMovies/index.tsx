@@ -5,14 +5,23 @@ import { Button } from "@chakra-ui/button";
 import BoxContainer from "../BoxContainer";
 import { Input } from "@chakra-ui/react";
 import { useMovies } from "../../Providers/Movies";
-import { FormControl } from "@chakra-ui/form-control";
-
+import { useHistory } from "react-router";
 import { BsSearch } from "react-icons/bs";
 import { useEffect, useState } from "react";
+import { useAuth } from "../../Providers/Auth";
 
 const BrowseMovies = () => {
-  const { getMovies, movies, searchMovies, searchedMovies } = useMovies();
-  const [page, setPage] = useState<number>(1);
+  const history = useHistory();
+  const {
+    getMovies,
+    movies,
+    searchMovies,
+    searchedMovies,
+    getSpecificMovie,
+    AddToFavorites,
+  } = useMovies();
+  const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
+  const [page, setPage] = useState<number>(7);
   const [text, setText] = useState<string>("");
   const [isSearch, setIsSearch] = useState<boolean>(false);
   const imgurl = "https://image.tmdb.org/t/p/original";
@@ -20,7 +29,8 @@ const BrowseMovies = () => {
     searchMovies(text);
     setIsSearch(true);
   };
-
+  const { auth } = useAuth();
+  console.log(auth);
   useEffect(() => {
     if (movies.length < 1) {
       getMovies(page);
@@ -83,6 +93,11 @@ const BrowseMovies = () => {
           {isSearch
             ? searchedMovies.map((movie) => (
                 <MovieCard
+                  AddToFavorite={() => AddToFavorites(movie, token)}
+                  onClick={() => {
+                    getSpecificMovie(movie);
+                    history.push("/aboutmovie");
+                  }}
                   release_date={movie.release_date}
                   popularity={movie.popularity}
                   title={movie.original_title}
@@ -91,6 +106,11 @@ const BrowseMovies = () => {
               ))
             : movies.map((movie) => (
                 <MovieCard
+                  AddToFavorite={() => AddToFavorites(movie, token)}
+                  onClick={() => {
+                    getSpecificMovie(movie);
+                    history.push("/aboutmovie");
+                  }}
                   release_date={movie.release_date}
                   popularity={movie.popularity}
                   title={movie.original_title}

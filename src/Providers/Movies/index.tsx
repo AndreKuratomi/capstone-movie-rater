@@ -1,13 +1,17 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { createContext, useContext, useEffect, useState } from "react";
 import api from "../../Services/api";
 import { ReactNode } from "react";
 import { useAuth } from "../Auth";
-import { Dispatch, SetStateAction } from "react";
+
+import jwtDecode, { JwtPayload } from "jwt-decode";
+
 import axios from "axios";
+import { jsx } from "@emotion/react";
 interface IMovies {
   children: ReactNode;
 }
-interface IMoviesList {
+export interface IMoviesList {
   adult?: boolean;
   backdrop_path?: string;
   genre_ids?: number[];
@@ -22,24 +26,50 @@ interface IMoviesList {
   video?: boolean;
   vote_average?: number;
   vote_count?: number;
+  review?: string[];
+}
+interface IReview {
+  movieId: number;
+  comment: string;
+  userId: number;
 }
 
 interface IMoviesContext {
+  review: IReview[];
   getMovies: (page: number) => void;
   setMovies: any;
+
+  DeleteFromFavorites: (movieId: number, token: string) => void;
+  getReview: (movieId: number, token: string) => void;
+  getFavorites: (user: number) => void;
   searchMovies: (searchText: string) => void;
   movies: IMoviesList[];
+  favorites: IMoviesList[];
   searchedMovies: IMoviesList[];
+  getSpecificMovie: (specifcMovie: IMoviesList) => void;
+  aboutMovie: IMoviesList;
+  AddToFavorites: (data: IMoviesList, token: string) => void;
+  addReviews: (
+    movieId: number,
+    comment: string,
+    userId: number,
+    token: string
+  ) => void;
 }
 
 const MoviesContext = createContext({} as IMoviesContext);
 export const MoviesProvider = ({ children }: IMovies) => {
   const TMDBapi =
     "https://api.themoviedb.org/3/search/movie?api_key=4b5de5fed14a8cc95ec876f973db1f9c&query=";
-  const { auth } = useAuth();
+
   const [movies, setMovies] = useState([]);
   const [searchedMovies, setSearchedMovies] = useState([]);
+  const [favorites, setFavorites] = useState<IMoviesList[]>([]);
+  const [aboutMovie, setAboutMovie] = useState({});
+  const [review, setReview] = useState([]);
+  const { auth } = useAuth();
 
+  const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
   const getMovies = (page: number) => {
     api
       .get(`movies?page=${page}`)
@@ -49,7 +79,53 @@ export const MoviesProvider = ({ children }: IMovies) => {
       })
       .catch((err) => console.log("Grupos não podem ser carregados"));
   };
-
+  const getSpecificMovie = (specifcMovie: IMoviesList) => {
+    setAboutMovie(specifcMovie);
+  };
+  const getFavorites = (userId: number) => {
+    api
+      .get(`favorites?userId=${userId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        setFavorites(response.data);
+      });
+  };
+  const AddToFavorites = (data: IMoviesList, token: string) => {
+    let isInFavorite = false;
+    const decode = jwtDecode<JwtPayload>(token);
+    delete data.id;
+    const Addedmovie = {
+      userId: Number(decode.sub),
+      ...data,
+    };
+    favorites.map((movie) => {
+      if (movie.title !== data.title) {
+      } else {
+        isInFavorite = true;
+      }
+    });
+    if (!isInFavorite) {
+      api
+        .post("favorites", Addedmovie, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((_) => console.log("filme adicionado"));
+    } else {
+      console.log("filme ja adicionado");
+    }
+  };
+  const DeleteFromFavorites = (movieId: number, token: string) => {
+    console.log("entrou na funcão");
+    api
+      .delete(`favorites/${movieId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        console.log(res, "deletou");
+      })
+      .catch((err) => console.log(err));
+  };
   const searchMovies = (searchText: string) => {
     axios
       .get(TMDBapi + searchText)
@@ -60,9 +136,58 @@ export const MoviesProvider = ({ children }: IMovies) => {
       .catch((err) => console.log("Grupo não podem ser carregados"));
   };
 
+  const getReview = (movieId: number, token: string) => {
+    api
+      .get(`reviews?movieId=${movieId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        setReview(response.data);
+      })
+      .catch((err) => console.log("Movies não podem ser carregados"));
+  };
+
+  const addReviews = (
+    movieId: number,
+    comment: string,
+    userId: number,
+    token: string
+  ) => {
+    const movieReview = {
+      movieId: movieId,
+      comment: comment,
+      userId: userId,
+    };
+    api
+      .post(`reviews/`, movieReview, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log("funcionou");
+      })
+      .catch((err) => console.log("Review não podem ser carregados", err));
+  };
+
   return (
     <MoviesContext.Provider
-      value={{ searchMovies, getMovies, movies, setMovies, searchedMovies }}
+      value={{
+        addReviews,
+        DeleteFromFavorites,
+        favorites,
+        getFavorites,
+        searchMovies,
+        getMovies,
+        movies,
+        setMovies,
+        searchedMovies,
+        getSpecificMovie,
+        aboutMovie,
+        AddToFavorites,
+        getReview,
+        review,
+      }}
     >
       {children}
     </MoviesContext.Provider>

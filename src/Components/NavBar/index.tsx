@@ -8,6 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import Logo from "../../Assets/img/logo.png";
+import { Link as RouteLink } from "react-router-dom";
 
 const NavBar = () => {
   return (
@@ -16,13 +17,15 @@ const NavBar = () => {
         <Flex w="100%" bg="#000000" justify="space-between" alignItems="center">
           <Box padding="1rem">
             <BreadcrumbItem>
-              <Image src={Logo} alt="logo" width="50%" />
+              <RouteLink to="/">
+                <Image src={Logo} alt="logo" width="50%" />
+              </RouteLink>
             </BreadcrumbItem>
           </Box>
           <Box padding="1rem">
             <BreadcrumbItem padding="0px 5px" color="white">
               <BreadcrumbLink as={Link} to="/aboutus">
-                About us
+                About Us
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbItem padding="0px 5px" color="white">
@@ -43,4 +46,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-

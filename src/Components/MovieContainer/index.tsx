@@ -1,12 +1,19 @@
 import { Flex } from "@chakra-ui/layout";
-import { ReactNode } from "hoist-non-react-statics/node_modules/@types/react";
+import { ReactNode } from "react";
 
 interface IMovieContainer {
   children: ReactNode;
   type?: string;
+  colorBorder?: string;
+  height?: string;
 }
 
-const MovieContainer = ({ children, type }: IMovieContainer) => {
+const MovieContainer = ({
+  children,
+  type,
+  colorBorder,
+  height,
+}: IMovieContainer) => {
   return type === "column" ? (
     <Flex
       w="65vw"
@@ -15,10 +22,10 @@ const MovieContainer = ({ children, type }: IMovieContainer) => {
       justifyContent="space-evenly"
       flexDirection="column"
       alignItems="center"
-      bgColor="black.transparent500"
+      bgColor="black"
       borderRadius="15px"
       border="2px solid"
-      borderColor="fontColor.pinkLight"
+      borderColor="#ffffff73"
     >
       {children}
     </Flex>
@@ -30,10 +37,10 @@ const MovieContainer = ({ children, type }: IMovieContainer) => {
       justifyContent="center"
       flexDirection="column"
       alignItems="center"
-      bgColor="black.transparent500"
+      bgColor="black"
       borderRadius="15px"
       border="2px solid"
-      borderColor="fontColor.pinkLight"
+      borderColor="#ffffff73"
     >
       {children}
     </Flex>

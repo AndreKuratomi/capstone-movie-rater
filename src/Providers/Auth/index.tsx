@@ -16,7 +16,7 @@ const AuthContext = createContext<AuthContextProps>({} as AuthContextProps);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const token =
-    JSON.parse(localStorage.getItem("@movies:token") || "null") || false;
+    JSON.parse(localStorage.getItem("@movies: token") || "null") || false;
   const [auth, setAuth] = useState(token);
   useEffect(() => {
     if (token !== false) {
