@@ -32,8 +32,9 @@ const MovieContainer = ({
     </Flex>
   ) : (
     <Flex
-      w="75vw"
-      h="95vh"
+      w="95%"
+      overflowY="scroll"
+      h="95%"
       mb="20px"
       justifyContent="center"
       flexDirection="column"

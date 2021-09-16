@@ -1,4 +1,4 @@
-import { Heading, Flex, useMediaQuery } from "@chakra-ui/react";
+import { Heading, Flex, useMediaQuery, Box } from "@chakra-ui/react";
 import MovieCard from "../MovieCard";
 import BoxContainer from "../BoxContainer";
 import MovieContainer from "../MovieContainer";
@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import jwtDecode, { JwtPayload } from "jwt-decode";
 import MenuMobile from "../MenuMobile";
+import "./styles.css";
 
 const DashboardComponent = () => {
   const history = useHistory();
@@ -47,8 +48,12 @@ const DashboardComponent = () => {
       flexDirection="column"
     >
       {/* {mobileVersion && <MenuMobile />} */}
-      <Heading w="76%" fontWeight="400" mb="3px" color="fontColor.white100">
-      </Heading>
+      <Heading
+        w="76%"
+        fontWeight="400"
+        mb="3px"
+        color="fontColor.white100"
+      ></Heading>
       <MovieContainer type="column">
         {UpMovies.length > 1 ? (
           <BoxContainer
@@ -79,44 +84,50 @@ const DashboardComponent = () => {
           fontSize="20px"
           fontWeight="400"
           color="fontColor.white100"
+          padding="0.5rem"
         >
           Recomendados
         </Heading>
-        <BoxContainer>
-          {movies?.map((movie) => (
-            <MovieCard
-              AddToFavorite={() => AddToFavorites(movie, token)}
-              onClick={() => {
-                getSpecificMovie(movie);
-                history.push("/aboutmovie");
-              }}
-              title={movie.title}
-              poster_path={imgurl + movie.poster_path}
-            />
-          ))}
-        </BoxContainer>
+        <Box display="flex" maxWidth="95%">
+          <Flex overflowX="scroll" overflowY="hidden" className="barra">
+            {movies?.map((movie) => (
+              <MovieCard
+                AddToFavorite={() => AddToFavorites(movie, token)}
+                onClick={() => {
+                  getSpecificMovie(movie);
+                  history.push("/aboutmovie");
+                }}
+                title={movie.title}
+                poster_path={imgurl + movie.poster_path}
+              />
+            ))}
+          </Flex>
+        </Box>
         <Heading
           w="76%"
           fontSize="20px"
           fontWeight="400"
           color="fontColor.white100"
+          padding="1rem"
         >
           Meus Filmes
         </Heading>
-        <BoxContainer>
-          {favorites.map((movie) => (
-            <MovieCard
-              getSpecificMovie={() => {
-                getSpecificMovie(movie);
-                history.push("/aboutmovie");
-              }}
-              onClick={() => movie.id && DeleteFromFavorites(movie.id, token)}
-              type="favorites"
-              title={movie.title}
-              poster_path={imgurl + movie.poster_path}
-            />
-          ))}
-        </BoxContainer>
+        <Box display="flex" maxWidth="95%">
+          <Flex overflowX="scroll" overflowY="hidden" className="barra">
+            {favorites.map((movie) => (
+              <MovieCard
+                getSpecificMovie={() => {
+                  getSpecificMovie(movie);
+                  history.push("/aboutmovie");
+                }}
+                onClick={() => movie.id && DeleteFromFavorites(movie.id, token)}
+                type="favorites"
+                title={movie.title}
+                poster_path={imgurl + movie.poster_path}
+              />
+            ))}
+          </Flex>
+        </Box>
       </MovieContainer>
     </Flex>
   );
