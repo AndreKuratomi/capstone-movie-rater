@@ -8,7 +8,6 @@ import { useHistory } from "react-router-dom";
 import jwtDecode, { JwtPayload } from "jwt-decode";
 import MenuMobile from "../MenuMobile";
 import "./styles.css";
-
 const DashboardComponent = () => {
   const history = useHistory();
   const {
@@ -28,7 +27,6 @@ const DashboardComponent = () => {
   const [count, setCount] = useState<number>(Math.floor(Math.random() * 20));
   const [page, setPage] = useState<number>(1);
   const imgurl = "https://image.tmdb.org/t/p/original";
-
   const decode = jwtDecode<JwtPayload>(token);
   useEffect(() => {
     if (movies.length < 1) {
@@ -36,9 +34,7 @@ const DashboardComponent = () => {
     }
     getFavorites(Number(decode.sub));
   }, [getFavorites]);
-
   const [mobileVersion] = useMediaQuery("(max-width: 500px)");
-
   return (
     <Flex
       w="85%"
@@ -78,7 +74,6 @@ const DashboardComponent = () => {
             />
           </BoxContainer>
         ) : null}
-
         <Heading
           w="76%"
           fontSize="20px"
