@@ -74,7 +74,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
 
   const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
 
-  const chargeGroupsFailToast = () => {
+  const getMoviesFailToast = () => {
     toast({
       description: "Verificar conexão",
       duration: 5000,
@@ -89,7 +89,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
       .then((response) => {
         setMovies(response.data[0].results);
       })
-      .catch((_) => chargeGroupsFailToast());
+      .catch((_) => getMoviesFailToast());
   };
 
   const getSpecificMovie = (specifcMovie: IMoviesList) => {
@@ -114,9 +114,6 @@ export const MoviesProvider = ({ children }: IMovies) => {
         setFavorites(response.data);
       })
       .catch((_) => getFavoritesFailToast());
-    // if (favorites.length === 0) {
-    //   ;
-    // }
   };
 
   const addFilmSuccessToast = () => {
@@ -156,9 +153,8 @@ export const MoviesProvider = ({ children }: IMovies) => {
         .post("favorites", Addedmovie, {
           headers: { Authorization: `Bearer ${token}` },
         })
-        .then((_) => addFilmSuccessToast());
-    } else {
-      addFilmFailToast();
+        .then((_) => addFilmSuccessToast())
+        .catch((_) => addFilmFailToast());
     }
   };
 
@@ -233,9 +229,6 @@ export const MoviesProvider = ({ children }: IMovies) => {
         setReview(response.data);
       })
       .catch((_) => getReviewFailToast());
-    // if (review.length === 0) {
-    //   getReviewFailToast();
-    // }
   };
 
   const addReviewsSuccessToast = () => {
@@ -273,7 +266,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => {
+      .then((_) => {
         addReviewsSuccessToast();
       })
       .catch((_) => addReviewsFailToast());

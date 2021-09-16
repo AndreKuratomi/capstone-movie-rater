@@ -176,7 +176,6 @@ export const Register = () => {
                         <option value="Ação">Ação</option>
                         <option value="Aventura">Aventura</option>
                         <option value="Animação">Animação</option>
-                        <option value="Cinema TV">Cinema TV</option>
                         <option value="Comédia">Comédia</option>
                         <option value="Crime">Crime</option>
                         <option value="Documentário">Documentário</option>
@@ -294,7 +293,6 @@ export const Register = () => {
                         <option value="Ação">Ação</option>
                         <option value="Aventura">Aventura</option>
                         <option value="Animação">Animação</option>
-                        <option value="Cinema TV">Cinema TV</option>
                         <option value="Comédia">Comédia</option>
                         <option value="Crime">Crime</option>
                         <option value="Documentário">Documentário</option>
