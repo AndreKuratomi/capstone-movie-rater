@@ -1,12 +1,5 @@
-import {
-  createContext,
-  useContext,
-  useState,
-  ReactNode,
-  useEffect,
-} from "react";
+import { createContext, useContext, useState, ReactNode } from "react";
 import api from "../../Services/api";
-import jwtDecode, { JwtPayload } from "jwt-decode";
 
 interface IRegister {
   username: string;
