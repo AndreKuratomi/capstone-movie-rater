@@ -27,14 +27,19 @@ import {
   ModalBody,
 } from "@chakra-ui/modal";
 import { useUser } from "../../Providers/User";
+import { useForm } from "react-hook-form";
+import { Input } from "@chakra-ui/input";
+import { useEffect } from "react";
 
 const MenuAside = () => {
-  const { userName, category } = useUser();
+  const { userName, category, updateCategory } = useUser();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { register, handleSubmit } = useForm();
 
   const logOut = () => {
     localStorage.clear();
   };
+
 
   return (
     <VStack
@@ -152,9 +157,16 @@ const MenuAside = () => {
                 onClose={onClose}
               >
                 <ModalOverlay />
-                <ModalContent display="flex">
+                <ModalContent display="flex" size="sm">
                   <ModalCloseButton />
-                  <Box display="flex" flexDirection="column" w="100%">
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    w="100%"
+                    alignItems="center"
+                    justifyContent="center"
+                    padding="1rem"
+                  >
                     <Box
                       w="100px"
                       h="100px"
@@ -163,38 +175,43 @@ const MenuAside = () => {
                       textAlign="center"
                       padding="5px"
                     />
-                    <Box display="flex" flexDirection="column">
+                    <Box display="flex" flexDirection="column" mt="1rem">
                       <Text
                         fontFamily="rounded1C"
-                        fontSize="2rem"
+                        fontSize="1rem"
                         color="#440000"
                         textAlign="center"
                       >
                         {" "}
-                        {userName}
+                        Usuário: {userName}
                       </Text>
                       <Text
                         fontFamily="rounded1C"
-                        fontSize="2rem"
+                        fontSize="1rem"
                         color="#440000"
                         textAlign="center"
                       >
                         {" "}
-                        {category}
+                        Categoria favorita: {category}
                       </Text>
+                      <form onSubmit={handleSubmit(updateCategory)}>
+                        <Input label="Username" {...register("username")} />
+                        <Input label="Categoria" {...register("selectGenre")} />
+                        <Button
+                          type="submit"
+                          bg="#440000"
+                          color="white"
+                          _hover={{ bg: "#000000" }}
+                          focusBorderColor="none"
+                        >
+                          Save
+                        </Button>
+                      </form>
                     </Box>
                   </Box>
                   <ModalBody pb={6}></ModalBody>
                   <ModalFooter>
-                    <Button
-                      type="submit"
-                      bg="#440000"
-                      color="white"
-                      _hover={{ bg: "#000000" }}
-                      focusBorderColor="none"
-                    >
-                      Save
-                    </Button>
+                    
                     <Button onClick={onClose}>Cancel</Button>
                   </ModalFooter>
                 </ModalContent>
