@@ -34,9 +34,17 @@ import { CgProfile } from "react-icons/cg";
 import { RiLogoutBoxFill } from "react-icons/ri";
 
 const MenuMobile = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isOpenMenu,
+    onOpen: onOpenMenu,
+    onClose: onCloseMenu,
+  } = useDisclosure();
   const { userName, category, updateCategory } = useUser();
-
+  const {
+    isOpen: isOpenModal,
+    onOpen: onOpenModal,
+    onClose: onCloseModal,
+  } = useDisclosure();
   const { register, handleSubmit } = useForm();
 
   const logOut = () => {
@@ -47,7 +55,7 @@ const MenuMobile = () => {
     <Box width="100%" textAlign="center">
       <Button
         colorScheme="red"
-        onClick={onOpen}
+        onClick={onOpenMenu}
         width="100%"
         border="none"
         color="black"
@@ -58,7 +66,7 @@ const MenuMobile = () => {
       >
         MENU
       </Button>
-      <Drawer placement="top" onClose={onClose} isOpen={isOpen}>
+      <Drawer placement="top" onClose={onCloseMenu} isOpen={isOpenMenu}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton _focus={{ boxShadow: "none" }} />
@@ -89,11 +97,11 @@ const MenuMobile = () => {
           <DrawerBody>
             <Box display="flex">
               <CgProfile />
-              <Link onClick={onOpen}>Perfil</Link>
+              <Link onClick={onOpenModal}>Perfil</Link>
               <Modal
                 closeOnOverlayClick={false}
-                isOpen={isOpen}
-                onClose={onClose}
+                isOpen={isOpenModal}
+                onClose={onCloseModal}
               >
                 <ModalOverlay />
                 <ModalContent display="flex" size="sm">
@@ -150,7 +158,7 @@ const MenuMobile = () => {
                   </Box>
                   <ModalBody pb={6}></ModalBody>
                   <ModalFooter>
-                    <Button onClick={onClose}>Cancel</Button>
+                    <Button onClick={onCloseModal}>Cancel</Button>
                   </ModalFooter>
                 </ModalContent>
               </Modal>

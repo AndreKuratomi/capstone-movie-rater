@@ -62,7 +62,7 @@ const BoxContainer = ({
       padding="0.25rem"
       css={{
         "&::-webkit-scrollbar": {
-          width: "0",
+          width: "10px",
         },
         "&::-webkit-scrollbar-track": {
           width: "6px",
