@@ -1,5 +1,11 @@
-import jwtDecode from "jwt-decode";
-import { createContext, useContext, useState, ReactNode, useEffect } from "react";
+import jwtDecode, { JwtPayload } from "jwt-decode";
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react";
 import api from "../../Services/api";
 
 interface IRegister {

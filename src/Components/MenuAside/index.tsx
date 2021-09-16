@@ -15,7 +15,7 @@ import { MdMovieCreation } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { RiLogoutBoxFill } from "react-icons/ri";
 import { Link as ReachLink } from "react-router-dom";
-import { Link, Image} from "@chakra-ui/react";
+import { Link, Image } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { Button } from "@chakra-ui/button";
 import {
@@ -29,10 +29,9 @@ import {
 } from "@chakra-ui/modal";
 import { useRegister } from "../../Providers/Register";
 const MenuAside = () => {
-  
-    const logOut = () => {
-      localStorage.clear();
-    };
+  const logOut = () => {
+    localStorage.clear();
+  };
   const { userName, category } = useRegister();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
@@ -181,9 +180,9 @@ const MenuAside = () => {
                 </Button>
               </Heading>
             </Box>
-          </VStack>
-        </GridItem>
-      </Grid>
+          </Box>
+        </VStack>
+      </Flex>
     </VStack>
   );
 };
