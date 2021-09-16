@@ -15,13 +15,26 @@ import { MdMovieCreation } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { RiLogoutBoxFill } from "react-icons/ri";
 import { Link as ReachLink } from "react-router-dom";
-import { Link, Image, Button } from "@chakra-ui/react";
-
+import { Link, Image} from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/hooks";
+import { Button } from "@chakra-ui/button";
+import {
+  Modal,
+  ModalOverlay,
+  ModalHeader,
+  ModalContent,
+  ModalFooter,
+  ModalCloseButton,
+  ModalBody,
+} from "@chakra-ui/modal";
+import { useRegister } from "../../Providers/Register";
 const MenuAside = () => {
-  const logOut = () => {
-    localStorage.clear();
-  };
-
+  
+    const logOut = () => {
+      localStorage.clear();
+    };
+  const { userName, category } = useRegister();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <VStack
       w="250px"
@@ -152,9 +165,60 @@ const MenuAside = () => {
                 fontWeight="100"
                 lineHeight="35px"
               >
-                <Link as={ReachLink} to="/">
-                  Perfil
-                </Link>
+                <Link onClick={onOpen}>Perfil</Link>
+                <Modal
+                  closeOnOverlayClick={false}
+                  isOpen={isOpen}
+                  onClose={onClose}
+                >
+                  <ModalOverlay />
+                  <ModalContent display="flex">
+                    <ModalCloseButton />
+                    <Box display="flex" flexDirection="column" w="100%">
+                      <Box
+                        w="100px"
+                        h="100px"
+                        borderRadius="50%"
+                        bgColor="black.transparent500"
+                        textAlign="center"
+                        padding="5px"
+                      />
+                      <Box display="flex" flexDirection="column">
+                        <Text
+                          fontFamily="rounded1C"
+                          fontSize="2rem"
+                          color="#440000"
+                          textAlign="center"
+                        >
+                          {" "}
+                          {userName}
+                        </Text>
+                        <Text
+                          fontFamily="rounded1C"
+                          fontSize="2rem"
+                          color="#440000"
+                          textAlign="center"
+                        >
+                          {" "}
+                          {category}
+                        </Text>
+                      </Box>
+                    </Box>
+                    <ModalBody pb={6}></ModalBody>
+                    <ModalFooter>
+                      <Button
+                        type="submit"
+                        bg="#440000"
+                        color="white"
+                        _hover={{ bg: "#000000" }}
+                        focusBorderColor="none"
+                      >
+                        Save
+                      </Button>
+                      <Button onClick={onClose}>Cancel</Button>
+                    </ModalFooter>
+                  </ModalContent>
+                </Modal>
               </Heading>
             </Box>
             <Box display="flex" w="150px">
