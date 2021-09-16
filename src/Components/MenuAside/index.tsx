@@ -26,12 +26,15 @@ import {
   ModalCloseButton,
   ModalBody,
 } from "@chakra-ui/modal";
+import { Select } from "../../Components/Form/Select";
 import { useUser } from "../../Providers/User";
-
+import { useForm } from "react-hook-form";
+import { Input } from "@chakra-ui/input";
+import { useEffect } from "react";
 const MenuAside = () => {
-  const { userName, category } = useUser();
+  const { userName, category, updateCategory } = useUser();
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const { register, handleSubmit } = useForm();
   const logOut = () => {
     localStorage.clear();
   };
@@ -152,9 +155,16 @@ const MenuAside = () => {
                 onClose={onClose}
               >
                 <ModalOverlay />
-                <ModalContent display="flex">
+                <ModalContent display="flex" size="sm">
                   <ModalCloseButton />
-                  <Box display="flex" flexDirection="column" w="100%">
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    w="100%"
+                    alignItems="center"
+                    justifyContent="center"
+                    padding="1rem"
+                  >
                     <Box
                       w="100px"
                       h="100px"
@@ -163,40 +173,73 @@ const MenuAside = () => {
                       textAlign="center"
                       padding="5px"
                     />
-                    <Box display="flex" flexDirection="column">
+                    <Box display="flex" flexDirection="column" mt="1rem">
                       <Text
                         fontFamily="rounded1C"
-                        fontSize="2rem"
+                        fontSize="1rem"
                         color="#440000"
                         textAlign="center"
                       >
                         {" "}
-                        {userName}
+                        Usuário: {userName}
                       </Text>
                       <Text
                         fontFamily="rounded1C"
-                        fontSize="2rem"
+                        fontSize="1rem"
                         color="#440000"
                         textAlign="center"
                       >
                         {" "}
-                        {category}
+                        Gênero favorito: {category}
                       </Text>
+
+                      <form onSubmit={handleSubmit(updateCategory)}>
+                        <Input
+                          label="Username"
+                          {...register("username")}
+                          placeholder="Username"
+                        />
+                        <Select
+                          bg="#FFF"
+                          color="gray.500"
+                          placeholder="Gênero favorito:"
+                          {...register("selectGenre")}
+                        >
+                          <option value="Ação">Ação</option>
+                          <option value="Aventura">Aventura</option>
+                          <option value="Animação">Animação</option>
+                          <option value="Cinema TV">Cinema TV</option>
+                          <option value="Comédia">Comédia</option>
+                          <option value="Crime">Crime</option>
+                          <option value="Documentário">Documentário</option>
+                          <option value="Família">Família</option>
+                          <option value="Fantasia">Fantasia</option>
+                          <option value="Faroeste">Faroeste</option>
+                          <option value="Ficção científica">
+                            Ficção científica
+                          </option>
+                          <option value="Guerra">Guerra</option>
+                          <option value="História">História</option>
+                          <option value="Música">Música</option>
+                          <option value="Mistério">Mistério</option>
+                          <option value="Romance">Romance</option>
+                          <option value="Terror">Terror</option>
+                          <option value="Thriller">Thriller</option>
+                        </Select>
+
+                        <Button
+                          type="submit"
+                          bg="#440000"
+                          color="white"
+                          _hover={{ bg: "#000000" }}
+                          focusBorderColor="none"
+                        >
+                          Save
+                        </Button>
+                      </form>
                     </Box>
                   </Box>
                   <ModalBody pb={6}></ModalBody>
-                  <ModalFooter>
-                    <Button
-                      type="submit"
-                      bg="#440000"
-                      color="white"
-                      _hover={{ bg: "#000000" }}
-                      focusBorderColor="none"
-                    >
-                      Save
-                    </Button>
-                    <Button onClick={onClose}>Cancel</Button>
-                  </ModalFooter>
                 </ModalContent>
               </Modal>
             </Heading>
