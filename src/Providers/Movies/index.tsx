@@ -45,6 +45,7 @@ interface IMoviesContext {
   getFavorites: (user: number) => void;
   searchMovies: (searchText: string) => void;
   movies: IMoviesList[];
+
   favorites: IMoviesList[];
   searchedMovies: IMoviesList[];
   getSpecificMovie: (specifcMovie: IMoviesList) => void;
@@ -65,6 +66,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
     "https://api.themoviedb.org/3/search/movie?api_key=4b5de5fed14a8cc95ec876f973db1f9c&query=";
 
   const [movies, setMovies] = useState([]);
+
   const [searchedMovies, setSearchedMovies] = useState([]);
   const [favorites, setFavorites] = useState<IMoviesList[]>([]);
   const [aboutMovie, setAboutMovie] = useState({});
@@ -87,7 +89,6 @@ export const MoviesProvider = ({ children }: IMovies) => {
     api
       .get(`movies?page=${page}`)
       .then((response) => {
-        console.log(response.data[0].results);
         setMovies(response.data[0].results);
       })
       .catch((err) => chargeGroupsFailToast());
