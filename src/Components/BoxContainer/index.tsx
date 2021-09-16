@@ -21,7 +21,7 @@ const BoxContainer = ({
   return type === "Upcomming" ? (
     <Box
       minW="85%"
-      h="30%"
+      // h="30%"
       position="relative"
       display="flex"
       flexDirection="row"
@@ -57,8 +57,10 @@ const BoxContainer = ({
     </Box>
   ) : type === "Browse" ? (
     <Box
-      w="85%"
+      w="95%"
       overflowY="auto"
+      // border={children ? "1px solid white" : "1px solid red"}
+      padding="0.25rem"
       css={{
         "&::-webkit-scrollbar": {
           width: "0",
@@ -72,7 +74,6 @@ const BoxContainer = ({
         },
       }}
       bgColor="black.transparent800"
-      h="80%"
       mb="8px"
       display="flex"
       flexDirection="row"
@@ -86,8 +87,10 @@ const BoxContainer = ({
     </Box>
   ) : type === "specificMovie" ? (
     <Box
-      w="85%"
+      w="95%"
       overflowY="auto"
+      // border={children ? "1px solid white" : "1px solid red"}
+      padding="0.25rem"
       css={{
         "&::-webkit-scrollbar": {
           width: "0",
@@ -114,8 +117,10 @@ const BoxContainer = ({
     </Box>
   ) : (
     <Box
-      w="85%"
+      w="95%"
       overflowY="auto"
+      // border={children ? "1px solid blue" : "1px solid red"}
+      padding="0.25rem"
       css={{
         "&::-webkit-scrollbar": {
           width: "0",
@@ -129,7 +134,6 @@ const BoxContainer = ({
         },
       }}
       bgColor="black.transparent800"
-      h="80%"
       mb="8px"
       display="flex"
       flexDirection="row"
