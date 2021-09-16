@@ -56,7 +56,7 @@ const MovieCard = ({
         onClick={AddToFavorite}
         cursor="pointer"
         fontSize="25px"
-        color="fontColor.pinkLight"
+        color="red"
         position="absolute"
         top="2"
         right="1"
@@ -98,22 +98,12 @@ const MovieCard = ({
       </Menu>
     </VStack>
   ) : type === "favorites" ? (
-    <VStack
-      justifyContent="center"
-      alignItems="center"
-      h="270px"
-      position="relative"
-      minW="130px"
-      mt="5px"
-      ml="25px"
-      mb="5px"
-      mr="25px"
-    >
+    <VStack justifyContent="center" alignItems="center" position="relative">
       <Box
         onClick={onClick}
         cursor="pointer"
         fontSize="25px"
-        color="fontColor.pinkLight"
+        color="red"
         position="absolute"
         top="2"
         right="1"
@@ -143,19 +133,14 @@ const MovieCard = ({
     <VStack
       justifyContent="center"
       alignItems="center"
-      h="270px"
       position="relative"
-      minW="130px"
-      mt="5px"
-      ml="25px"
-      mb="5px"
-      mr="25px"
+      m="1rem"
     >
       <Box
         onClick={AddToFavorite}
         cursor="pointer"
         fontSize="25px"
-        color="fontColor.pinkLight"
+        color="white"
         position="absolute"
         top="2"
         right="1"
