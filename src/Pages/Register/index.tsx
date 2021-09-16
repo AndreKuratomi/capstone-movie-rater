@@ -31,6 +31,7 @@ interface IRegister {
   username: string;
   email: string;
   password: string;
+  selectGenre: string;
 }
 
 export const Register = () => {
@@ -90,8 +91,10 @@ export const Register = () => {
   const submitFunction = (data: IRegister) => {
     api
       .post("register", data)
-      .then((_) => {
+      .then((response) => {
+        const { accessToken } = response.data;
         addSuccessToast();
+        localStorage.setItem("@token: register", JSON.stringify(accessToken));
         history.push("/login");
       })
       .catch((_) => {

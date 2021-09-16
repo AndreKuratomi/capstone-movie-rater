@@ -8,6 +8,8 @@ import { useHistory } from "react-router-dom";
 import jwtDecode, { JwtPayload } from "jwt-decode";
 import MenuMobile from "../MenuMobile";
 import "./styles.css";
+import { useUser } from "../../Providers/User";
+import { getCategory } from "../../utilities/index";
 const DashboardComponent = () => {
   const history = useHistory();
   const {
@@ -20,18 +22,25 @@ const DashboardComponent = () => {
     DeleteFromFavorites,
   } = useMovies();
   const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
+  const { category } = useUser();
+  const [categoryNumber, setCategoryNumber] = useState<number>(0);
+
   const UpMovies = movies.filter((movie) => {
     const date = movie.release_date?.replaceAll("-", "");
     return Number(date) > 202109;
   });
+  const recomended = movies.filter((movie) =>
+    movie.genre_ids?.includes(categoryNumber)
+  );
+
   const [count, setCount] = useState<number>(Math.floor(Math.random() * 20));
   const [page, setPage] = useState<number>(1);
   const imgurl = "https://image.tmdb.org/t/p/original";
   const decode = jwtDecode<JwtPayload>(token);
   useEffect(() => {
-    if (movies.length < 1) {
-      getMovies(page);
-    }
+    getCategory(category, setCategoryNumber);
+    console.log(categoryNumber);
+
     getFavorites(Number(decode.sub));
   }, [getFavorites]);
   const [mobileVersion] = useMediaQuery("(max-width: 500px)");
@@ -85,7 +94,7 @@ const DashboardComponent = () => {
         </Heading>
         <Box display="flex" maxWidth="95%">
           <Flex overflowX="scroll" overflowY="hidden" className="barra">
-            {movies?.map((movie) => (
+            {recomended?.map((movie) => (
               <MovieCard
                 AddToFavorite={() => AddToFavorites(movie, token)}
                 onClick={() => {
