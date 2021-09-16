@@ -1,5 +1,6 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import api from "../../Services/api";
+import jwtDecode, { JwtPayload } from "jwt-decode";
 
 interface IRegister {
   username: string;
@@ -43,7 +44,7 @@ export const RegisterProvider = ({ children }: RegisterProviderProps) => {
         })
         .then((response) => {
           setUserName(response.data[0].username);
-          setCategory(response.data[0].select_Genre);
+          setCategory(response.data[0].selectGenre);
         })
         .catch((err) => console.log(err));
     }

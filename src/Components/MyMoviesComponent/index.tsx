@@ -21,7 +21,7 @@ const MyMoviesComponent = () => {
   const [filteredFavorite, setFilteredFavorite] = useState<IMoviesList[]>([]);
 
   const history = useHistory();
-  const { getSpecificMovie, favorites, getFavorites } = useMovies();
+  const { getSpecificMovie, favorites, getFavorites, DeleteFromFavorites } = useMovies();
 
   const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
   const decode = jwtDecode<JwtPayload>(token);
@@ -40,7 +40,8 @@ const MyMoviesComponent = () => {
     if (findMovie === "") {
       setSearch(false);
     }
-  }, [findMovie]);
+  }, [findMovie,
+    getFavorites]);
 
   return (
     <Flex
@@ -84,22 +85,25 @@ const MyMoviesComponent = () => {
           {filteredFavorite.length > 0 && search
             ? filteredFavorite.map((movie) => (
                 <MovieCard
-                  type="favorites"
-                  onClick={() => {
+                  getSpecificMovie={() => {
                     getSpecificMovie(movie);
                     history.push("/aboutmovie");
                   }}
+                  onClick={() => movie.id && DeleteFromFavorites(movie.id, token)}
+                  type="favorites"
+                  
                   title={movie.title}
                   poster_path={imgurl + movie.poster_path}
                 />
               ))
             : favorites.map((movie) => (
                 <MovieCard
-                  type="favorites"
-                  onClick={() => {
+                  getSpecificMovie={() => {
                     getSpecificMovie(movie);
                     history.push("/aboutmovie");
                   }}
+                  onClick={() => movie.id && DeleteFromFavorites(movie.id, token)}
+                  type="favorites"
                   title={movie.title}
                   poster_path={imgurl + movie.poster_path}
                 />

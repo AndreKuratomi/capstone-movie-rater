@@ -10,6 +10,7 @@ function Chat() {
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
   const { userName } = useRegister();
+
   useEffect(() => {
     socket.on("message", (payload) => {
       setChat([...chat, payload]);
