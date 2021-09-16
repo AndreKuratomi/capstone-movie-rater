@@ -40,15 +40,12 @@ const DashboardComponent = () => {
   const imgurl = "https://image.tmdb.org/t/p/original";
   const decode = jwtDecode<JwtPayload>(token);
   useEffect(() => {
-    if (movies.length < 1) {
-      getMovies(page);
-    }
-    if (favorites.length < 1) {
-      getFavorites(Number(decode.sub));
-    }
+    getMovies(page);
+
+    getFavorites(Number(decode.sub));
 
     getCategory(category, setCategoryNumber);
-  }, [getFavorites, getMovies, page, setPage]);
+  }, [getFavorites, getMovies]);
   const [mobileVersion] = useMediaQuery("(max-width: 500px)");
   return (
     <Flex
