@@ -192,10 +192,15 @@ const MenuAside = () => {
                         textAlign="center"
                       >
                         {" "}
-                        Categoria favorita: {category}
+                        Gênero favorito: {category}
                       </Text>
+
                       <form onSubmit={handleSubmit(updateCategory)}>
-                        <Input label="Username" {...register("username")} />
+                        <Input
+                          label="Username"
+                          {...register("username")}
+                          placeholder="Username"
+                        />
                         <Select
                           bg="#FFF"
                           color="gray.500"
@@ -223,6 +228,7 @@ const MenuAside = () => {
                           <option value="Terror">Terror</option>
                           <option value="Thriller">Thriller</option>
                         </Select>
+
                         <Button
                           type="submit"
                           bg="#440000"
@@ -236,9 +242,6 @@ const MenuAside = () => {
                     </Box>
                   </Box>
                   <ModalBody pb={6}></ModalBody>
-                  <ModalFooter>
-                    <Button onClick={onClose}>Cancel</Button>
-                  </ModalFooter>
                 </ModalContent>
               </Modal>
             </Heading>
