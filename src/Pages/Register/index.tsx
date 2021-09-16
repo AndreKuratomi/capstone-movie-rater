@@ -24,8 +24,6 @@ import { MdEmail } from "react-icons/md";
 
 import LogoRegister from "../../Assets/img/img_register2.png";
 
-import NavBar from "../../Components/NavBar";
-import NavMobile from "../../Components/NavMobile";
 import NavMobileForRegAndLog from "../../Components/NavMobileForRegAndLog";
 import NavBarForRegAndLog from "../../Components/NavBarForRegAndLog";
 
