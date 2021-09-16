@@ -43,6 +43,7 @@ const MovieCard = ({
       minW="130px"
       ml="25px"
       position="relative"
+      overflow="auto"
     >
       <Img
         cursor="pointer"
@@ -60,7 +61,6 @@ const MovieCard = ({
         position="absolute"
         top="2"
         right="1"
-        overflow="scroll"
       >
         <AiFillPlusCircle />
       </Box>
