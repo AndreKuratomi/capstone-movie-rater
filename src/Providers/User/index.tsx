@@ -1,4 +1,10 @@
-import { createContext, useContext, useState, ReactNode, useEffect } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react";
 import api from "../../Services/api";
 import jwtDecode, { JwtPayload } from "jwt-decode";
 interface UserProviderProps {
@@ -10,9 +16,7 @@ interface UserContextProps {
   category: string;
 }
 
-const UserContext = createContext<UserContextProps>(
-  {} as UserContextProps
-);
+const UserContext = createContext<UserContextProps>({} as UserContextProps);
 
 export const UserProvider = ({ children }: UserProviderProps) => {
   const [userName, setUserName] = useState<string>("");

@@ -84,7 +84,6 @@ const Login = () => {
         const { accessToken } = response.data;
         const decoded = jwtDecode<JwtPayload>(accessToken);
         setAuth(accessToken);
-        window.localStorage.clear();
         window.localStorage.setItem(
           "@movies: token",
           JSON.stringify(accessToken)
