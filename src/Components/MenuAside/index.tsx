@@ -15,9 +15,13 @@ import { MdMovieCreation } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { RiLogoutBoxFill } from "react-icons/ri";
 import { Link as ReachLink } from "react-router-dom";
-import { Link, Image } from "@chakra-ui/react";
+import { Link, Image, Button } from "@chakra-ui/react";
 
 const MenuAside = () => {
+  const logOut = () => {
+    localStorage.clear();
+  };
+
   return (
     <VStack
       w="250px"
@@ -164,7 +168,22 @@ const MenuAside = () => {
                 fontWeight="100"
                 lineHeight="35px"
               >
-                Logout
+                <Button
+                  backgroundColor="red.800"
+                  border="none"
+                  fontSize="20PX"
+                  ml="5px"
+                  fontWeight="100"
+                  lineHeight="35px"
+                  _hover={{ bg: "red.800" }}
+                  onClick={logOut}
+                  padding="0"
+                  margin-left="-1px"
+                >
+                  <Link as={ReachLink} to="/">
+                    Logout
+                  </Link>
+                </Button>
               </Heading>
             </Box>
           </VStack>

@@ -8,9 +8,10 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
+  Link,
   useDisclosure,
 } from "@chakra-ui/react";
-import { Link, Link as ReachLink } from "react-router-dom";
+import { Link as ReachLink } from "react-router-dom";
 
 import { ImHome3 } from "react-icons/im";
 import { RiReservedLine, RiSearchEyeLine } from "react-icons/ri";
@@ -21,6 +22,10 @@ import { RiLogoutBoxFill } from "react-icons/ri";
 
 const MenuMobile = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const logOut = () => {
+    localStorage.clear();
+  };
 
   return (
     <Box width="100%" textAlign="center">
@@ -72,7 +77,22 @@ const MenuMobile = () => {
             </Box>
             <Box display="flex">
               <RiLogoutBoxFill />
-              <Link to="/">Logout</Link>
+              <Button
+                bgColor="#FFF"
+                border="none"
+                fontSize="16PX"
+                ml="5px"
+                fontWeight="100"
+                height="20px"
+                _hover={{ bg: "red.800" }}
+                onClick={logOut}
+                padding="0"
+                margin-left="0"
+              >
+                <Link as={ReachLink} to="/">
+                  Logout
+                </Link>
+              </Button>
             </Box>
           </DrawerBody>
         </DrawerContent>
