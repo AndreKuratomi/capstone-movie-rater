@@ -26,6 +26,7 @@ import {
   ModalCloseButton,
   ModalBody,
 } from "@chakra-ui/modal";
+import { Select } from "../../Components/Form/Select";
 import { useUser } from "../../Providers/User";
 import { useForm } from "react-hook-form";
 import { Input } from "@chakra-ui/input";
@@ -35,7 +36,6 @@ const MenuAside = () => {
   const { userName, category, updateCategory } = useUser();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { register, handleSubmit } = useForm();
-
   const logOut = () => {
     localStorage.clear();
   };
@@ -196,7 +196,33 @@ const MenuAside = () => {
                       </Text>
                       <form onSubmit={handleSubmit(updateCategory)}>
                         <Input label="Username" {...register("username")} />
-                        <Input label="Categoria" {...register("selectGenre")} />
+                        <Select
+                          bg="#FFF"
+                          color="gray.500"
+                          placeholder="Gênero favorito:"
+                          {...register("selectGenre")}
+                        >
+                          <option value="Ação">Ação</option>
+                          <option value="Aventura">Aventura</option>
+                          <option value="Animação">Animação</option>
+                          <option value="Cinema TV">Cinema TV</option>
+                          <option value="Comédia">Comédia</option>
+                          <option value="Crime">Crime</option>
+                          <option value="Documentário">Documentário</option>
+                          <option value="Família">Família</option>
+                          <option value="Fantasia">Fantasia</option>
+                          <option value="Faroeste">Faroeste</option>
+                          <option value="Ficção científica">
+                            Ficção científica
+                          </option>
+                          <option value="Guerra">Guerra</option>
+                          <option value="História">História</option>
+                          <option value="Música">Música</option>
+                          <option value="Mistério">Mistério</option>
+                          <option value="Romance">Romance</option>
+                          <option value="Terror">Terror</option>
+                          <option value="Thriller">Thriller</option>
+                        </Select>
                         <Button
                           type="submit"
                           bg="#440000"
@@ -211,7 +237,6 @@ const MenuAside = () => {
                   </Box>
                   <ModalBody pb={6}></ModalBody>
                   <ModalFooter>
-                    
                     <Button onClick={onClose}>Cancel</Button>
                   </ModalFooter>
                 </ModalContent>
