@@ -33,6 +33,7 @@ const MovieContainer = ({
   ) : (
     <Flex
       w="95%"
+      overflowY="scroll"
       h="95%"
       mb="20px"
       justifyContent="center"
