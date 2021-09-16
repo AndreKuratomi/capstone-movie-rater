@@ -27,9 +27,9 @@ import {
   ModalCloseButton,
   ModalBody,
 } from "@chakra-ui/modal";
-import { useRegister } from "../../Providers/Register";
+import { useUser } from "../../Providers/User";
 const MenuAside = () => {
-  const { userName, category } = useRegister();
+  const { userName, category } = useUser();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <VStack

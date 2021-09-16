@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { IMoviesList } from "../../Providers/Movies";
 import jwtDecode, { JwtPayload } from "jwt-decode";
 import { number } from "yup";
-import { useRegister } from "../../Providers/Register";
+import { useUser } from "../../Providers/User";
 const SpecificMovieContainer = () => {
   const { getSpecificMovie, aboutMovie } = useMovies();
   const imgurl = "https://image.tmdb.org/t/p/original";
@@ -18,7 +18,7 @@ const SpecificMovieContainer = () => {
   }, [getReview]);
   console.log(review);
   const decoded = jwtDecode<JwtPayload>(token);
-  const { userName } = useRegister();
+  const { userName } = useUser();
   const [mobileVersion] = useMediaQuery("(max-width: 500px)");
   return (
     <Flex flexDirection="column" h="100%">

@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 import { Box, Flex, Button, Input } from "@chakra-ui/react";
 import "./styles.css";
-import { useRegister } from "../../Providers/Register";
+import { useUser } from "../../Providers/User"
 
 const socket = io("https://chat-capstone-g5.herokuapp.com/");
 
 function Chat() {
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
-  const { userName } = useRegister();
+  const { userName } = useUser();
 
   useEffect(() => {
     socket.on("message", (payload) => {

@@ -1,39 +1,23 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import api from "../../Services/api";
 import jwtDecode, { JwtPayload } from "jwt-decode";
-
-interface IRegister {
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
-
-interface RegisterProviderProps {
+interface UserProviderProps {
   children: ReactNode;
 }
 
-interface RegisterContextProps {
-  signUp: (data: IRegister) => void;
+interface UserContextProps {
   userName: string;
   category: string;
 }
 
-const RegisterContext = createContext<RegisterContextProps>(
-  {} as RegisterContextProps
+const UserContext = createContext<UserContextProps>(
+  {} as UserContextProps
 );
 
-export const RegisterProvider = ({ children }: RegisterProviderProps) => {
+export const UserProvider = ({ children }: UserProviderProps) => {
   const [userName, setUserName] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
-
-  const signUp = (data: IRegister) => {
-    api
-      .post("register/", data)
-      .then((_) => "Cadastro realizado com sucesso!")
-      .catch((_) => "Falha no cadastro!");
-  };
 
   useEffect(() => {
     if (token) {
@@ -51,10 +35,10 @@ export const RegisterProvider = ({ children }: RegisterProviderProps) => {
   }, [token]);
 
   return (
-    <RegisterContext.Provider value={{ signUp, userName, category }}>
+    <UserContext.Provider value={{ userName, category }}>
       {children}
-    </RegisterContext.Provider>
+    </UserContext.Provider>
   );
 };
 
-export const useRegister = () => useContext(RegisterContext);
+export const useUser = () => useContext(UserContext);
