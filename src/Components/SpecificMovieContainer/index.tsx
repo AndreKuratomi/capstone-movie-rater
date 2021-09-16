@@ -1,26 +1,25 @@
 import { Grid, GridItem, Box, Heading, Flex } from "@chakra-ui/layout";
 import { Img } from "@chakra-ui/image";
 import { useMovies } from "../../Providers/Movies";
-import { useRegister } from "../../Providers/Register";
+import { useUser } from "../../Providers/User";
 import { Input, Button, Text, useMediaQuery } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { IMoviesList } from "../../Providers/Movies";
 import jwtDecode, { JwtPayload } from "jwt-decode";
 import { number } from "yup";
-// import { useRegister } from "../../Providers/Register";
+
 const SpecificMovieContainer = () => {
   const { getSpecificMovie, aboutMovie } = useMovies();
   const imgurl = "https://image.tmdb.org/t/p/original";
   const [comments, setComments] = useState<string>("");
   const { addReviews, getReview, review } = useMovies();
-  const { userName } = useRegister();
   const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
   useEffect(() => {
     aboutMovie.id && getReview(aboutMovie.id, token);
   }, [getReview]);
   console.log(review);
   const decoded = jwtDecode<JwtPayload>(token);
-  // const { userName } = useRegister();
+  const { userName } = useUser();
   const [mobileVersion] = useMediaQuery("(max-width: 500px)");
   return (
     <Flex flexDirection="column" h="100%">
