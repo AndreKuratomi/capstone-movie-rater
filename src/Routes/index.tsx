@@ -17,12 +17,12 @@ const Routes = () => {
       <Route path="/aboutus" component={AboutUs} />
       <Route path="/signup" component={Register} />
       <Route path="/login" component={Login} />
-      <Route path="/dashboard" component={Dashboard} />
-      <Route path="/groups" component={Groups} />
-      <Route path="/movies" component={Movies} />
-      <Route path="/profile" component={Profile} />
-      <Route path="/mymovies" component={MyMovies} />
-      <Route path="/aboutmovie" component={Aboutmovie} />
+      <Route isPrivate path="/dashboard" component={Dashboard} />
+      <Route isPrivate path="/groups" component={Groups} />
+      <Route isPrivate path="/movies" component={Movies} />
+      <Route isPrivate path="/profile" component={Profile} />
+      <Route isPrivate path="/mymovies" component={MyMovies} />
+      <Route isPrivate path="/aboutmovie" component={Aboutmovie} />
     </Switch>
   );
 };
