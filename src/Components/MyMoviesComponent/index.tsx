@@ -9,40 +9,36 @@ import { useHistory } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import jwtDecode, { JwtPayload } from "jwt-decode";
-import { IMoviesList } from "../../Providers/Movies"
+import { IMoviesList } from "../../Providers/Movies";
 
-interface IMyMoviesComponent{
-  setFilteredFavorite: (value: React.SetStateAction<IMoviesList[]>) => void
-
+interface IMyMoviesComponent {
+  setFilteredFavorite: (value: React.SetStateAction<IMoviesList[]>) => void;
 }
 
 const MyMoviesComponent = () => {
   const [findMovie, setFindMovie] = useState<string>("");
   const [search, setSearch] = useState<boolean>(false);
-  const [filteredFavorite, setFilteredFavorite] = useState<IMoviesList[]>([])
+  const [filteredFavorite, setFilteredFavorite] = useState<IMoviesList[]>([]);
 
-  const history = useHistory()
-  const {
-    getSpecificMovie,
-    favorites,
-    getFavorites
-  } = useMovies();
+  const history = useHistory();
+  const { getSpecificMovie, favorites, getFavorites } = useMovies();
 
   const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
   const decode = jwtDecode<JwtPayload>(token);
   const imgurl = "https://image.tmdb.org/t/p/original";
-  const filter = favorites.filter((favorite) => 
-         favorite.title?.toUpperCase().includes(findMovie.toUpperCase()));
+  const filter = favorites.filter((favorite) =>
+    favorite.title?.toUpperCase().includes(findMovie.toUpperCase())
+  );
 
   const handleSearch = () => {
-      setFilteredFavorite(filter)
-      setSearch(true)  
+    setFilteredFavorite(filter);
+    setSearch(true);
   };
 
   useEffect(() => {
-    getFavorites(Number(decode.sub))
-    if(findMovie === ""){
-      setSearch(false)
+    getFavorites(Number(decode.sub));
+    if (findMovie === "") {
+      setSearch(false);
     }
   }, [findMovie]);
 
@@ -53,8 +49,8 @@ const MyMoviesComponent = () => {
       justifyContent="flex-end"
       alignItems="center"
       flexDirection="column"
+      overflow="scroll"
     >
-      
       <MovieContainer>
         <Flex w="100%" mb="25px" justifyContent="flex-end">
           <Input
@@ -85,36 +81,33 @@ const MyMoviesComponent = () => {
           Meus Filmes
         </Heading>
         <BoxContainer type="Browse">
-          {
-          filteredFavorite.length > 0 &&
-          search ?
-          filteredFavorite.map((movie) => (
-            <MovieCard
-              type="favorites"
-              onClick={() => {
-                getSpecificMovie(movie);
-                history.push("/aboutmovie");
-              }}
-              title={movie.title}
-              poster_path={imgurl + movie.poster_path}
-            />
-          ))
-          :
-          favorites.map((movie) => (
-            <MovieCard
-              type="favorites"
-              onClick={() => {
-                getSpecificMovie(movie);
-                history.push("/aboutmovie");
-              }}
-              title={movie.title}
-              poster_path={imgurl + movie.poster_path}
-            />
-          ))}
+          {filteredFavorite.length > 0 && search
+            ? filteredFavorite.map((movie) => (
+                <MovieCard
+                  type="favorites"
+                  onClick={() => {
+                    getSpecificMovie(movie);
+                    history.push("/aboutmovie");
+                  }}
+                  title={movie.title}
+                  poster_path={imgurl + movie.poster_path}
+                />
+              ))
+            : favorites.map((movie) => (
+                <MovieCard
+                  type="favorites"
+                  onClick={() => {
+                    getSpecificMovie(movie);
+                    history.push("/aboutmovie");
+                  }}
+                  title={movie.title}
+                  poster_path={imgurl + movie.poster_path}
+                />
+              ))}
         </BoxContainer>
       </MovieContainer>
     </Flex>
   );
 };
 
-export default MyMoviesComponent
+export default MyMoviesComponent;
