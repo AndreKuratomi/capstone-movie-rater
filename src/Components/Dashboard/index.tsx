@@ -112,19 +112,21 @@ const DashboardComponent = () => {
         >
           Meus Filmes
         </Heading>
-        <Box display="flex">
-          {favorites.map((movie) => (
-            <MovieCard
-              getSpecificMovie={() => {
-                getSpecificMovie(movie);
-                history.push("/aboutmovie");
-              }}
-              onClick={() => movie.id && DeleteFromFavorites(movie.id, token)}
-              type="favorites"
-              title={movie.title}
-              poster_path={imgurl + movie.poster_path}
-            />
-          ))}
+        <Box display="flex" maxWidth="95%">
+          <Flex overflowX="scroll" overflowY="hidden" className="barra">
+            {favorites.map((movie) => (
+              <MovieCard
+                getSpecificMovie={() => {
+                  getSpecificMovie(movie);
+                  history.push("/aboutmovie");
+                }}
+                onClick={() => movie.id && DeleteFromFavorites(movie.id, token)}
+                type="favorites"
+                title={movie.title}
+                poster_path={imgurl + movie.poster_path}
+              />
+            ))}
+          </Flex>
         </Box>
       </MovieContainer>
     </Flex>
