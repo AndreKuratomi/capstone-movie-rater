@@ -94,11 +94,7 @@ const MenuAside = () => {
                 lineHeight="35px"
               >
                 <Link as={ReachLink} to="/movies">
-<<<<<<< HEAD
-                  Movies
-=======
                   Filmes
->>>>>>> bf8b4e687f5f088944858b8450a80824a3218fde
                 </Link>
               </Heading>
             </Box>
@@ -114,11 +110,7 @@ const MenuAside = () => {
                 lineHeight="35px"
               >
                 <Link as={ReachLink} to="/groups">
-<<<<<<< HEAD
-                  Groups
-=======
                   Grupos
->>>>>>> bf8b4e687f5f088944858b8450a80824a3218fde
                 </Link>
               </Heading>
             </Box>
@@ -134,11 +126,7 @@ const MenuAside = () => {
                 lineHeight="35px"
               >
                 <Link as={ReachLink} to="/mymovies">
-<<<<<<< HEAD
-                  My movies
-=======
                   Meus Filmes
->>>>>>> bf8b4e687f5f088944858b8450a80824a3218fde
                 </Link>
               </Heading>
             </Box>
@@ -161,11 +149,7 @@ const MenuAside = () => {
                 lineHeight="35px"
               >
                 <Link as={ReachLink} to="/">
-<<<<<<< HEAD
-                  Profile
-=======
                   Perfil
->>>>>>> bf8b4e687f5f088944858b8450a80824a3218fde
                 </Link>
               </Heading>
             </Box>
@@ -180,13 +164,7 @@ const MenuAside = () => {
                 fontWeight="100"
                 lineHeight="35px"
               >
-<<<<<<< HEAD
-                <Link as={ReachLink} to="/">
-                  SignOut
-                </Link>
-=======
                 Logout
->>>>>>> bf8b4e687f5f088944858b8450a80824a3218fde
               </Heading>
             </Box>
           </VStack>
