@@ -51,18 +51,7 @@ const MovieCard = ({
         w="75%"
         h="70%"
       />
-      {/* <Box
-        onClick={AddToFavorite}
-        cursor="pointer"
-        fontSize="25px"
-        color="red"
-        position="absolute"
-        top="2"
-        right="1"
-        // overflow="scroll"
-      >
-        <AiFillPlusCircle />
-      </Box> */}
+
       <Menu>
         <MenuButton
           display="flex"

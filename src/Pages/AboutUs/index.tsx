@@ -1,12 +1,6 @@
 import NavBar from "../../Components/NavBar";
 import NavMobile from "../../Components/NavMobile";
-import {
-  Box,
-  useMediaQuery,
-  Text,
-  Breadcrumb,
-  BreadcrumbItem,
-} from "@chakra-ui/react";
+import { Box, useMediaQuery, Text } from "@chakra-ui/react";
 import InfoCard from "../../Components/InfoCard";
 import "react-multi-carousel/lib/styles.css";
 import Carousel from "react-multi-carousel";
@@ -166,13 +160,6 @@ const AboutUs = () => {
           </Box>
         )}
       </Box>
-      {/* <Breadcrumb width="100%" bg="#4E4E4E" textAlign="center" mt="4rem">
-        <BreadcrumbItem color="white">
-          <Text padding="1rem">
-            developed by equipe 3 © all rights reserved.
-          </Text>
-        </BreadcrumbItem>
-      </Breadcrumb> */}
     </Box>
   );
 };

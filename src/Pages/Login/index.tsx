@@ -97,7 +97,6 @@ const Login = () => {
   };
 
   const [mobileVersion] = useMediaQuery("(max-width: 500px)");
-  const [desktopVersion] = useMediaQuery("(min-width:768px)");
 
   return (
     <Box bg="#000" height="100vh" overflow="hidden">

@@ -1,12 +1,4 @@
-import {
-  VStack,
-  Grid,
-  GridItem,
-  Heading,
-  Box,
-  Text,
-  Flex,
-} from "@chakra-ui/layout";
+import { VStack, Heading, Box, Text, Flex } from "@chakra-ui/layout";
 import Logo from "../../Assets/img/logo.png";
 import { ImHome3 } from "react-icons/im";
 import { RiSearchEyeLine } from "react-icons/ri";
@@ -20,9 +12,7 @@ import { useDisclosure } from "@chakra-ui/hooks";
 import {
   Modal,
   ModalOverlay,
-  ModalHeader,
   ModalContent,
-  ModalFooter,
   ModalCloseButton,
   ModalBody,
 } from "@chakra-ui/modal";
@@ -30,7 +20,7 @@ import { Select } from "../../Components/Form/Select";
 import { useUser } from "../../Providers/User";
 import { useForm } from "react-hook-form";
 import { Input } from "@chakra-ui/input";
-import { useEffect } from "react";
+
 const MenuAside = () => {
   const { userName, category, updateCategory } = useUser();
   const { isOpen, onOpen, onClose } = useDisclosure();
