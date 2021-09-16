@@ -26,11 +26,15 @@ import {
   ModalCloseButton,
   ModalBody,
 } from "@chakra-ui/modal";
-import { useUser } from "../../Providers/User"
+import { useUser } from "../../Providers/User";
 
 const MenuAside = () => {
-  const { userName, category } = useUser()
+  const { userName, category } = useUser();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const logOut = () => {
+    localStorage.clear();
+  };
 
   return (
     <VStack
@@ -142,59 +146,59 @@ const MenuAside = () => {
               lineHeight="35px"
             >
               <Link onClick={onOpen}>Perfil</Link>
-                <Modal
-                  closeOnOverlayClick={false}
-                  isOpen={isOpen}
-                  onClose={onClose}
-                >
-                  <ModalOverlay />
-                  <ModalContent display="flex">
-                    <ModalCloseButton />
-                    <Box display="flex" flexDirection="column" w="100%">
-                      <Box
-                        w="100px"
-                        h="100px"
-                        borderRadius="50%"
-                        bgColor="black.transparent500"
+              <Modal
+                closeOnOverlayClick={false}
+                isOpen={isOpen}
+                onClose={onClose}
+              >
+                <ModalOverlay />
+                <ModalContent display="flex">
+                  <ModalCloseButton />
+                  <Box display="flex" flexDirection="column" w="100%">
+                    <Box
+                      w="100px"
+                      h="100px"
+                      borderRadius="50%"
+                      bgColor="black.transparent500"
+                      textAlign="center"
+                      padding="5px"
+                    />
+                    <Box display="flex" flexDirection="column">
+                      <Text
+                        fontFamily="rounded1C"
+                        fontSize="2rem"
+                        color="#440000"
                         textAlign="center"
-                        padding="5px"
-                      />
-                      <Box display="flex" flexDirection="column">
-                        <Text
-                          fontFamily="rounded1C"
-                          fontSize="2rem"
-                          color="#440000"
-                          textAlign="center"
-                        >
-                          {" "}
-                          {userName}
-                        </Text>
-                        <Text
-                          fontFamily="rounded1C"
-                          fontSize="2rem"
-                          color="#440000"
-                          textAlign="center"
-                        >
-                          {" "}
-                          {category}
-                        </Text>
-                      </Box>
-                    </Box>
-                    <ModalBody pb={6}></ModalBody>
-                    <ModalFooter>
-                      <Button
-                        type="submit"
-                        bg="#440000"
-                        color="white"
-                        _hover={{ bg: "#000000" }}
-                        focusBorderColor="none"
                       >
-                        Save
-                      </Button>
-                      <Button onClick={onClose}>Cancel</Button>
-                    </ModalFooter>
-                  </ModalContent>
-                </Modal>
+                        {" "}
+                        {userName}
+                      </Text>
+                      <Text
+                        fontFamily="rounded1C"
+                        fontSize="2rem"
+                        color="#440000"
+                        textAlign="center"
+                      >
+                        {" "}
+                        {category}
+                      </Text>
+                    </Box>
+                  </Box>
+                  <ModalBody pb={6}></ModalBody>
+                  <ModalFooter>
+                    <Button
+                      type="submit"
+                      bg="#440000"
+                      color="white"
+                      _hover={{ bg: "#000000" }}
+                      focusBorderColor="none"
+                    >
+                      Save
+                    </Button>
+                    <Button onClick={onClose}>Cancel</Button>
+                  </ModalFooter>
+                </ModalContent>
+              </Modal>
             </Heading>
           </Box>
           <Box display="flex" w="150px" alignItems="center">
@@ -208,7 +212,22 @@ const MenuAside = () => {
               fontWeight="100"
               lineHeight="35px"
             >
-              Logout
+              <Button
+                backgroundColor="red.800"
+                border="none"
+                fontSize="20PX"
+                ml="5px"
+                fontWeight="100"
+                lineHeight="35px"
+                _hover={{ bg: "red.800" }}
+                onClick={logOut}
+                padding="0"
+                margin-left="-1px"
+              >
+                <Link as={ReachLink} to="/">
+                  Logout
+                </Link>
+              </Button>
             </Heading>
           </Box>
         </VStack>

@@ -35,7 +35,7 @@ const NavMobile = () => {
 
         <MenuList bg="white" border="none" color="black" padding="0px">
           <RouteLink to="/aboutus">
-            <MenuItem>About Us</MenuItem>
+            <MenuItem>Sobre nós</MenuItem>
           </RouteLink>
           <RouteLink to="login">
             <MenuItem>Login</MenuItem>
@@ -46,7 +46,7 @@ const NavMobile = () => {
               borderBottomRightRadius="6px"
               borderBottomLeftRadius="6px"
             >
-              Sign Up
+              Cadastro
             </MenuItem>
           </RouteLink>
         </MenuList>
