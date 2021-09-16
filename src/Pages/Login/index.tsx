@@ -12,21 +12,20 @@ import {
   Box,
   Button,
   FormControl,
-  Image,
   Link,
   Text,
   useToast,
 } from "@chakra-ui/react";
 
-import LogoLogin from "../../Assets/img/img login.png";
+import LogoLogin from "../../Assets/img/img_login.png";
 import { Flex, Stack } from "@chakra-ui/layout";
 import { FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
 import { Input } from "../../Components/Form/Input";
 
-import NavBar from "../../Components/NavBar";
-import NavMobile from "../../Components/NavMobile";
+import NavMobileForRegAndLog from "../../Components/NavMobileForRegAndLog";
+import NavBarForRegAndLog from "../../Components/NavBarForRegAndLog";
 
 const Login = () => {
   interface ILogin {
@@ -98,138 +97,169 @@ const Login = () => {
       });
   };
 
-  const [mobileVersion] = useMediaQuery("(max-width: 768px)");
+  const [mobileVersion] = useMediaQuery("(max-width: 500px)");
   const [desktopVersion] = useMediaQuery("(min-width:768px)");
 
   return (
-    <Box bg="#000" align="center">
-      {mobileVersion ? <NavMobile /> : <NavBar />}
-
-      {mobileVersion ? (
-        <Image
-          src={LogoLogin}
-          alt="LogoLogin"
-          position="absolute"
-          top="0px"
-          right="3 5px"
-          width="80%"
-        />
-      ) : (
-        <Image
-          src={LogoLogin}
-          alt="LogoLogin"
-          position="absolute"
-          top="0px"
-          right="380px"
-          width="30%"
-        />
-      )}
-
-      <Flex align="center" bg="#000" direction="column" height="100vh">
+    <Box bg="#000" height="100vh" overflow="hidden">
+      <Box>
+        {mobileVersion ? <NavMobileForRegAndLog /> : <NavBarForRegAndLog />}
         {mobileVersion ? (
-          <Box position="absolute" top="160px" right="0px">
-            <form onSubmit={handleSubmit(submitFunction)}>
-              <FormControl
-                align="center"
-                borderBottom="4px solid white"
-                padding="1.5rem 4rem"
-              >
-                <Stack spacing="4">
-                  <Input
-                    error={errors.email}
-                    icon={MdEmail}
-                    placeholder="Email"
-                    type="email"
-                    {...register("email")}
-                  />
-                  <Input
-                    error={errors.password}
-                    icon={FaLock}
-                    placeholder="Senha"
-                    type="password"
-                    {...register("password")}
-                  />
-                </Stack>
-                <Button
-                  bg="red.500"
-                  color="white"
-                  mt="5"
-                  type="submit"
-                  _hover={{ bg: "red.500" }}
-                >
-                  Registrar
-                </Button>
-              </FormControl>
-            </form>
-            <Box marginTop="3.5">
-              <Stack spacing="3.5">
-                <Flex align="center" color="white" direction="column">
-                  <Text as="span" align="center">
-                    Já tem cadastro? Então vamos ao{" "}
-                    <Link as={ReachLink} to="/login">
-                      Login
-                    </Link>
-                  </Text>
-                  <Link as={ReachLink} to="/">
-                    Voltar para a página principal
-                  </Link>
-                </Flex>
-              </Stack>
-            </Box>
-          </Box>
+          <>
+            <Box
+              bgImage={`url(${LogoLogin})`}
+              backgroundRepeat="no-repeat"
+              backgroundSize="contain"
+              height="150px"
+              width="150px"
+              maxWidth="400px"
+              maxHeight="400px"
+              minWidth="320px"
+              minHeight="400px"
+              margin="0 auto"
+              position="relative"
+              bottom="0px"
+              zIndex="1"
+            ></Box>
+
+            <Flex
+              align="center"
+              direction="column"
+              position="relative"
+              bottom="150px"
+              zIndex="2"
+            >
+              <Box>
+                <form onSubmit={handleSubmit(submitFunction)}>
+                  <FormControl
+                    align="center"
+                    borderBottom="4px solid white"
+                    padding="1.5rem 4rem"
+                  >
+                    <Stack spacing="2">
+                      <Input
+                        error={errors.email}
+                        icon={MdEmail}
+                        placeholder="Email"
+                        type="email"
+                        {...register("email")}
+                      />
+                      <Input
+                        error={errors.password}
+                        icon={FaLock}
+                        placeholder="Senha"
+                        type="password"
+                        {...register("password")}
+                      />
+                    </Stack>
+                    <Button
+                      bg="red.500"
+                      color="white"
+                      mt="5"
+                      type="submit"
+                      _hover={{ bg: "red.500" }}
+                    >
+                      Logar
+                    </Button>
+                  </FormControl>
+                </form>
+                <Box marginTop="3.5">
+                  <Stack spacing="3.5">
+                    <Flex align="center" color="white" direction="column">
+                      <Text as="span" align="center">
+                        Ainda não tem cadastro? Então vamos ao{" "}
+                        <Link as={ReachLink} to="/signup">
+                          Login
+                        </Link>
+                      </Text>
+                      <Link as={ReachLink} to="/">
+                        Voltar para a página principal
+                      </Link>
+                    </Flex>
+                  </Stack>
+                </Box>
+              </Box>
+            </Flex>
+          </>
         ) : (
-          <Box position="absolute" top="240px" right="480px">
-            <form onSubmit={handleSubmit(submitFunction)}>
-              <FormControl
-                align="center"
-                borderBottom="4px solid white"
-                padding="1.5rem 4rem"
-              >
-                <Stack spacing="4">
-                  <Input
-                    error={errors.email}
-                    icon={MdEmail}
-                    placeholder="Email"
-                    type="email"
-                    {...register("email")}
-                  />
-                  <Input
-                    error={errors.password}
-                    icon={FaLock}
-                    placeholder="Senha"
-                    type="password"
-                    {...register("password")}
-                  />
-                </Stack>
-                <Button
-                  bg="red.500"
-                  color="white"
-                  mt="5"
-                  type="submit"
-                  _hover={{ bg: "red.500" }}
-                >
-                  Registrar
-                </Button>
-              </FormControl>
-            </form>
-            <Box marginTop="3.5">
-              <Stack spacing="3.5">
-                <Flex align="center" color="white" direction="column">
-                  <Text as="span" align="center">
-                    Já tem cadastro? Então vamos ao{" "}
-                    <Link as={ReachLink} to="/signup">
-                      Cadastro
-                    </Link>
-                  </Text>
-                  <Link as={ReachLink} to="/">
-                    Voltar para a página principal
-                  </Link>
-                </Flex>
-              </Stack>
-            </Box>
-          </Box>
+          <>
+            <Box
+              bgImage={`url(${LogoLogin})`}
+              backgroundRepeat="no-repeat"
+              backgroundSize="contain"
+              height="300px"
+              width="300px"
+              maxWidth="400px"
+              maxHeight="400px"
+              minWidth="400px"
+              minHeight="400px"
+              margin="0 auto"
+              position="relative"
+              bottom="85px"
+              zIndex="1"
+            ></Box>
+
+            <Flex
+              align="center"
+              direction="column"
+              position="relative"
+              bottom="120px"
+              zIndex="2"
+            >
+              <Box>
+                <form onSubmit={handleSubmit(submitFunction)}>
+                  <FormControl
+                    align="center"
+                    borderBottom="4px solid white"
+                    padding="0.5rem 4rem"
+                  >
+                    <Stack spacing="2">
+                      <Input
+                        error={errors.email}
+                        icon={MdEmail}
+                        placeholder="Email"
+                        type="email"
+                        {...register("email")}
+                      />
+                      <Input
+                        error={errors.password}
+                        icon={FaLock}
+                        placeholder="Senha"
+                        type="password"
+                        {...register("password")}
+                      />
+                    </Stack>
+                    <Button
+                      bg="red.500"
+                      color="white"
+                      mt="3"
+                      type="submit"
+                      _hover={{ bg: "red.500" }}
+                    >
+                      Logar
+                    </Button>
+                  </FormControl>
+                </form>
+                <Box marginTop="3.5">
+                  <Stack spacing="3.5">
+                    <Flex align="center" color="white" direction="column">
+                      <Text as="span" align="center">
+                        Ainda não tem cadastro? Então vamos ao{" "}
+                        <Link as={ReachLink} to="/signup">
+                          Cadastro
+                        </Link>
+                      </Text>
+                      <Link as={ReachLink} to="/">
+                        Voltar para a página principal
+                      </Link>
+                    </Flex>
+                  </Stack>
+                </Box>
+              </Box>
+            </Flex>
+          </>
         )}
-      </Flex>
+      </Box>
     </Box>
   );
 };

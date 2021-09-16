@@ -16,8 +16,8 @@ const MovieContainer = ({
 }: IMovieContainer) => {
   return type === "column" ? (
     <Flex
-      w="95%"
-      h="95%"
+      w="65vw"
+      h="100vh"
       mb="20px"
       justifyContent="space-evenly"
       flexDirection="column"
@@ -26,6 +26,7 @@ const MovieContainer = ({
       borderRadius="15px"
       border="2px solid"
       borderColor="#ffffff73"
+      overflowy="scroll"
     >
       {children}
     </Flex>
@@ -41,6 +42,7 @@ const MovieContainer = ({
       borderRadius="15px"
       border="2px solid"
       borderColor="#ffffff73"
+      overflow-y="scroll"
     >
       {children}
     </Flex>
