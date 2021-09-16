@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 import { Box, Flex, Button, Input } from "@chakra-ui/react";
 import "./styles.css";
+import { useRegister } from "../../Providers/Register";
 
 const socket = io("https://chat-capstone-g5.herokuapp.com/");
-const userName = "User " + parseInt(Math.random() * 10);
+
 function Chat() {
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
+  const { userName } = useRegister();
   useEffect(() => {
     socket.on("message", (payload) => {
       setChat([...chat, payload]);
@@ -51,6 +53,7 @@ function Chat() {
         <form onSubmit={sendMessage}>
           <Input
             type="text"
+            border="#440000"
             w="70%"
             focusBorderColor="none"
             name="message"
