@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import api from "../../Services/api";
 import { ReactNode } from "react";
 import { useAuth } from "../Auth";
@@ -7,7 +7,6 @@ import { useAuth } from "../Auth";
 import jwtDecode, { JwtPayload } from "jwt-decode";
 
 import axios from "axios";
-import { jsx } from "@emotion/react";
 import { useToast } from "@chakra-ui/react";
 interface IMovies {
   children: ReactNode;
@@ -71,15 +70,14 @@ export const MoviesProvider = ({ children }: IMovies) => {
   const [favorites, setFavorites] = useState<IMoviesList[]>([]);
   const [aboutMovie, setAboutMovie] = useState({});
   const [review, setReview] = useState([]);
-  const { auth } = useAuth();
   const toast = useToast();
 
   const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
 
-  const chargeGroupsFailToast = () => {
+  const getMoviesFailToast = () => {
     toast({
       description: "Verificar conexão",
-      duration: 5000,
+      duration: 2000,
       position: "top",
       status: "error",
       title: "Ocorreu um erro",
@@ -91,7 +89,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
       .then((response) => {
         setMovies(response.data[0].results);
       })
-      .catch((_) => chargeGroupsFailToast());
+      .catch((_) => getMoviesFailToast());
   };
 
   const getSpecificMovie = (specifcMovie: IMoviesList) => {
@@ -101,7 +99,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
   const getFavoritesFailToast = () => {
     toast({
       description: "",
-      duration: 5000,
+      duration: 2000,
       position: "top",
       status: "error",
       title: "Falha de conexão",
@@ -116,15 +114,12 @@ export const MoviesProvider = ({ children }: IMovies) => {
         setFavorites(response.data);
       })
       .catch((_) => getFavoritesFailToast());
-    // if (favorites.length === 0) {
-    //   ;
-    // }
   };
 
   const addFilmSuccessToast = () => {
     toast({
       description: "",
-      duration: 5000,
+      duration: 2000,
       position: "top",
       status: "success",
       title: "Filme adicionado!",
@@ -133,7 +128,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
   const addFilmFailToast = () => {
     toast({
       description: "",
-      duration: 5000,
+      duration: 2000,
       position: "top",
       status: "error",
       title: "Filme já adicionado!",
@@ -158,16 +153,15 @@ export const MoviesProvider = ({ children }: IMovies) => {
         .post("favorites", Addedmovie, {
           headers: { Authorization: `Bearer ${token}` },
         })
-        .then((_) => addFilmSuccessToast());
-    } else {
-      addFilmFailToast();
+        .then((_) => addFilmSuccessToast())
+        .catch((err) => console.log(err));
     }
   };
 
   const deleteFilmSuccessToast = () => {
     toast({
       description: "",
-      duration: 5000,
+      duration: 2000,
       position: "top",
       status: "success",
       title: "Filme deletado!",
@@ -176,14 +170,13 @@ export const MoviesProvider = ({ children }: IMovies) => {
   const deleteFilmFailToast = () => {
     toast({
       description: "Verificar conexão.",
-      duration: 5000,
+      duration: 2000,
       position: "top",
       status: "error",
       title: "Falha ao deletar!",
     });
   };
   const DeleteFromFavorites = (movieId: number, token: string) => {
-    console.log("entrou na funcão");
     api
       .delete(`favorites/${movieId}`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -191,15 +184,13 @@ export const MoviesProvider = ({ children }: IMovies) => {
       .then((_) => {
         deleteFilmSuccessToast();
       })
-      .catch((_) => {
-        deleteFilmFailToast();
-      });
+      .catch((err) => console.log(err));
   };
 
   const searchMoviesFailToast = () => {
     toast({
       description: "Verifique o nome informado.",
-      duration: 5000,
+      duration: 2000,
       position: "top",
       status: "error",
       title: "Não há nenhum filme correspondente!",
@@ -211,7 +202,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
       .then((response) => {
         setSearchedMovies(response.data.results);
       })
-      .catch((_) => searchMoviesFailToast());
+      .catch((err) => console.log(err));
     if (searchedMovies.length === 0) {
       searchMoviesFailToast();
     }
@@ -220,7 +211,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
   const getReviewFailToast = () => {
     toast({
       description: "",
-      duration: 5000,
+      duration: 2000,
       position: "top",
       status: "error",
       title: "Erro de conexão",
@@ -234,16 +225,13 @@ export const MoviesProvider = ({ children }: IMovies) => {
       .then((response) => {
         setReview(response.data);
       })
-      .catch((_) => getReviewFailToast());
-    // if (review.length === 0) {
-    //   getReviewFailToast();
-    // }
+      .catch((err) => console.log(err));
   };
 
   const addReviewsSuccessToast = () => {
     toast({
       description: "",
-      duration: 5000,
+      duration: 2000,
       position: "top",
       status: "success",
       title: "Review carregada!",
@@ -252,7 +240,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
   const addReviewsFailToast = () => {
     toast({
       description: "Verificar conexão",
-      duration: 5000,
+      duration: 2000,
       position: "top",
       status: "error",
       title: "Review não pode ser carregada!",
@@ -275,10 +263,10 @@ export const MoviesProvider = ({ children }: IMovies) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => {
+      .then((_) => {
         addReviewsSuccessToast();
       })
-      .catch((_) => addReviewsFailToast());
+      .catch((err) => console.log(err));
   };
 
   return (

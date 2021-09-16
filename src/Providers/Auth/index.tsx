@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { ReactNode } from "react";
 import { createContext, useContext, useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 
 interface AuthProviderProps {
   children: ReactNode;

@@ -1,4 +1,4 @@
-import { Heading, Flex, useMediaQuery, Box } from "@chakra-ui/react";
+import { Heading, Flex, useMediaQuery, Box, Button } from "@chakra-ui/react";
 import MovieCard from "../MovieCard";
 import BoxContainer from "../BoxContainer";
 import MovieContainer from "../MovieContainer";
@@ -10,6 +10,8 @@ import MenuMobile from "../MenuMobile";
 import "./styles.css";
 import { useUser } from "../../Providers/User";
 import { getCategory } from "../../utilities/index";
+import { BiRightArrow } from "react-icons/bi";
+import { BiLeftArrow } from "react-icons/bi";
 const DashboardComponent = () => {
   const history = useHistory();
   const {
@@ -38,11 +40,12 @@ const DashboardComponent = () => {
   const imgurl = "https://image.tmdb.org/t/p/original";
   const decode = jwtDecode<JwtPayload>(token);
   useEffect(() => {
-    getCategory(category, setCategoryNumber);
-    console.log(categoryNumber);
+    getMovies(page);
 
     getFavorites(Number(decode.sub));
-  }, [getFavorites]);
+
+    getCategory(category, setCategoryNumber);
+  }, [getFavorites, getMovies]);
   const [mobileVersion] = useMediaQuery("(max-width: 500px)");
   return (
     <Flex
@@ -63,7 +66,9 @@ const DashboardComponent = () => {
         {UpMovies.length > 1 ? (
           <BoxContainer
             increase={() =>
-              count < UpMovies.length ? setCount(count + 1) : setCount(count)
+              count < UpMovies.length - 1
+                ? setCount(count + 1)
+                : setCount(count)
             }
             decrease={() => (count > 1 ? setCount(count - 1) : setCount(count))}
             type="Upcomming"
@@ -92,7 +97,8 @@ const DashboardComponent = () => {
         >
           Recomendados
         </Heading>
-        <Box display="flex" maxWidth="95%">
+
+        <Box display="flex" maxWidth="95%" position="relative">
           <Flex overflowX="scroll" overflowY="hidden" className="barra">
             {recomended?.map((movie) => (
               <MovieCard

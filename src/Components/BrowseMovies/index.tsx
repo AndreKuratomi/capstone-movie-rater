@@ -72,13 +72,7 @@ const BrowseMovies = () => {
   ]);
 
   return (
-    <Flex
-      w="85%"
-      h="100vh"
-      alignItems="center"
-      flexDirection="column"
-      overflow="scroll"
-    >
+    <Flex w="85%" h="100vh" alignItems="center" flexDirection="column">
       <MovieContainer>
         <Flex w="100%" mb="25px" justifyContent="flex-end">
           <Input
