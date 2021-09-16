@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import api from "../../Services/api";
 import { ReactNode } from "react";
 import { useAuth } from "../Auth";
@@ -7,7 +7,6 @@ import { useAuth } from "../Auth";
 import jwtDecode, { JwtPayload } from "jwt-decode";
 
 import axios from "axios";
-import { jsx } from "@emotion/react";
 import { useToast } from "@chakra-ui/react";
 interface IMovies {
   children: ReactNode;
@@ -71,12 +70,11 @@ export const MoviesProvider = ({ children }: IMovies) => {
   const [favorites, setFavorites] = useState<IMoviesList[]>([]);
   const [aboutMovie, setAboutMovie] = useState({});
   const [review, setReview] = useState([]);
-  const { auth } = useAuth();
   const toast = useToast();
 
   const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
 
-  const chargeGroupsFailToast = () => {
+  const getMoviesFailToast = () => {
     toast({
       description: "Verificar conexão",
       duration: 5000,
@@ -91,7 +89,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
       .then((response) => {
         setMovies(response.data[0].results);
       })
-      .catch((err) => console.log(err));
+      .catch((_) => getMoviesFailToast());
   };
 
   const getSpecificMovie = (specifcMovie: IMoviesList) => {
@@ -115,10 +113,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
       .then((response) => {
         setFavorites(response.data);
       })
-      .catch((err) => console.log(err));
-    // if (favorites.length === 0) {
-    //   ;
-    // }
+      .catch((_) => getFavoritesFailToast());
   };
 
   const addFilmSuccessToast = () => {
@@ -158,9 +153,8 @@ export const MoviesProvider = ({ children }: IMovies) => {
         .post("favorites", Addedmovie, {
           headers: { Authorization: `Bearer ${token}` },
         })
-        .then((_) => addFilmSuccessToast());
-    } else {
-      addFilmFailToast();
+        .then((_) => addFilmSuccessToast())
+        .catch((_) => addFilmFailToast());
     }
   };
 
@@ -183,7 +177,6 @@ export const MoviesProvider = ({ children }: IMovies) => {
     });
   };
   const DeleteFromFavorites = (movieId: number, token: string) => {
-    console.log("entrou na funcão");
     api
       .delete(`favorites/${movieId}`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -235,9 +228,6 @@ export const MoviesProvider = ({ children }: IMovies) => {
         setReview(response.data);
       })
       .catch((_) => getReviewFailToast());
-    // if (review.length === 0) {
-    //   getReviewFailToast();
-    // }
   };
 
   const addReviewsSuccessToast = () => {
@@ -275,7 +265,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => {
+      .then((_) => {
         addReviewsSuccessToast();
       })
       .catch((_) => addReviewsFailToast());
