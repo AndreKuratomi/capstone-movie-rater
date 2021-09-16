@@ -2,7 +2,6 @@ import { Box } from "@chakra-ui/layout";
 import { ReactNode } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-
 interface IBoxContainer {
   bgImg?: string;
   children: ReactNode;
@@ -10,7 +9,6 @@ interface IBoxContainer {
   decrease?: () => void;
   increase?: () => void | undefined;
 }
-
 const BoxContainer = ({
   bgImg,
   children,

@@ -3,7 +3,6 @@ import { VStack, Box, Text, Heading } from "@chakra-ui/layout";
 import { Menu, MenuButton, MenuList } from "@chakra-ui/menu";
 import { HiPlus } from "react-icons/hi";
 import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
-
 interface IMoviesList {
   onClick?: () => void;
   AddToFavorite?: (movie: IMoviesList) => void;
@@ -43,7 +42,6 @@ const MovieCard = ({
       minW="130px"
       ml="25px"
       position="relative"
-      overflow="auto"
     >
       <Img
         cursor="pointer"
@@ -61,6 +59,7 @@ const MovieCard = ({
         position="absolute"
         top="2"
         right="1"
+        // overflow="scroll"
       >
         <AiFillPlusCircle />
       </Box> */}
@@ -166,5 +165,4 @@ const MovieCard = ({
     </VStack>
   );
 };
-
 export default MovieCard;
