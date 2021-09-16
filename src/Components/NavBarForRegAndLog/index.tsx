@@ -12,7 +12,7 @@ import { Link as RouteLink } from "react-router-dom";
 
 const NavBar = () => {
   return (
-    <Breadcrumb>
+    <Breadcrumb position="relative" zIndex="0">
       <BreadcrumbItem color="white" w="100%">
         <Flex w="100%" bg="#000000" justify="space-between" alignItems="center">
           <Box padding="1rem">

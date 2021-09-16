@@ -3,9 +3,6 @@ import {
   FormErrorMessage,
   Select as ChakraSelect,
   SelectFieldProps as ChakraSelectProps,
-  InputGroup,
-  SelectField,
-  InputLeftElement,
 } from "@chakra-ui/react";
 
 import {
@@ -56,7 +53,6 @@ const SelectBase: ForwardRefRenderFunction<
       {!!error && (
         <FormErrorMessage
           align="center"
-          backgroundColor="#000"
           color="red.500"
           fontStyle=""
           fontWeight="bold"

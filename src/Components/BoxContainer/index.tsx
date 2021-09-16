@@ -2,7 +2,6 @@ import { Box } from "@chakra-ui/layout";
 import { ReactNode } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-
 interface IBoxContainer {
   bgImg?: string;
   children: ReactNode;
@@ -10,7 +9,6 @@ interface IBoxContainer {
   decrease?: () => void;
   increase?: () => void | undefined;
 }
-
 const BoxContainer = ({
   bgImg,
   children,
@@ -27,9 +25,10 @@ const BoxContainer = ({
       flexDirection="row"
       borderRadius="15px"
       bgImage={bgImg}
+      backgroundSize="cover"
       bgSize="fill"
-      mt="8px"
       bgPosition="center"
+      mt="30%"
     >
       <Box
         cursor="pointer"
@@ -57,11 +56,13 @@ const BoxContainer = ({
     </Box>
   ) : type === "Browse" ? (
     <Box
-      w="85%"
+      w="95%"
       overflowY="auto"
+      // border={children ? "1px solid white" : "1px solid red"}
+      padding="0.25rem"
       css={{
         "&::-webkit-scrollbar": {
-          width: "0",
+          width: "10px",
         },
         "&::-webkit-scrollbar-track": {
           width: "6px",
@@ -72,7 +73,6 @@ const BoxContainer = ({
         },
       }}
       bgColor="black.transparent800"
-      h="80%"
       mb="8px"
       display="flex"
       flexDirection="row"
@@ -86,8 +86,10 @@ const BoxContainer = ({
     </Box>
   ) : type === "specificMovie" ? (
     <Box
-      w="85%"
+      w="95%"
       overflowY="auto"
+      // border={children ? "1px solid white" : "1px solid red"}
+      padding="0.25rem"
       css={{
         "&::-webkit-scrollbar": {
           width: "0",
@@ -114,8 +116,10 @@ const BoxContainer = ({
     </Box>
   ) : (
     <Box
-      w="85%"
+      w="95%"
       overflowY="auto"
+      // border={children ? "1px solid blue" : "1px solid red"}
+      padding="0.25rem"
       css={{
         "&::-webkit-scrollbar": {
           width: "0",
@@ -129,7 +133,6 @@ const BoxContainer = ({
         },
       }}
       bgColor="black.transparent800"
-      h="80%"
       mb="8px"
       display="flex"
       flexDirection="row"

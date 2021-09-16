@@ -1,13 +1,11 @@
 import { Flex } from "@chakra-ui/layout";
 import { ReactNode } from "react";
-
 interface IMovieContainer {
   children: ReactNode;
   type?: string;
   colorBorder?: string;
   height?: string;
 }
-
 const MovieContainer = ({
   children,
   type,
@@ -16,8 +14,21 @@ const MovieContainer = ({
 }: IMovieContainer) => {
   return type === "column" ? (
     <Flex
-      w="65vw"
-      h="88vh"
+      w="95%"
+      overflowY="auto"
+      css={{
+        "&::-webkit-scrollbar": {
+          width: "10px",
+        },
+        "&::-webkit-scrollbar-track": {
+          width: "6px",
+        },
+        "&::-webkit-scrollbar-thumb": {
+          background: "rgba(91, 91, 91, 0.67)",
+          borderRadius: "24px",
+        },
+      }}
+      h="95%"
       mb="20px"
       justifyContent="space-evenly"
       flexDirection="column"
@@ -31,8 +42,21 @@ const MovieContainer = ({
     </Flex>
   ) : (
     <Flex
-      w="75vw"
-      h="95vh"
+      w="95%"
+      overflowX="auto"
+      css={{
+        "&::-webkit-scrollbar": {
+          width: "5px",
+        },
+        "&::-webkit-scrollbar-track": {
+          width: "6px",
+        },
+        "&::-webkit-scrollbar-thumb": {
+          background: "rgba(91, 91, 91, 0.67)",
+          borderRadius: "24px",
+        },
+      }}
+      h="95%"
       mb="20px"
       justifyContent="center"
       flexDirection="column"
@@ -46,5 +70,4 @@ const MovieContainer = ({
     </Flex>
   );
 };
-
 export default MovieContainer;

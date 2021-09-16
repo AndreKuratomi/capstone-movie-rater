@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import api from "../../Services/api";
 import { ReactNode } from "react";
 import { useAuth } from "../Auth";
@@ -7,7 +7,7 @@ import { useAuth } from "../Auth";
 import jwtDecode, { JwtPayload } from "jwt-decode";
 
 import axios from "axios";
-import { jsx } from "@emotion/react";
+import { useToast } from "@chakra-ui/react";
 interface IMovies {
   children: ReactNode;
 }
@@ -44,6 +44,7 @@ interface IMoviesContext {
   getFavorites: (user: number) => void;
   searchMovies: (searchText: string) => void;
   movies: IMoviesList[];
+
   favorites: IMoviesList[];
   searchedMovies: IMoviesList[];
   getSpecificMovie: (specifcMovie: IMoviesList) => void;
@@ -58,29 +59,51 @@ interface IMoviesContext {
 }
 
 const MoviesContext = createContext({} as IMoviesContext);
+
 export const MoviesProvider = ({ children }: IMovies) => {
   const TMDBapi =
     "https://api.themoviedb.org/3/search/movie?api_key=4b5de5fed14a8cc95ec876f973db1f9c&query=";
 
   const [movies, setMovies] = useState([]);
+
   const [searchedMovies, setSearchedMovies] = useState([]);
   const [favorites, setFavorites] = useState<IMoviesList[]>([]);
   const [aboutMovie, setAboutMovie] = useState({});
   const [review, setReview] = useState([]);
-  const { auth } = useAuth();
+  const toast = useToast();
 
   const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
+
+  const getMoviesFailToast = () => {
+    toast({
+      description: "Verificar conexão",
+      duration: 5000,
+      position: "top",
+      status: "error",
+      title: "Ocorreu um erro",
+    });
+  };
   const getMovies = (page: number) => {
     api
       .get(`movies?page=${page}`)
       .then((response) => {
-        console.log(response.data[0].results);
         setMovies(response.data[0].results);
       })
-      .catch((err) => console.log("Grupos não podem ser carregados"));
+      .catch((_) => getMoviesFailToast());
   };
+
   const getSpecificMovie = (specifcMovie: IMoviesList) => {
     setAboutMovie(specifcMovie);
+  };
+
+  const getFavoritesFailToast = () => {
+    toast({
+      description: "",
+      duration: 5000,
+      position: "top",
+      status: "error",
+      title: "Falha de conexão",
+    });
   };
   const getFavorites = (userId: number) => {
     api
@@ -89,7 +112,27 @@ export const MoviesProvider = ({ children }: IMovies) => {
       })
       .then((response) => {
         setFavorites(response.data);
-      });
+      })
+      .catch((_) => getFavoritesFailToast());
+  };
+
+  const addFilmSuccessToast = () => {
+    toast({
+      description: "",
+      duration: 5000,
+      position: "top",
+      status: "success",
+      title: "Filme adicionado!",
+    });
+  };
+  const addFilmFailToast = () => {
+    toast({
+      description: "",
+      duration: 5000,
+      position: "top",
+      status: "error",
+      title: "Filme já adicionado!",
+    });
   };
   const AddToFavorites = (data: IMoviesList, token: string) => {
     let isInFavorite = false;
@@ -110,32 +153,72 @@ export const MoviesProvider = ({ children }: IMovies) => {
         .post("favorites", Addedmovie, {
           headers: { Authorization: `Bearer ${token}` },
         })
-        .then((_) => console.log("filme adicionado"));
-    } else {
-      console.log("filme ja adicionado");
+        .then((_) => addFilmSuccessToast())
+        .catch((_) => addFilmFailToast());
     }
   };
+
+  const deleteFilmSuccessToast = () => {
+    toast({
+      description: "",
+      duration: 5000,
+      position: "top",
+      status: "success",
+      title: "Filme deletado!",
+    });
+  };
+  const deleteFilmFailToast = () => {
+    toast({
+      description: "Verificar conexão.",
+      duration: 5000,
+      position: "top",
+      status: "error",
+      title: "Falha ao deletar!",
+    });
+  };
   const DeleteFromFavorites = (movieId: number, token: string) => {
-    console.log("entrou na funcão");
     api
       .delete(`favorites/${movieId}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((res) => {
-        console.log(res, "deletou");
+      .then((_) => {
+        deleteFilmSuccessToast();
       })
-      .catch((err) => console.log(err));
+      .catch((_) => {
+        deleteFilmFailToast();
+      });
+  };
+
+  const searchMoviesFailToast = () => {
+    toast({
+      description: "Verifique o nome informado.",
+      duration: 5000,
+      position: "top",
+      status: "error",
+      title: "Não há nenhum filme correspondente!",
+    });
   };
   const searchMovies = (searchText: string) => {
     axios
       .get(TMDBapi + searchText)
-
       .then((response) => {
         setSearchedMovies(response.data.results);
       })
-      .catch((err) => console.log("Grupo não podem ser carregados"));
+      .catch((_) => searchMoviesFailToast());
+    if (searchedMovies.length === 0) {
+      searchMoviesFailToast();
+    }
   };
 
+  const getReviewFailToast = () => {
+    toast({
+      description: "",
+      duration: 5000,
+      position: "top",
+      status: "error",
+      title: "Erro de conexão",
+    });
+  };
   const getReview = (movieId: number, token: string) => {
     api
       .get(`reviews?movieId=${movieId}`, {
@@ -144,9 +227,27 @@ export const MoviesProvider = ({ children }: IMovies) => {
       .then((response) => {
         setReview(response.data);
       })
-      .catch((err) => console.log("Movies não podem ser carregados"));
+      .catch((_) => getReviewFailToast());
   };
 
+  const addReviewsSuccessToast = () => {
+    toast({
+      description: "",
+      duration: 5000,
+      position: "top",
+      status: "success",
+      title: "Review carregada!",
+    });
+  };
+  const addReviewsFailToast = () => {
+    toast({
+      description: "Verificar conexão",
+      duration: 5000,
+      position: "top",
+      status: "error",
+      title: "Review não pode ser carregada!",
+    });
+  };
   const addReviews = (
     movieId: number,
     comment: string,
@@ -164,10 +265,10 @@ export const MoviesProvider = ({ children }: IMovies) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => {
-        console.log("funcionou");
+      .then((_) => {
+        addReviewsSuccessToast();
       })
-      .catch((err) => console.log("Review não podem ser carregados", err));
+      .catch((_) => addReviewsFailToast());
   };
 
   return (

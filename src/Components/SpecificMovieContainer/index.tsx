@@ -1,14 +1,13 @@
-import { Grid, GridItem, Box, Heading, Flex } from "@chakra-ui/layout";
+import { Box, Heading, Flex } from "@chakra-ui/layout";
 import { Img } from "@chakra-ui/image";
 import { useMovies } from "../../Providers/Movies";
-import { Input, Button } from "@chakra-ui/react";
+import { useUser } from "../../Providers/User";
+import { Input, Button, Text, useMediaQuery } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { IMoviesList } from "../../Providers/Movies";
 import jwtDecode, { JwtPayload } from "jwt-decode";
-import { number } from "yup";
 
 const SpecificMovieContainer = () => {
-  const { getSpecificMovie, aboutMovie } = useMovies();
+  const { aboutMovie } = useMovies();
   const imgurl = "https://image.tmdb.org/t/p/original";
   const [comments, setComments] = useState<string>("");
   const { addReviews, getReview, review } = useMovies();
@@ -16,72 +15,50 @@ const SpecificMovieContainer = () => {
   useEffect(() => {
     aboutMovie.id && getReview(aboutMovie.id, token);
   }, [getReview]);
-  console.log(review);
   const decoded = jwtDecode<JwtPayload>(token);
+  const { userName } = useUser();
+  const [mobileVersion] = useMediaQuery("(max-width: 500px)");
   return (
     <Flex flexDirection="column" h="100%">
+      <Heading color="white" textAlign="center" width="100%" p="1rem">
+        {aboutMovie.title}
+      </Heading>
       <Box
-        mt="20px"
-        ml="20px"
+        alignItems="center"
         display="flex"
-        flexDirection="row"
+        flexDirection={mobileVersion ? "column" : "row"}
         justifyContent="space-between"
       >
         <Box w="35%">
           <Img
-            w="70%"
+            w={mobileVersion ? "100%" : "80%"}
             cursor="pointer"
             src={imgurl + aboutMovie.poster_path}
             borderRadius="8px"
           />
         </Box>
-        <Box w="60%" h="100%">
-          <Box
-            ml="25px"
-            w="48%"
-            h="100%"
-            borderRadius="15px"
-            padding="20px"
-            bgColor="brown.dark"
-          >
-            <Heading
-              w="100%"
-              fontSize="20px"
-              lineHeight="30px"
-              color="fontColor.pinkLight"
-            >
+        <Box w={mobileVersion ? "100%" : "60%"} h="100%">
+          <Box h="100%" borderRadius="15px" padding="20px" bgColor="brown.dark">
+            <Text w="100%" fontSize="20px" lineHeight="30px" color="white">
               {aboutMovie.overview}
-            </Heading>
+            </Text>
           </Box>
         </Box>
       </Box>
-      <Box mt="20px" ml="20px" h="100px" display="flex" flexDirection="column">
-        <Heading
-          mb="6px"
-          fontWeight="400"
-          fontSize="18px"
-          color="fontColor.pinkLight"
-        >
-          data de lançamento: <b>{aboutMovie.release_date}</b>
-        </Heading>
-        <Heading
-          mb="6px"
-          fontWeight="400"
-          fontSize="18px"
-          color="fontColor.pinkLight"
-        >
-          popularidade: <b>{aboutMovie.popularity}</b>
-        </Heading>
-        <Heading
-          mb="6px"
-          fontWeight="400"
-          fontSize="18px"
-          color="fontColor.pinkLight"
-        >
-          linguagem original: <b>{aboutMovie.original_language}</b>
-        </Heading>
+      <Box
+        mt="20px"
+        ml="20px"
+        h="100px"
+        display="flex"
+        flexDirection="column"
+        color="white"
+      >
+        <Text>Data de lançamento: {aboutMovie.release_date}</Text>
+        <Text>Popularidade: {aboutMovie.popularity}</Text>
+        <Text>Título original: {aboutMovie.original_title}</Text>
+        <Text>Idioma original: {aboutMovie.original_language}</Text>
       </Box>
-      <Box display="flex" flexDirection="column">
+      <Box display="flex" flexDirection="column" mt="4rem">
         <Heading
           textAlign="center"
           mb="16px"
@@ -91,22 +68,23 @@ const SpecificMovieContainer = () => {
         >
           Reviews
         </Heading>
-        <Box display="flex" flexDirection="column" alignItems="center">
+        <Box
+          display="flex"
+          alignItems="center"
+          flexDirection={mobileVersion ? "column" : "row"}
+        >
           <Input
             onChange={(e) => setComments(e.target.value)}
             w="100%"
-            color="fontColor.pinkLight"
             borderColor="fontColor.black800"
-            placeholder="Digite o que achou do filme"
-            bgColor="brown.dark"
+            placeholder="Digite aqui a sua opinião!"
+            bgColor="white"
           />
 
           <Button
-            mt="10px"
-            w="40%"
+            w={mobileVersion ? "100%" : "40%"}
             hover="fontColor.black800"
-            bgColor="brown.dark"
-            color="fontColor.pinkLight"
+            bgColor="#d28b20"
             onClick={() =>
               aboutMovie.id &&
               addReviews(aboutMovie.id, comments, Number(decoded.sub), token)
@@ -118,25 +96,34 @@ const SpecificMovieContainer = () => {
         </Box>
         {review ? (
           review?.map((comment, index) => (
-            <Flex ml="20px" flexDirection="row" mb="5px">
+            <Flex
+              margin={
+                mobileVersion ? "1rem 0rem 1rem 0rem" : "1rem 1rem 1rem 1rem"
+              }
+              flexDirection="row"
+              border="1px solid #4a4a4a"
+              alignItems="center"
+              p="1rem"
+              bg="transparent"
+            >
               <Img
                 w="50px"
                 h="50px"
                 borderRadius="50%"
                 cursor="pointer"
                 src="https://image.tmdb.org/t/p/original/pUK9duiCK1PKqWA5rRQ4XBMHITH.jpg"
+                ml="1rem"
               />
               <Box
                 ml="25px"
-                w="48%"
-                h="130px"
+                w="50%"
                 borderRadius="15px"
                 padding="10px"
-                bgColor="brown.dark"
+                bgColor="#450808"
               >
-                <Heading w="100%" fontSize="20px" color="fontColor.white100">
-                  {comment.comment}
-                </Heading>
+                <Text w="100%" color="fontColor.white100">
+                  {userName}: {comment.comment}
+                </Text>
               </Box>
             </Flex>
           ))

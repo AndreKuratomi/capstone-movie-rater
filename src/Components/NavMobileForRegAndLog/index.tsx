@@ -14,7 +14,14 @@ import Logo from "../../Assets/img/logo.png";
 
 const NavMobile = () => {
   return (
-    <Box bg="black" display="flex" justifyContent="flex-end" padding="0.25rem">
+    <Box
+      bg="black"
+      display="flex"
+      justifyContent="flex-end"
+      padding="0.25rem"
+      position="relative"
+      zIndex="3"
+    >
       <RouteLink to="/">
         <Image src={Logo} width="50%" />
       </RouteLink>

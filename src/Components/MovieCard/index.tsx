@@ -3,7 +3,6 @@ import { VStack, Box, Text, Heading } from "@chakra-ui/layout";
 import { Menu, MenuButton, MenuList } from "@chakra-ui/menu";
 import { HiPlus } from "react-icons/hi";
 import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
-
 interface IMoviesList {
   onClick?: () => void;
   AddToFavorite?: (movie: IMoviesList) => void;
@@ -49,20 +48,21 @@ const MovieCard = ({
         onClick={onClick}
         src={backdrop_path || poster_path}
         borderRadius="8px"
-        w="130px"
+        w="75%"
         h="70%"
       />
-      <Box
+      {/* <Box
         onClick={AddToFavorite}
         cursor="pointer"
         fontSize="25px"
-        color="fontColor.pinkLight"
+        color="red"
         position="absolute"
         top="2"
         right="1"
+        // overflow="scroll"
       >
         <AiFillPlusCircle />
-      </Box>
+      </Box> */}
       <Menu>
         <MenuButton
           display="flex"
@@ -73,7 +73,6 @@ const MovieCard = ({
           transition="all 0.2s"
           color="fontColor.white100"
           borderRadius="md"
-          borderWidth="1px"
           bgColor="red.300"
           _hover={{ bg: "red.800" }}
           _expanded={{ bg: "red.800" }}
@@ -87,12 +86,6 @@ const MovieCard = ({
           <Text ml="5px" color="fontColor.white100">
             {title}
           </Text>
-          <Text ml="5px" color="fontColor.white100">
-            {release_date}
-          </Text>
-          <Text ml="5px" color="fontColor.white100">
-            {popularity}
-          </Text>
         </MenuList>
       </Menu>
     </VStack>
@@ -100,19 +93,14 @@ const MovieCard = ({
     <VStack
       justifyContent="center"
       alignItems="center"
-      h="270px"
       position="relative"
-      minW="130px"
-      mt="5px"
-      ml="25px"
-      mb="5px"
-      mr="25px"
+      m="1rem"
     >
       <Box
         onClick={onClick}
         cursor="pointer"
         fontSize="25px"
-        color="fontColor.pinkLight"
+        color="red"
         position="absolute"
         top="2"
         right="1"
@@ -142,19 +130,14 @@ const MovieCard = ({
     <VStack
       justifyContent="center"
       alignItems="center"
-      h="270px"
       position="relative"
-      minW="130px"
-      mt="5px"
-      ml="25px"
-      mb="5px"
-      mr="25px"
+      m="1rem"
     >
       <Box
         onClick={AddToFavorite}
         cursor="pointer"
         fontSize="25px"
-        color="fontColor.pinkLight"
+        color="white"
         position="absolute"
         top="2"
         right="1"
@@ -182,5 +165,4 @@ const MovieCard = ({
     </VStack>
   );
 };
-
 export default MovieCard;
