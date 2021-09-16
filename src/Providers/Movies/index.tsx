@@ -76,25 +76,34 @@ export const MoviesProvider = ({ children }: IMovies) => {
 
   const chargeGroupsFailToast = () => {
     toast({
-      description: "",
+      description: "Verificar conexão",
       duration: 5000,
       position: "top",
       status: "error",
-      title: "Grupos não podem ser carregados",
+      title: "Ocorreu um erro",
     });
   };
   const getMovies = (page: number) => {
     api
       .get(`movies?page=${page}`)
       .then((response) => {
-        console.log(response.data[0].results);
         setMovies(response.data[0].results);
       })
-      .catch((err) => chargeGroupsFailToast());
+      .catch((_) => chargeGroupsFailToast());
   };
 
   const getSpecificMovie = (specifcMovie: IMoviesList) => {
     setAboutMovie(specifcMovie);
+  };
+
+  const getFavoritesFailToast = () => {
+    toast({
+      description: "",
+      duration: 5000,
+      position: "top",
+      status: "error",
+      title: "Falha de conexão",
+    });
   };
   const getFavorites = (userId: number) => {
     api
@@ -103,7 +112,11 @@ export const MoviesProvider = ({ children }: IMovies) => {
       })
       .then((response) => {
         setFavorites(response.data);
-      });
+      })
+      .catch((_) => getFavoritesFailToast());
+    // if (favorites.length === 0) {
+    //   ;
+    // }
   };
 
   const addFilmSuccessToast = () => {
@@ -160,7 +173,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
   };
   const deleteFilmFailToast = () => {
     toast({
-      description: "",
+      description: "Verificar conexão.",
       duration: 5000,
       position: "top",
       status: "error",
@@ -183,11 +196,11 @@ export const MoviesProvider = ({ children }: IMovies) => {
 
   const searchMoviesFailToast = () => {
     toast({
-      description: "",
+      description: "Verifique o nome informado.",
       duration: 5000,
       position: "top",
       status: "error",
-      title: "Filmes não podem ser carregados",
+      title: "Não há nenhum filme correspondente!",
     });
   };
   const searchMovies = (searchText: string) => {
@@ -197,6 +210,9 @@ export const MoviesProvider = ({ children }: IMovies) => {
         setSearchedMovies(response.data.results);
       })
       .catch((_) => searchMoviesFailToast());
+    if (searchedMovies.length === 0) {
+      searchMoviesFailToast();
+    }
   };
 
   const getReviewFailToast = () => {
@@ -205,7 +221,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
       duration: 5000,
       position: "top",
       status: "error",
-      title: "Movies não podem ser carregados!",
+      title: "Erro de conexão",
     });
   };
   const getReview = (movieId: number, token: string) => {
@@ -216,7 +232,10 @@ export const MoviesProvider = ({ children }: IMovies) => {
       .then((response) => {
         setReview(response.data);
       })
-      .catch((err) => getReviewFailToast());
+      .catch((_) => getReviewFailToast());
+    // if (review.length === 0) {
+    //   getReviewFailToast();
+    // }
   };
 
   const addReviewsSuccessToast = () => {
@@ -230,7 +249,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
   };
   const addReviewsFailToast = () => {
     toast({
-      description: "",
+      description: "Verificar conexão",
       duration: 5000,
       position: "top",
       status: "error",
