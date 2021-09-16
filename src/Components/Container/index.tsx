@@ -19,7 +19,6 @@ const ContainerDashboard = ({ children }: ContainerDashboardProps) => {
       minW="100vw"
       bgImage={image}
       bgSize="cover"
-      overflow="hidden"
     >
       {mobileVersion ? (
         <Flex
