@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import api from "../../Services/api";
 import { ReactNode } from "react";
 import { useAuth } from "../Auth";
@@ -7,7 +7,6 @@ import { useAuth } from "../Auth";
 import jwtDecode, { JwtPayload } from "jwt-decode";
 
 import axios from "axios";
-import { jsx } from "@emotion/react";
 import { useToast } from "@chakra-ui/react";
 interface IMovies {
   children: ReactNode;
@@ -71,7 +70,6 @@ export const MoviesProvider = ({ children }: IMovies) => {
   const [favorites, setFavorites] = useState<IMoviesList[]>([]);
   const [aboutMovie, setAboutMovie] = useState({});
   const [review, setReview] = useState([]);
-  const { auth } = useAuth();
   const toast = useToast();
 
   const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
@@ -179,7 +177,6 @@ export const MoviesProvider = ({ children }: IMovies) => {
     });
   };
   const DeleteFromFavorites = (movieId: number, token: string) => {
-    console.log("entrou na funcão");
     api
       .delete(`favorites/${movieId}`, {
         headers: { Authorization: `Bearer ${token}` },

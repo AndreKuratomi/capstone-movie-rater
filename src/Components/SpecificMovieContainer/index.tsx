@@ -1,15 +1,13 @@
-import { Grid, GridItem, Box, Heading, Flex } from "@chakra-ui/layout";
+import { Box, Heading, Flex } from "@chakra-ui/layout";
 import { Img } from "@chakra-ui/image";
 import { useMovies } from "../../Providers/Movies";
 import { useUser } from "../../Providers/User";
 import { Input, Button, Text, useMediaQuery } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { IMoviesList } from "../../Providers/Movies";
 import jwtDecode, { JwtPayload } from "jwt-decode";
-import { number } from "yup";
 
 const SpecificMovieContainer = () => {
-  const { getSpecificMovie, aboutMovie } = useMovies();
+  const { aboutMovie } = useMovies();
   const imgurl = "https://image.tmdb.org/t/p/original";
   const [comments, setComments] = useState<string>("");
   const { addReviews, getReview, review } = useMovies();
@@ -17,7 +15,6 @@ const SpecificMovieContainer = () => {
   useEffect(() => {
     aboutMovie.id && getReview(aboutMovie.id, token);
   }, [getReview]);
-  console.log(review);
   const decoded = jwtDecode<JwtPayload>(token);
   const { userName } = useUser();
   const [mobileVersion] = useMediaQuery("(max-width: 500px)");
