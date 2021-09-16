@@ -73,19 +73,19 @@ const MenuMobile = () => {
           <DrawerBody>
             <Box display="flex">
               <ImHome3 />
-              <Link to="/">Home</Link>
+              <ReachLink to="/">Home</ReachLink>
             </Box>
             <Box display="flex">
               <RiSearchEyeLine />
-              <Link to="/movies">Filmes</Link>
+              <ReachLink to="/movies">Filmes</ReachLink>
             </Box>
             <Box display="flex">
               <TiGroup />
-              <Link to="/groups">Grupos</Link>
+              <ReachLink to="/groups">Grupos</ReachLink>
             </Box>
             <Box display="flex">
               <MdMovieCreation />
-              <Link to="/mymovies">Meus Filmes</Link>
+              <ReachLink to="/mymovies">Meus Filmes</ReachLink>
             </Box>
           </DrawerBody>
           <DrawerHeader color="red.800" borderBottomWidth="1px">
