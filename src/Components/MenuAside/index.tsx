@@ -228,7 +228,9 @@ const MenuAside = () => {
                 fontWeight="100"
                 lineHeight="35px"
               >
-                Logout
+                <Link as={ReachLink} to="/">
+                  Logout
+                </Link>
               </Heading>
             </Box>
           </VStack>
