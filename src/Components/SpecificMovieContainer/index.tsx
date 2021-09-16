@@ -1,6 +1,7 @@
 import { Grid, GridItem, Box, Heading, Flex } from "@chakra-ui/layout";
 import { Img } from "@chakra-ui/image";
 import { useMovies } from "../../Providers/Movies";
+import { useRegister } from "../../Providers/Register";
 import { Input, Button, Text, useMediaQuery } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { IMoviesList } from "../../Providers/Movies";
@@ -12,6 +13,7 @@ const SpecificMovieContainer = () => {
   const imgurl = "https://image.tmdb.org/t/p/original";
   const [comments, setComments] = useState<string>("");
   const { addReviews, getReview, review } = useMovies();
+  const { userName } = useRegister();
   const token = JSON.parse(localStorage.getItem("@movies: token") || "null");
   useEffect(() => {
     aboutMovie.id && getReview(aboutMovie.id, token);

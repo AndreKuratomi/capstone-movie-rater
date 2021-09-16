@@ -21,15 +21,16 @@ const BoxContainer = ({
   return type === "Upcomming" ? (
     <Box
       minW="85%"
-      // h="30%"
+      h="30%"
       position="relative"
       display="flex"
       flexDirection="row"
       borderRadius="15px"
       bgImage={bgImg}
+      backgroundSize="cover"
       bgSize="fill"
-      mt="8px"
       bgPosition="center"
+      mt="30%"
     >
       <Box
         cursor="pointer"

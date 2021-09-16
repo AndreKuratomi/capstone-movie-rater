@@ -17,6 +17,20 @@ const MovieContainer = ({
   return type === "column" ? (
     <Flex
       w="95%"
+      overflowY="scroll"
+      css={{
+        "&::-webkit-scrollbar": {
+          width: "10px",
+          height: "5px",
+        },
+        "&::-webkit-scrollbar-track": {
+          width: "6px",
+        },
+        "&::-webkit-scrollbar-thumb": {
+          background: "rgba(91, 91, 91, 0.67)",
+          borderRadius: "24px",
+        },
+      }}
       h="95%"
       mb="20px"
       justifyContent="space-evenly"
@@ -32,6 +46,7 @@ const MovieContainer = ({
   ) : (
     <Flex
       w="95%"
+      overflowY="scroll"
       h="95%"
       mb="20px"
       justifyContent="center"
