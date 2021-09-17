@@ -38,7 +38,7 @@ const DashboardComponent = () => {
   const decode = jwtDecode<JwtPayload>(token);
   useEffect(() => {
     getMovies(page);
-
+    console.log(recomended);
     getFavorites(Number(decode.sub));
 
     getCategory(category, setCategoryNumber);
@@ -96,17 +96,29 @@ const DashboardComponent = () => {
 
         <Box display="flex" maxWidth="95%" position="relative">
           <Flex overflowX="scroll" overflowY="hidden" className="barra">
-            {recomended?.map((movie) => (
-              <MovieCard
-                AddToFavorite={() => AddToFavorites(movie, token)}
-                onClick={() => {
-                  getSpecificMovie(movie);
-                  history.push("/aboutmovie");
-                }}
-                title={movie.title}
-                poster_path={imgurl + movie.poster_path}
-              />
-            ))}
+            {recomended
+              ? recomended.map((movie) => (
+                  <MovieCard
+                    AddToFavorite={() => AddToFavorites(movie, token)}
+                    onClick={() => {
+                      getSpecificMovie(movie);
+                      history.push("/aboutmovie");
+                    }}
+                    title={movie.title}
+                    poster_path={imgurl + movie.poster_path}
+                  />
+                ))
+              : movies.map((movie) => (
+                  <MovieCard
+                    AddToFavorite={() => AddToFavorites(movie, token)}
+                    onClick={() => {
+                      getSpecificMovie(movie);
+                      history.push("/aboutmovie");
+                    }}
+                    title={movie.title}
+                    poster_path={imgurl + movie.poster_path}
+                  />
+                ))}
           </Flex>
         </Box>
         <Heading
