@@ -1,12 +1,4 @@
-import {
-  VStack,
-  Grid,
-  GridItem,
-  Heading,
-  Box,
-  Text,
-  Flex,
-} from "@chakra-ui/layout";
+import { VStack, Heading, Box, Text, Flex } from "@chakra-ui/layout";
 import Logo from "../../Assets/img/logo.png";
 import { ImHome3 } from "react-icons/im";
 import { RiSearchEyeLine } from "react-icons/ri";
@@ -20,9 +12,7 @@ import { useDisclosure } from "@chakra-ui/hooks";
 import {
   Modal,
   ModalOverlay,
-  ModalHeader,
   ModalContent,
-  ModalFooter,
   ModalCloseButton,
   ModalBody,
 } from "@chakra-ui/modal";
@@ -30,7 +20,7 @@ import { Select } from "../../Components/Form/Select";
 import { useUser } from "../../Providers/User";
 import { useForm } from "react-hook-form";
 import { Input } from "@chakra-ui/input";
-import { useEffect } from "react";
+import avatarMock from "../../Assets/img/avatarMock.jpg"
 
 const MenuAside = () => {
   const { userName, category, updateCategory } = useUser();
@@ -64,7 +54,8 @@ const MenuAside = () => {
           w="100px"
           h="100px"
           borderRadius="50%"
-          bgColor="black.transparent500"
+          bgImage={`url(${avatarMock})`}
+          backgroundSize="contain"
         />
         <VStack>
           <Heading fontWeight="light" as="h3" fontSize="25px" m="1rem">
@@ -80,6 +71,8 @@ const MenuAside = () => {
               ml="5px"
               fontWeight="100"
               lineHeight="35px"
+              _hover={{ transform: "translateY(-1px)", borderColor:"gray" }}
+              transition="border 0.2s, ease 0s, transform 0.2s"
             >
               <Link as={ReachLink} to="/dashboard">
                 Home
@@ -96,6 +89,8 @@ const MenuAside = () => {
               ml="5px"
               fontWeight="100"
               lineHeight="35px"
+              _hover={{ transform: "translateY(-1px)", borderColor:"gray" }}
+              transition="border 0.2s, ease 0s, transform 0.2s"
             >
               <Link as={ReachLink} to="/movies">
                 Filmes
@@ -112,6 +107,8 @@ const MenuAside = () => {
               ml="5px"
               fontWeight="100"
               lineHeight="35px"
+              _hover={{ transform: "translateY(-1px)", borderColor:"gray" }}
+              transition="border 0.2s, ease 0s, transform 0.2s"
             >
               <Link as={ReachLink} to="/groups">
                 Grupos
@@ -128,6 +125,8 @@ const MenuAside = () => {
               ml="5px"
               fontWeight="100"
               lineHeight="35px"
+              _hover={{ transform: "translateY(-1px)", borderColor:"gray" }}
+              transition="border 0.2s, ease 0s, transform 0.2s"
             >
               <Link as={ReachLink} to="/mymovies">
                 Meus Filmes
@@ -149,6 +148,8 @@ const MenuAside = () => {
               ml="5px"
               fontWeight="100"
               lineHeight="35px"
+              _hover={{ transform: "translateY(-1px)", borderColor:"gray" }}
+              transition="border 0.2s, ease 0s, transform 0.2s"
             >
               <Link onClick={onOpen}>Perfil</Link>
               <Modal
@@ -183,7 +184,7 @@ const MenuAside = () => {
                         textAlign="center"
                       >
                         {" "}
-                        Usuário: {userName}
+                        <b>Usuário:</b> {userName}
                       </Text>
                       <Text
                         fontFamily="rounded1C"
@@ -192,53 +193,55 @@ const MenuAside = () => {
                         textAlign="center"
                       >
                         {" "}
-                        Gênero favorito: {category}
+                        <b>Gênero</b> favorito: {category}
                       </Text>
+                      <Box padding="1rem" textAlign="center">
+                        <form onSubmit={handleSubmit(updateCategory)}>
+                          <Input
+                            label="Username"
+                            {...register("username")}
+                            placeholder="Username"
+                          />
+                          <Select
+                            bg="#FFF"
+                            color="gray.500"
+                            placeholder="Gênero favorito:"
+                            {...register("selectGenre")}
+                          >
+                            <option value="Ação">Ação</option>
+                            <option value="Aventura">Aventura</option>
+                            <option value="Animação">Animação</option>
+                            <option value="Cinema TV">Cinema TV</option>
+                            <option value="Comédia">Comédia</option>
+                            <option value="Crime">Crime</option>
+                            <option value="Documentário">Documentário</option>
+                            <option value="Família">Família</option>
+                            <option value="Fantasia">Fantasia</option>
+                            <option value="Faroeste">Faroeste</option>
+                            <option value="Ficção científica">
+                              Ficção científica
+                            </option>
+                            <option value="Guerra">Guerra</option>
+                            <option value="História">História</option>
+                            <option value="Música">Música</option>
+                            <option value="Mistério">Mistério</option>
+                            <option value="Romance">Romance</option>
+                            <option value="Terror">Terror</option>
+                            <option value="Thriller">Thriller</option>
+                          </Select>
 
-                      <form onSubmit={handleSubmit(updateCategory)}>
-                        <Input
-                          label="Username"
-                          {...register("username")}
-                          placeholder="Username"
-                        />
-                        <Select
-                          bg="#FFF"
-                          color="gray.500"
-                          placeholder="Gênero favorito:"
-                          {...register("selectGenre")}
-                        >
-                          <option value="Ação">Ação</option>
-                          <option value="Aventura">Aventura</option>
-                          <option value="Animação">Animação</option>
-                          <option value="Cinema TV">Cinema TV</option>
-                          <option value="Comédia">Comédia</option>
-                          <option value="Crime">Crime</option>
-                          <option value="Documentário">Documentário</option>
-                          <option value="Família">Família</option>
-                          <option value="Fantasia">Fantasia</option>
-                          <option value="Faroeste">Faroeste</option>
-                          <option value="Ficção científica">
-                            Ficção científica
-                          </option>
-                          <option value="Guerra">Guerra</option>
-                          <option value="História">História</option>
-                          <option value="Música">Música</option>
-                          <option value="Mistério">Mistério</option>
-                          <option value="Romance">Romance</option>
-                          <option value="Terror">Terror</option>
-                          <option value="Thriller">Thriller</option>
-                        </Select>
-
-                        <Button
-                          type="submit"
-                          bg="#440000"
-                          color="white"
-                          _hover={{ bg: "#000000" }}
-                          focusBorderColor="none"
-                        >
-                          Save
-                        </Button>
-                      </form>
+                          <Button
+                            type="submit"
+                            bg="#440000"
+                            color="white"
+                            _hover={{ bg: "#000000" }}
+                            focusBorderColor="none"
+                            mt="1rem"
+                          >
+                            Salvar
+                          </Button>
+                        </form>
+                      </Box>
                     </Box>
                   </Box>
                   <ModalBody pb={6}></ModalBody>
@@ -256,6 +259,8 @@ const MenuAside = () => {
               ml="5px"
               fontWeight="100"
               lineHeight="35px"
+              _hover={{ transform: "translateY(-1px)", borderColor:"gray" }}
+              transition="border 0.2s, ease 0s, transform 0.2s"
             >
               <Button
                 backgroundColor="red.800"

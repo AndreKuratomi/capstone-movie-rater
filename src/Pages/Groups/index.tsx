@@ -1,6 +1,5 @@
 import AllGroups from "../../Components/AllGroups";
 import { Container, Box, Flex, useMediaQuery } from "@chakra-ui/react";
-import { ReactNode } from "react";
 import image from "../../Assets/img/background.jpg";
 import MenuAside from "../../Components/MenuAside";
 import MenuMobile from "../../Components/MenuMobile";

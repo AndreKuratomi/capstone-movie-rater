@@ -1,4 +1,4 @@
-import { Heading, Flex, useMediaQuery, Box, Button } from "@chakra-ui/react";
+import { Heading, Flex, useMediaQuery, Box } from "@chakra-ui/react";
 import MovieCard from "../MovieCard";
 import BoxContainer from "../BoxContainer";
 import MovieContainer from "../MovieContainer";
@@ -6,12 +6,9 @@ import { useMovies } from "../../Providers/Movies/index";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import jwtDecode, { JwtPayload } from "jwt-decode";
-import MenuMobile from "../MenuMobile";
 import "./styles.css";
 import { useUser } from "../../Providers/User";
 import { getCategory } from "../../utilities/index";
-import { BiRightArrow } from "react-icons/bi";
-import { BiLeftArrow } from "react-icons/bi";
 const DashboardComponent = () => {
   const history = useHistory();
   const {
@@ -41,12 +38,12 @@ const DashboardComponent = () => {
   const decode = jwtDecode<JwtPayload>(token);
   useEffect(() => {
     getMovies(page);
-
+    console.log(recomended);
     getFavorites(Number(decode.sub));
 
     getCategory(category, setCategoryNumber);
   }, [getFavorites, getMovies]);
-  const [mobileVersion] = useMediaQuery("(max-width: 500px)");
+
   return (
     <Flex
       w="85%"
@@ -55,7 +52,6 @@ const DashboardComponent = () => {
       alignItems="center"
       flexDirection="column"
     >
-      {/* {mobileVersion && <MenuMobile />} */}
       <Heading
         w="76%"
         fontWeight="400"
@@ -100,17 +96,29 @@ const DashboardComponent = () => {
 
         <Box display="flex" maxWidth="95%" position="relative">
           <Flex overflowX="scroll" overflowY="hidden" className="barra">
-            {recomended?.map((movie) => (
-              <MovieCard
-                AddToFavorite={() => AddToFavorites(movie, token)}
-                onClick={() => {
-                  getSpecificMovie(movie);
-                  history.push("/aboutmovie");
-                }}
-                title={movie.title}
-                poster_path={imgurl + movie.poster_path}
-              />
-            ))}
+            {recomended
+              ? recomended.map((movie) => (
+                  <MovieCard
+                    AddToFavorite={() => AddToFavorites(movie, token)}
+                    onClick={() => {
+                      getSpecificMovie(movie);
+                      history.push("/aboutmovie");
+                    }}
+                    title={movie.title}
+                    poster_path={imgurl + movie.poster_path}
+                  />
+                ))
+              : movies.map((movie) => (
+                  <MovieCard
+                    AddToFavorite={() => AddToFavorites(movie, token)}
+                    onClick={() => {
+                      getSpecificMovie(movie);
+                      history.push("/aboutmovie");
+                    }}
+                    title={movie.title}
+                    poster_path={imgurl + movie.poster_path}
+                  />
+                ))}
           </Flex>
         </Box>
         <Heading

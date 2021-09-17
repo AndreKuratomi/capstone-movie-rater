@@ -11,7 +11,7 @@ import {
 import { useDisclosure } from "@chakra-ui/hooks";
 
 export const Profile = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onClose } = useDisclosure();
 
   return (
     <>

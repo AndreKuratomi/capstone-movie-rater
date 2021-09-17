@@ -6,7 +6,6 @@ import {
   Link,
   Flex,
   Menu,
-  MenuItem,
   MenuButton,
   MenuList,
 } from "@chakra-ui/react";
@@ -35,6 +34,8 @@ const InfoCard = ({
       padding="20px"
       textAlign="center"
       border="1px solid black"
+      _hover={{ transform: "translateY(-6px)" }}
+      transition="border 0.2s, ease 0s, transform 0.2s"
     >
       <Image src={image} border="1px solid black" borderRadius="100%" />
       <Heading>{name}</Heading>
@@ -42,14 +43,20 @@ const InfoCard = ({
       <Box fontSize="14px">
         <Flex alignItems="center">
           <AiFillLinkedin />
-          <Link href={linkedin} isExternal>
+          <Link href={linkedin} isExternal
+          _hover={{ textDecoration:"underline" }}
+          transition="border 0.2s, ease 0s, transform 0.2s">
             Linkedin
           </Link>
         </Flex>
         <Flex alignItems="center">
           <AiOutlineMail />
           <Menu>
-            <MenuButton>Email</MenuButton>
+            <MenuButton  
+              _hover={{ textDecoration:"underline" }}
+              transition="border 0.2s, ease 0s, transform 0.2s">
+                Email
+            </MenuButton>
             <MenuList color="black">{email}</MenuList>
           </Menu>
         </Flex>

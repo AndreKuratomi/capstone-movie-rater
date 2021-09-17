@@ -2,7 +2,6 @@ import { Container, Box, Flex } from "@chakra-ui/layout";
 import { ReactNode } from "react";
 import image from "../../Assets/img/background.jpg";
 import MenuAside from "../MenuAside/index";
-import MenuAsideMobile from "../MenuAsideMobile/index";
 import { useMediaQuery } from "@chakra-ui/react";
 import MenuMobile from "../MenuMobile";
 

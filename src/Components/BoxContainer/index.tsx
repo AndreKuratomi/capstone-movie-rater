@@ -58,7 +58,6 @@ const BoxContainer = ({
     <Box
       w="95%"
       overflowY="auto"
-      // border={children ? "1px solid white" : "1px solid red"}
       padding="0.25rem"
       css={{
         "&::-webkit-scrollbar": {
@@ -77,10 +76,11 @@ const BoxContainer = ({
       display="flex"
       flexDirection="row"
       flexWrap="wrap"
-      justifyContent="space-between"
+      justifyContent="center"
       borderRadius="15px"
       bgSize="fill"
       bgPosition="center"
+      alignItems="center"
     >
       {children}
     </Box>
@@ -88,7 +88,6 @@ const BoxContainer = ({
     <Box
       w="95%"
       overflowY="auto"
-      // border={children ? "1px solid white" : "1px solid red"}
       padding="0.25rem"
       css={{
         "&::-webkit-scrollbar": {
@@ -118,7 +117,6 @@ const BoxContainer = ({
     <Box
       w="95%"
       overflowY="auto"
-      // border={children ? "1px solid blue" : "1px solid red"}
       padding="0.25rem"
       css={{
         "&::-webkit-scrollbar": {

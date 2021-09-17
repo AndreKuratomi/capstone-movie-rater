@@ -8,8 +8,6 @@ import { useMovies } from "../../Providers/Movies";
 import { useHistory } from "react-router";
 import { BsSearch } from "react-icons/bs";
 import { useEffect, useState } from "react";
-import { useAuth } from "../../Providers/Auth";
-import { setPriority } from "os";
 
 const BrowseMovies = () => {
   const history = useHistory();
@@ -31,7 +29,6 @@ const BrowseMovies = () => {
     searchMovies(text);
     setIsSearch(true);
   };
-  const { auth } = useAuth();
 
   const previousPage = () => {
     if (page > 1) {

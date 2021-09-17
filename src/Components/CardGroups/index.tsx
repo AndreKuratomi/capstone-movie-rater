@@ -7,7 +7,11 @@ interface ICardGroups {
 
 const CardGroup = ({ img, name }: ICardGroups) => {
   return (
-    <Box>
+    <Box
+      _hover={{ transform: "translateY(-1px)", borderColor:"gray" }}
+      transition="border 0.2s, ease 0s, transform 0.2s"
+      focus
+    >
       <Text
         textAlign="center"
         bg="#443919"

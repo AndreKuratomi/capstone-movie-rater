@@ -63,9 +63,7 @@ export const Register = () => {
     resolver: yupResolver(formSchema),
   });
 
-  console.log(errors.selectGenre?.message);
   const history = useHistory();
-  const [username, setUsername] = useState<string>("");
   const toast = useToast();
 
   const addSuccessToast = () => {
@@ -103,7 +101,6 @@ export const Register = () => {
   };
 
   const [mobileVersion] = useMediaQuery("(max-width: 500px)");
-  const [desktopVersion] = useMediaQuery("(max-width:768px)");
 
   return (
     <Box bg="#000" height="100vh" overflow="hidden">
