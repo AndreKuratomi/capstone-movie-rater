@@ -45,15 +45,16 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         .catch((err) => console.log(err));
     }
   }, [token, userName, category]);
+  
   const updateCategory = (data: IUser) => {
     const { username, selectGenre } = data;
     const decoded = jwtDecode<JwtPayload>(token);
     api
       .patch(
-        `users/${decoded.sub}/`,
+        `users/${decoded.sub}`,
         {
           username: username,
-          selectGenre: selectGenre,
+          selectGenre: selectGenre
         },
         {
           headers: {

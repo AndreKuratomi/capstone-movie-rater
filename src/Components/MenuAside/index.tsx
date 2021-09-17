@@ -20,6 +20,7 @@ import { Select } from "../../Components/Form/Select";
 import { useUser } from "../../Providers/User";
 import { useForm } from "react-hook-form";
 import { Input } from "@chakra-ui/input";
+import avatarMock from "../../Assets/img/avatarMock.jpg"
 
 const MenuAside = () => {
   const { userName, category, updateCategory } = useUser();
@@ -28,6 +29,7 @@ const MenuAside = () => {
   const logOut = () => {
     localStorage.clear();
   };
+
 
   return (
     <VStack
@@ -52,7 +54,8 @@ const MenuAside = () => {
           w="100px"
           h="100px"
           borderRadius="50%"
-          bgColor="black.transparent500"
+          bgImage={`url(${avatarMock})`}
+          backgroundSize="contain"
         />
         <VStack>
           <Heading fontWeight="light" as="h3" fontSize="25px" m="1rem">
@@ -68,6 +71,8 @@ const MenuAside = () => {
               ml="5px"
               fontWeight="100"
               lineHeight="35px"
+              _hover={{ transform: "translateY(-1px)", borderColor:"gray" }}
+              transition="border 0.2s, ease 0s, transform 0.2s"
             >
               <Link as={ReachLink} to="/dashboard">
                 Home
@@ -84,6 +89,8 @@ const MenuAside = () => {
               ml="5px"
               fontWeight="100"
               lineHeight="35px"
+              _hover={{ transform: "translateY(-1px)", borderColor:"gray" }}
+              transition="border 0.2s, ease 0s, transform 0.2s"
             >
               <Link as={ReachLink} to="/movies">
                 Filmes
@@ -100,6 +107,8 @@ const MenuAside = () => {
               ml="5px"
               fontWeight="100"
               lineHeight="35px"
+              _hover={{ transform: "translateY(-1px)", borderColor:"gray" }}
+              transition="border 0.2s, ease 0s, transform 0.2s"
             >
               <Link as={ReachLink} to="/groups">
                 Grupos
@@ -116,6 +125,8 @@ const MenuAside = () => {
               ml="5px"
               fontWeight="100"
               lineHeight="35px"
+              _hover={{ transform: "translateY(-1px)", borderColor:"gray" }}
+              transition="border 0.2s, ease 0s, transform 0.2s"
             >
               <Link as={ReachLink} to="/mymovies">
                 Meus Filmes
@@ -137,6 +148,8 @@ const MenuAside = () => {
               ml="5px"
               fontWeight="100"
               lineHeight="35px"
+              _hover={{ transform: "translateY(-1px)", borderColor:"gray" }}
+              transition="border 0.2s, ease 0s, transform 0.2s"
             >
               <Link onClick={onOpen}>Perfil</Link>
               <Modal
@@ -246,6 +259,8 @@ const MenuAside = () => {
               ml="5px"
               fontWeight="100"
               lineHeight="35px"
+              _hover={{ transform: "translateY(-1px)", borderColor:"gray" }}
+              transition="border 0.2s, ease 0s, transform 0.2s"
             >
               <Button
                 backgroundColor="red.800"

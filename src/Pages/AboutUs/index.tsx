@@ -48,8 +48,8 @@ const AboutUs = () => {
             padding="2rem"
           >
             <Text textAlign="center" fontSize="2xl">
-              texto sobre a equipe bem aquuuui texto texto texto texto texto
-              texto
+              Somos desenvolvedores apaixonados por filmes, que decidimos
+              criar uma plataforma mais intuitiva!
             </Text>
             <Box margin="auto" bg="black">
               <Carousel

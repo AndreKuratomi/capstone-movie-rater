@@ -50,7 +50,6 @@ const MyMoviesComponent = () => {
       justifyContent="flex-end"
       alignItems="center"
       flexDirection="column"
-      overflow="scroll"
     >
       <MovieContainer>
         <Flex w="100%" mb="25px" justifyContent="flex-end">

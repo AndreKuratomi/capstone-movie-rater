@@ -3,6 +3,8 @@ import { VStack, Box, Text, Heading } from "@chakra-ui/layout";
 import { Menu, MenuButton, MenuList } from "@chakra-ui/menu";
 import { HiPlus } from "react-icons/hi";
 import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
+
+
 interface IMoviesList {
   onClick?: () => void;
   AddToFavorite?: (movie: IMoviesList) => void;
@@ -43,6 +45,7 @@ const MovieCard = ({
       ml="25px"
       position="relative"
     >
+      
       <Img
         cursor="pointer"
         onClick={onClick}
@@ -50,6 +53,8 @@ const MovieCard = ({
         borderRadius="8px"
         w="75%"
         h="70%"
+        _hover={{ transform: "translateY(-4px)", borderColor:"gray" }}
+        transition="border 0.2s, ease 0s, transform 0.2s"
       />
 
       <Menu>
@@ -93,6 +98,7 @@ const MovieCard = ({
         position="absolute"
         top="2"
         right="1"
+        _hover={{ color: "green" }}
       >
         <AiFillMinusCircle />
       </Box>
@@ -103,6 +109,8 @@ const MovieCard = ({
         borderRadius="8px"
         w="130px"
         h="80%"
+        _hover={{ transform: "translateY(-7px)", borderColor:"gray" }}
+        transition="border 0.2s, ease 0s, transform 0.2s"
       />
       <Heading
         fontWeight="200"
@@ -130,6 +138,7 @@ const MovieCard = ({
         position="absolute"
         top="2"
         right="1"
+        _hover={{ color: "green" }}
       >
         <AiFillPlusCircle />
       </Box>
@@ -140,6 +149,8 @@ const MovieCard = ({
         borderRadius="8px"
         w="130px"
         h="80%"
+        _hover={{ transform: "translateY(-7px)", borderColor:"gray" }}
+        transition="border 0.2s, ease 0s, transform 0.2s"
       />
       <Heading
         fontWeight="200"

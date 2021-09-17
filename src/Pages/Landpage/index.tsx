@@ -265,7 +265,7 @@ const Landpage = () => {
             mt="1.5rem"
           >
             <ReactPlayer
-              url="https://www.youtube.com/watch?v=b80TWrBflh8"
+              url="https://youtu.be/Ludwi0x_M44"
               muted={true}
               id="video"
             />

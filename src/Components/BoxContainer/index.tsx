@@ -76,10 +76,11 @@ const BoxContainer = ({
       display="flex"
       flexDirection="row"
       flexWrap="wrap"
-      justifyContent="space-between"
+      justifyContent="center"
       borderRadius="15px"
       bgSize="fill"
       bgPosition="center"
+      alignItems="center"
     >
       {children}
     </Box>
