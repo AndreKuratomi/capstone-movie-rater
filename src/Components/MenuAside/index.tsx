@@ -181,7 +181,7 @@ const MenuAside = () => {
                         textAlign="center"
                       >
                         {" "}
-                        Usuário: {userName}
+                        <b>Usuário:</b> {userName}
                       </Text>
                       <Text
                         fontFamily="rounded1C"
@@ -190,53 +190,55 @@ const MenuAside = () => {
                         textAlign="center"
                       >
                         {" "}
-                        Gênero favorito: {category}
+                        <b>Gênero</b> favorito: {category}
                       </Text>
+                      <Box padding="1rem" textAlign="center">
+                        <form onSubmit={handleSubmit(updateCategory)}>
+                          <Input
+                            label="Username"
+                            {...register("username")}
+                            placeholder="Username"
+                          />
+                          <Select
+                            bg="#FFF"
+                            color="gray.500"
+                            placeholder="Gênero favorito:"
+                            {...register("selectGenre")}
+                          >
+                            <option value="Ação">Ação</option>
+                            <option value="Aventura">Aventura</option>
+                            <option value="Animação">Animação</option>
+                            <option value="Cinema TV">Cinema TV</option>
+                            <option value="Comédia">Comédia</option>
+                            <option value="Crime">Crime</option>
+                            <option value="Documentário">Documentário</option>
+                            <option value="Família">Família</option>
+                            <option value="Fantasia">Fantasia</option>
+                            <option value="Faroeste">Faroeste</option>
+                            <option value="Ficção científica">
+                              Ficção científica
+                            </option>
+                            <option value="Guerra">Guerra</option>
+                            <option value="História">História</option>
+                            <option value="Música">Música</option>
+                            <option value="Mistério">Mistério</option>
+                            <option value="Romance">Romance</option>
+                            <option value="Terror">Terror</option>
+                            <option value="Thriller">Thriller</option>
+                          </Select>
 
-                      <form onSubmit={handleSubmit(updateCategory)}>
-                        <Input
-                          label="Username"
-                          {...register("username")}
-                          placeholder="Username"
-                        />
-                        <Select
-                          bg="#FFF"
-                          color="gray.500"
-                          placeholder="Gênero favorito:"
-                          {...register("selectGenre")}
-                        >
-                          <option value="Ação">Ação</option>
-                          <option value="Aventura">Aventura</option>
-                          <option value="Animação">Animação</option>
-                          <option value="Cinema TV">Cinema TV</option>
-                          <option value="Comédia">Comédia</option>
-                          <option value="Crime">Crime</option>
-                          <option value="Documentário">Documentário</option>
-                          <option value="Família">Família</option>
-                          <option value="Fantasia">Fantasia</option>
-                          <option value="Faroeste">Faroeste</option>
-                          <option value="Ficção científica">
-                            Ficção científica
-                          </option>
-                          <option value="Guerra">Guerra</option>
-                          <option value="História">História</option>
-                          <option value="Música">Música</option>
-                          <option value="Mistério">Mistério</option>
-                          <option value="Romance">Romance</option>
-                          <option value="Terror">Terror</option>
-                          <option value="Thriller">Thriller</option>
-                        </Select>
-
-                        <Button
-                          type="submit"
-                          bg="#440000"
-                          color="white"
-                          _hover={{ bg: "#000000" }}
-                          focusBorderColor="none"
-                        >
-                          Save
-                        </Button>
-                      </form>
+                          <Button
+                            type="submit"
+                            bg="#440000"
+                            color="white"
+                            _hover={{ bg: "#000000" }}
+                            focusBorderColor="none"
+                            mt="1rem"
+                          >
+                            Salvar
+                          </Button>
+                        </form>
+                      </Box>
                     </Box>
                   </Box>
                   <ModalBody pb={6}></ModalBody>

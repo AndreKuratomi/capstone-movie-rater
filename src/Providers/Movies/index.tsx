@@ -89,7 +89,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
       .then((response) => {
         setMovies(response.data[0].results);
       })
-      .catch((_) => getMoviesFailToast());
+      .catch((err) => console.log(err));
   };
 
   const getSpecificMovie = (specifcMovie: IMoviesList) => {
@@ -113,7 +113,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
       .then((response) => {
         setFavorites(response.data);
       })
-      .catch((_) => getFavoritesFailToast());
+      .catch((err) => console.log(err));
   };
 
   const addFilmSuccessToast = () => {
