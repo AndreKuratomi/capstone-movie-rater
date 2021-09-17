@@ -2,7 +2,6 @@ import {
   Button,
   Drawer,
   DrawerBody,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
@@ -13,12 +12,10 @@ import {
 import { useUser } from "../../Providers/User";
 import { useForm } from "react-hook-form";
 import { Input } from "@chakra-ui/input";
-import { useEffect } from "react";
 import { Link as ReachLink } from "react-router-dom";
 import {
   Modal,
   ModalOverlay,
-  ModalHeader,
   ModalContent,
   ModalFooter,
   ModalCloseButton,
@@ -27,7 +24,7 @@ import {
 import { Text, Box } from "@chakra-ui/layout";
 
 import { ImHome3 } from "react-icons/im";
-import { RiReservedLine, RiSearchEyeLine } from "react-icons/ri";
+import { RiSearchEyeLine } from "react-icons/ri";
 import { TiGroup } from "react-icons/ti";
 import { MdMovieCreation } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";

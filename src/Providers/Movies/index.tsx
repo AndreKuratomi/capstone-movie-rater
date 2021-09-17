@@ -2,7 +2,6 @@
 import { createContext, useContext, useState } from "react";
 import api from "../../Services/api";
 import { ReactNode } from "react";
-import { useAuth } from "../Auth";
 
 import jwtDecode, { JwtPayload } from "jwt-decode";
 
@@ -96,15 +95,6 @@ export const MoviesProvider = ({ children }: IMovies) => {
     setAboutMovie(specifcMovie);
   };
 
-  const getFavoritesFailToast = () => {
-    toast({
-      description: "",
-      duration: 2000,
-      position: "top",
-      status: "error",
-      title: "Falha de conexão",
-    });
-  };
   const getFavorites = (userId: number) => {
     api
       .get(`favorites?userId=${userId}`, {
@@ -208,15 +198,6 @@ export const MoviesProvider = ({ children }: IMovies) => {
     }
   };
 
-  const getReviewFailToast = () => {
-    toast({
-      description: "",
-      duration: 2000,
-      position: "top",
-      status: "error",
-      title: "Erro de conexão",
-    });
-  };
   const getReview = (movieId: number, token: string) => {
     api
       .get(`reviews?movieId=${movieId}`, {
@@ -235,15 +216,6 @@ export const MoviesProvider = ({ children }: IMovies) => {
       position: "top",
       status: "success",
       title: "Review carregada!",
-    });
-  };
-  const addReviewsFailToast = () => {
-    toast({
-      description: "Verificar conexão",
-      duration: 2000,
-      position: "top",
-      status: "error",
-      title: "Review não pode ser carregada!",
     });
   };
   const addReviews = (

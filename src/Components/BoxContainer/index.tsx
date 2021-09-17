@@ -58,7 +58,6 @@ const BoxContainer = ({
     <Box
       w="95%"
       overflowY="auto"
-      // border={children ? "1px solid white" : "1px solid red"}
       padding="0.25rem"
       css={{
         "&::-webkit-scrollbar": {
@@ -88,7 +87,6 @@ const BoxContainer = ({
     <Box
       w="95%"
       overflowY="auto"
-      // border={children ? "1px solid white" : "1px solid red"}
       padding="0.25rem"
       css={{
         "&::-webkit-scrollbar": {
@@ -118,7 +116,6 @@ const BoxContainer = ({
     <Box
       w="95%"
       overflowY="auto"
-      // border={children ? "1px solid blue" : "1px solid red"}
       padding="0.25rem"
       css={{
         "&::-webkit-scrollbar": {

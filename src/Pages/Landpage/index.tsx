@@ -25,7 +25,7 @@ import Carousel from "react-multi-carousel";
 import shangchi from "../../Assets/img/shangchi.jpg";
 import candyman from "../../Assets/img/candyman.jpg";
 import after from "../../Assets/img/after.png";
-import sweetgirl from "../../Assets/img/sweetgirl.jpg"
+import sweetgirl from "../../Assets/img/sweetgirl.jpg";
 import "react-multi-carousel/lib/styles.css";
 import { Link as RouteLink } from "react-router-dom";
 
@@ -50,7 +50,6 @@ const Landpage = () => {
   };
 
   const [mobileVersion] = useMediaQuery("(max-width: 500px)");
-  const [tabletVersion] = useMediaQuery("(max-width: 768px)");
 
   return (
     <Box>
@@ -111,7 +110,7 @@ const Landpage = () => {
           mt="1rem"
         >
           <Heading fontFamily="PT Mono" mt="3rem" textAlign="center">
-           Bem vindo ao MovieRater!
+            Bem vindo ao MovieRater!
           </Heading>
           <Heading
             maxWidth="50rem"
@@ -132,34 +131,36 @@ const Landpage = () => {
             removeArrowOnDeviceType={["tablet", "mobile"]}
           >
             <Box>
-              <Image src={shangchi}/>
+              <Image src={shangchi} />
               <Text>
                 Shang-Chi é obrigado a confrontar um passado que julgava ter
-                deixado para trás quando é atraído à teia da misteriosa organização 
-                conhecida como os Dez Anéis.{" "}
+                deixado para trás quando é atraído à teia da misteriosa
+                organização conhecida como os Dez Anéis.{" "}
               </Text>
             </Box>
             <Box>
               <Image src={candyman} />
               <Text>
-                Uma "sequência espiritual" do filme de terror de 1992 "Candyman", 
-                que retorna ao bairro de Chicago, agora gentrificado, onde a lenda começou.{" "}
+                Uma "sequência espiritual" do filme de terror de 1992
+                "Candyman", que retorna ao bairro de Chicago, agora
+                gentrificado, onde a lenda começou.{" "}
               </Text>
             </Box>
             <Box>
-              <Image src={after}/>
+              <Image src={after} />
               <Text>
-                Tessa toma uma decisão que promete mudar a sua vida. Ao mesmo tempo, 
-                algumas revelações sobre sua família e o passado de Hardin 
-                ameaçam atrapalhar seus planos e acabar com o relacionamento 
-                intenso do casal.{" "}
+                Tessa toma uma decisão que promete mudar a sua vida. Ao mesmo
+                tempo, algumas revelações sobre sua família e o passado de
+                Hardin ameaçam atrapalhar seus planos e acabar com o
+                relacionamento intenso do casal.{" "}
               </Text>
             </Box>
             <Box>
               <Image src={sweetgirl} />
               <Text>
-              Um marido devastado jura vingar-se dos responsáveis pela morte 
-              de sua esposa e proteger a única família que lhe resta: sua filha.{" "}
+                Um marido devastado jura vingar-se dos responsáveis pela morte
+                de sua esposa e proteger a única família que lhe resta: sua
+                filha.{" "}
               </Text>
             </Box>
           </Carousel>

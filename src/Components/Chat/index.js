@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
-import { Box, Flex, Button, Input } from "@chakra-ui/react";
+import { Box, Button, Input } from "@chakra-ui/react";
 import "./styles.css";
-import { useUser } from "../../Providers/User"
+import { useUser } from "../../Providers/User";
 
 const socket = io("https://chat-capstone-g5.herokuapp.com/");
 
@@ -18,7 +18,6 @@ function Chat() {
   });
   const sendMessage = (e) => {
     e.preventDefault();
-    console.log(message);
     socket.emit("message", { userName, message });
     setMessage("");
   };

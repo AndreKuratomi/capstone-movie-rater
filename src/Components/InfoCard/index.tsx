@@ -6,7 +6,6 @@ import {
   Link,
   Flex,
   Menu,
-  MenuItem,
   MenuButton,
   MenuList,
 } from "@chakra-ui/react";

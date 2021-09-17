@@ -1,7 +1,6 @@
 import MovieContainer from "../MovieContainer";
 import { Flex, Heading, Text, Box } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/button";
-import BoxContainer from "../BoxContainer";
 import CardGroup from "../CardGroups";
 import {
   Input,
@@ -40,8 +39,8 @@ const AllGroups = () => {
             </Button>
           </Flex>
           <Text color="white" padding="0.5rem" maxWidth="60%" margin="auto">
-            Bem vindo ao nosso grupo de chat! Converse com pessoas que compartilham
-            dos mesmos gostos que você!
+            Bem vindo ao nosso grupo de chat! Converse com pessoas que
+            compartilham dos mesmos gostos que você!
           </Text>
         </Flex>
         <Heading
