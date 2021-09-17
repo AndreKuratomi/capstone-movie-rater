@@ -113,7 +113,7 @@ export const MoviesProvider = ({ children }: IMovies) => {
       .then((response) => {
         setFavorites(response.data);
       })
-      .catch((err) => console.log(err));
+      .catch((error) => console.log(error));
   };
 
   const addFilmSuccessToast = () => {
