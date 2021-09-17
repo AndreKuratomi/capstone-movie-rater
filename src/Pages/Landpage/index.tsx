@@ -93,7 +93,7 @@ const Landpage = () => {
             _hover={{ bg: "#440000" }}
             position="absolute"
             left="25px"
-            top="160px"
+            top="85px"
             outline="none"
             href="#video"
           >
@@ -123,12 +123,13 @@ const Landpage = () => {
             Todas as tendências de filmes em um mesmo lugar!
           </Heading>
         </Box>
-        <Box w="60%">
+        <Box w={mobileVersion ? "100%" : "40%"}>
           <Carousel
             responsive={responsive}
             infinite={true}
             containerClass="carousel-container"
             removeArrowOnDeviceType={["tablet", "mobile"]}
+            autoPlay={true}
           >
             <Box>
               <Image src={shangchi} />
@@ -226,8 +227,14 @@ const Landpage = () => {
           </Flex>
           <Box mb="2rem" w="100%" textAlign="center">
             <Link as={RouteLink} to="/signup">
-              <Button bg="white" color="black" padding="1rem 2rem">
-                Venha fazer parte da nossa comunidade!
+              <Button
+                bg="white"
+                color="black"
+                padding="1rem 2rem"
+                maxWidth="80%"
+                wordBreak="break-word"
+              >
+                Faça parte da nossa comunidade!
               </Button>
             </Link>
           </Box>
